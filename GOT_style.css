@@ -1,20 +1,74 @@
 #to_be_implemented/*this is the thing u will implement at the top of the page*/
 {
 	width:100%;
-	height:50px;
+	height:90px;
 	background-color:#bb9999;
 	
 }
-#categories
+#discussion_categories
 {
 	margin-top:10px;
-	width:150px;
-	height:500px;
+	width:210px;
+	height:600px;
 	float:left;
 	background-color:#bbbbff;
-	margin-top:50px;
+	
+}
+#discussion_main_content{
+	width:60%;
+	background-color:#555555;
+	height:500px;
+	margin-left:auto;
+	margin-right:auto;
+	
+	
+}
+#dis_cat{
+		font-size:35px;
+		padding-left:0px;
+		text-align:center;
+}
+#dis_cat li{
+	text-align:center;
+	width:210px;
+	font-size:30px;
+	list-style-type:none;
+	background-color:#666666;
+	margin-top:14px;
+}
+#dis_cat li:hover{
+	background-color:#aa8888;
+	font-size:26px;
+	border:2px solid #885566;
+	width:206px;
+}
+#add_discussion
+{
+	border:4px solid #bb3333;
+	background-color:#998888;
+	border-radius:38px;
+	font-size:48px;
+	font-weight:bold;
+	color:#bb3333;
+	position:fixed;
+	right:10px;
+	bottom:10px;
+	
 }
 
+	
+.textFldstyle{
+	width:180px;
+	height:500px;
+	margin-left:auto;
+	margin-right:auto;
+	
+}
+.btnStyle{
+	border: 2px solid #555599;
+	background-color:#996666;
+	color:#555599;
+}
 body {margin:0;}
 
 .topnav {
