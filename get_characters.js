@@ -1,5 +1,10 @@
 $(document).ready(function(){
-
+$( "#main-sidebar" ).simplerSidebar( {
+	  selectors: {
+	    trigger: "#toggle-sidebar",
+	    quitter: ".close-sb"
+	  }
+	});
     $( "#dialog" ).dialog({
       autoOpen: false,
       show: {

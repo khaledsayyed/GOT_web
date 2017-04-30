@@ -1,19 +1,83 @@
-<div class="topnav">
-<img id="logo" src="logo.jpeg" alt="LOGO pic">
-  <a class="active" href="index.php">Home</a>
-  <a href="discussions.php">Discussions</a>
-  <a href="characters.php">Characters</a> 
-  <a href="#">News</a>
-  <a href="#">Contact</a>
-  <div class="dropdown">
-  <a href="#sidemenu"> -- </a>
-  <div class="dropdown-content">
-      <a href="#login">Login</a>
-	  <a href="signup.php">Sign Up</a>
-      <a href="#editprofile">Edit Profile </a>
-      <a href="#about">About us </a>
-    </div>
+<script src="jquery.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="main-sidebar-left-top.js"></script>
+	    <script src="main-sidebar-right.js"></script>
+<script src="simpler-sidebar.js"></script>
+<script type="text/javascript">
+$(document).ready=function(){
+$( "#main-sidebar" ).simplerSidebar( {
+	  selectors: {
+	    trigger: "#toggle-sidebar",
+	    quitter: ".close-sb"
+	  }
+	});
+	}
+	</script>
+
+
+
+	<div class="main-navbar main-navbar-fixed-top" id="main-navbar">
+
+	  <div class="main-navbar-content">
+  <div><a class="active" href="index.php">Home</a></div>
+  <div> <a href="discussions.php">Discussions</a></div>
+   <div><a href="characters.php">Characters</a> </div>
+  <div> <a href="#">News</a></div>
+   <div><a href="#">Contact</a></div>
+	    <div class="icon right" id="toggle-sidebar">
+
+	      <img alt="menu" height="24px" src="menu.png" width="24px">
+
+	    </div>
+	  </div>
+
+
 	</div>
-  
-</div>
-<!--div id="right_list"></div-->
+<div class="main-sidebar main-sidebar-right" id="main-sidebar">
+
+	  <div class="main-sidebar-wrapper" id="main-sidebar-wrapper">
+
+	    <nav>
+
+	      <ul>
+
+	        <li class="close-sb">
+
+	         
+ <a href="#login">Login</a>
+	        </li>
+<li class="close-sb">
+
+	         
+<a href="signup.php">Sign Up</a>
+	        </li>
+	        <li class="close-sb">
+
+	         
+<a href="#editprofile">Edit Profile </a>
+	        </li>
+
+	        <li class="close-sb">
+
+	        
+	  
+    
+      <a href="#about">About us </a>
+
+	        </li>
+
+	      </ul>
+
+	    </nav>
+
+	  </div>
+
+	</div>
+	
+	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="main-sidebar-left-top.js"></script>
+	    <script src="main-sidebar-right.js"></script>
+<script src="simpler-sidebar.js"></script>
+<script type="text/javascript">
+
+	</script>
