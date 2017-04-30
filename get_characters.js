@@ -8,11 +8,11 @@ $( "#main-sidebar" ).simplerSidebar( {
     $( "#dialog" ).dialog({
       autoOpen: false,
       show: {
-        effect: "blind",
+        effect: "scale",
         duration: 1000
       },
       hide: {
-        effect: "explode",
+        effect: "puff",
         duration: 1000
       }
     });

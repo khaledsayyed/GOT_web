@@ -2,9 +2,17 @@
 <html>
 <head>
 <title>sign up</title>
+<script src="jquery.js"></script>
 <link href="GOT_style.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
-window.onload=function(){}
+window.onload=function(){
+	$( "#main-sidebar" ).simplerSidebar( {
+	  selectors: {
+	    trigger: "#toggle-sidebar",
+	    quitter: ".close-sb"
+	  }
+	});
+}
 function check_name(){
 
 }

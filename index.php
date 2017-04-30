@@ -28,7 +28,8 @@ $db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->exec($query);
 if(isSet($_GET["photo"])&&$_GET["photo"]!=NULL){is_photo_uploaded_and_moved($name);}
-
+session_start();
+$_SESSION["logged_in_name"] = $name; 
 }catch (PDOException $e){
 	
 	die("Connection failed: " . $e->getMessage());
@@ -44,7 +45,7 @@ endif;
 <meta charset="UTF-8" />
 	<title>Main </title>
 	<link href="GOT_style.css" rel="stylesheet" type="text/css"/>
-	<script src="jquery.js" type="text/javascript"></script>
+<script src="jquery.js"></script>
 	<script src="GOT.js" type="text/javascript"></script>
 </head>
 <body>

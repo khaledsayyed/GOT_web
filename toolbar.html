@@ -1,18 +1,9 @@
-<script src="jquery.js"></script>
+
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="main-sidebar-left-top.js"></script>
+
 	    <script src="main-sidebar-right.js"></script>
 <script src="simpler-sidebar.js"></script>
-<script type="text/javascript">
-$(document).ready=function(){
-$( "#main-sidebar" ).simplerSidebar( {
-	  selectors: {
-	    trigger: "#toggle-sidebar",
-	    quitter: ".close-sb"
-	  }
-	});
-	}
-	</script>
+
 
 
 
@@ -31,53 +22,54 @@ $( "#main-sidebar" ).simplerSidebar( {
 	    </div>
 	  </div>
 
+</div>
 
-	</div>
 <div class="main-sidebar main-sidebar-right" id="main-sidebar">
 
 	  <div class="main-sidebar-wrapper" id="main-sidebar-wrapper">
 
+	  <form action="server.php" method="post">
+		
+						<div>
+							<strong>UserName:</strong><input id="user" name="login_name" type="text" size="20"  /> <br />
+							<strong>Password: </strong><input id="pass" name="login_password" type="text" size="20"  /> <br />
+							<input type="submit" value="Log In" />
+						</div>
+	
+		</form>
 	    <nav>
 
 	      <ul>
 
-	        <li class="close-sb">
 
-	         
- <a href="#login">Login</a>
-	        </li>
-<li class="close-sb">
+<a href="signup.php"><li class="close-sb">
+         
+Sign Up
+	        </li></a>
+	<a href="#editprofile">        <li class="close-sb">
+        
+Edit Profile 
+	        </li></a>
 
-	         
-<a href="signup.php">Sign Up</a>
-	        </li>
-	        <li class="close-sb">
-
-	         
-<a href="#editprofile">Edit Profile </a>
-	        </li>
-
-	        <li class="close-sb">
-
-	        
-	  
-    
-      <a href="#about">About us </a>
-
-	        </li>
+	     <a href="#about">     <li class="close-sb">
+ About us 
+	        </li></a>
+			
 
 	      </ul>
 
 	    </nav>
+		This Website is developed by:<br />
+		Khaled El Sayed<br />
+		Huda Hammoud
 
 	  </div>
 
-	</div>
-	
-	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="main-sidebar-left-top.js"></script>
-	    <script src="main-sidebar-right.js"></script>
-<script src="simpler-sidebar.js"></script>
-<script type="text/javascript">
+</div>
 
-	</script>
+
+<div id="dummy_div">	</div>
+
+
+
+
