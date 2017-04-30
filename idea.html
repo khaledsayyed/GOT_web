@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">  
+    <head>
+               
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+        <!-- Include jQuery -->
+        <script type="text/javascript" src="/sites/starplugins/js/jquery.js"></script>
+        <!-- Include KillerCarousel JavaScript -->
+        <script type="text/javascript" src="/sites/starplugins/js/killercarousel/killercarousel.js?v=11"></script>
+        <!-- Include KillerCarousel CSS -->
+        <link href="/sites/starplugins/js/killercarousel/killercarousel.css?v=4" type="text/css" rel="stylesheet" />
+        
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3">
+        
+        <!-- Include Cloud Zoom CSS -->
+        <link href="/sites/starplugins/js/cloudzoom/cloudzoom.css?v=4" type="text/css" rel="stylesheet" />
+        <!-- Include Cloud Zoom JavaScript -->
+        <script type="text/javascript" src="/sites/starplugins/js/cloudzoom/cloudzoom.js?v=20"></script>
+        
+        <script type="text/javascript" src="/sites/starplugins/js/thumbelina/thumbelina.js?v=1"></script>
+        
+        <link href="/sites/starplugins/js/jetzoom/jetzoom.css?v=3" type="text/css" rel="stylesheet" />
+        <!-- Include Jet Zoom JavaScript -->
+        <script type="text/javascript" src="/sites/starplugins/js/jetzoom/jetzoom.js?v=8"></script>
+        <script type="text/javascript" src="/sites/starplugins/js/starzoom.js?v=5"></script>
+        <link href="/sites/starplugins/js/starzoom.css?v=3" type="text/css" rel="stylesheet" />
+
+        
+        <script type="text/javascript" src="/sites/starplugins/js/fancy/jquery.fancybox.js?v=2"></script>
+        <link rel="stylesheet" href="/sites/starplugins/js/fancy/jquery.fancybox.css??v=1" type="text/css" media="screen" />
+        
+                <link href="/sites/starplugins/js/thumbelina/thumbelina.css" type="text/css" rel="stylesheet" />
+
+        
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+        
+
+        <!-- Various page styles. -->
+        <style type="text/css">
+            body {
+                font-size:16px;
+                font-family: "Arvo","georgia",serif;
+                background-color:#333;
+                height:100%;
+                
+            }
+            
+            .band-color-1 a, .band-color-2 a, .band-color-3 a, .band-color-4 a  {
+                color:#ccccff;
+               
+            }
+            strong {
+                font-weight:700;
+            }
+            
+            .row {
+                padding-bottom:40px;
+            }
+            
+            .btn, label {
+                font-family: "Exo 2",sans-serif;
+            }
+            .navbar, login-nav {
+                font-family: "Exo 2",sans-serif; 
+            }
+   
+            
+            h1,h2,h3,h4,h5 {
+                font-weight:normal;
+                font-family: "Exo 2",sans-serif;
+                margin-bottom:20px;
+                margin-top:25px;
+            }
+            
+         
+            
+            h1,h2 {
+                text-shadow: -1px -1px 1px rgba(0,0,0,0.1);
+                border-radius: 3px;
+                color:rgba(0,0,0,0.75);
+                font-weight:400;
+            }
+           
+            
+            h3, h3 small {
+                font-family: "Arvo",serif;
+                color:rgba(0,0,0,0.75);
+                text-shadow:none;
+            }
+          
+            
+            h4 {
+                font-family: "Arvo",serif;
+                color:rgba(0,0,0,0.75);
+                 text-shadow:none;
+            }
+            #footer, #footer a {
+               color:#fff;
+               text-align: center;
+               font-size: 14px;
+               height:100%;
+               padding-top:15px;
+               padding-bottom:15px;
+            }
+/*  http://css-tricks.com/responsive-data-tables/ 
+  Look to implement this at some point.
+
+*/
+ .props-table {
+        border-collapse: collapse;
+        color:#444;
+        font-size:14px;    
+        background-color:#f5f5f5
+    }
+    .props-table th {
+        text-align: center;
+        padding:5px;
+    }
+    .props-table td {
+      
+        padding:5px;      
+    }
+    
+    .props-table td,.props-table td+td+td+td {
+        font-family: "Courier New",monospace;
+        text-align: center;
+    }
+    .props-table td+td+td  {
+        font-family: arial, sans-serif;
+        text-align: left;
+    }
+
+/* general spacer to place between stacked images etc. */
+.gen-spacer {
+    margin-top:25px;
+    margin-bottom:25px;
+    display:block;
+}
+
+/* prices in checkout */
+.price {
+   
+    float:right;
+    font-size:20px;
+}
+
+.text-danger {
+    font-family: "Exo 2", sans-serif;
+    font-weight:bold;
+    font-size:16px;
+    color: #aa4444;
+}
+
+/* stops stretching of paypal/wallet buttons */
+[type=image] {
+    padding:0px;
+    border:none;
+    width:auto;
+   height:auto;
+   background:none;
+}
+
+/* bolds selected item in checkout */
+input:checked + label {
+    font-weight:bold;
+}
+
+
+ .band-color-2 a {
+     color:darkblue;
+   
+ }
+ .band-color-2 .btn {
+     color:#fff;
+     
+ }
+
+/* Syle for download product boxes.*/
+.band-color-2 .well {
+      color:#000;
+    font-size:16px;
+    line-height: 22px;
+}
+
+/* reddish */             
+.band-color-1 {
+     background-color:#D74B4B;
+      color:#fff;
+    padding-top:20px;
+ }
+ /* orangey */
+.band-color-2 {
+     background-color:#D8914B;
+     color:#fff;
+     padding-top:20px;
+ }
+
+
+/* Dark purple */
+.band-color-3 {
+    background-color:#914BD8;color:#fff;
+    padding-top:20px;
+}
+/* pinkish */
+.band-color-4 {
+
+    background-color:#E37D7D;color:#fff;
+    padding-top:20px;
+}
+
+.band-color-5 {
+    background-color:#fff;color:#444;
+    padding-top:20px;
+}
+
+.band-color-6 {
+    padding-top:20px;
+    color:#fff;
+    background-color:#eeb0b0;
+}
+.download-box {
+    color:#000;
+    font-size:14px;
+ }
+ ul li {
+     font-size:15px;
+     margin-bottom:5px;
+ }
+
+/*750px	970px	1170px*/
+/* Large devices (large desktops, 1200px and up) */
+/*@media (min-width: 1170px) { body {font-size:18px;}  }*/
+
+           
+            #footer a {
+                text-decoration: underline;
+                color:#fff;
+            }
+            #footer a:hover {
+                color:#ccc;
+            }
+            #footer .container {
+                background-color:transparent;
+                font-family:'Exo 2';
+            }
+            .login-nav a{
+                color:#aaa;
+                font-size: 14px;
+            }
+            .login-nav a:hover {
+                color:#fff;
+                text-decoration: none;
+            }
+            
+            .login-nav a.btn {
+                color:#fff;
+            }
+            
+            .navbar {
+                border-radius:0;
+                margin-bottom: 0px;
+            }
+            
+            .mainnav {
+                padding-bottom:0px;
+                font-family: "Exo 2";
+            }
+            .mainnav a {
+             padding:10px;   
+             padding-top:0px;
+             display:block;
+            }
+            
+            .mainnav a.first {
+                padding-left:0px;
+            }
+            
+            .logo-area {
+                padding-bottom:0px;
+                padding-top:10px;
+                font-family: "Exo 2";
+            }
+            
+            .revision {
+                font-size:14px;
+                margin-top:-15px;
+            }
+            .well a {
+                text-decoration: underline;
+            }
+ 
+ /* little adjusment to suit our font better */
+ .glyphicon {
+     top:3px;
+ }
+ .twitter-logo {
+     margin-top:-3px;
+ }
+
+        </style>
+        
+
+<script type = "text/javascript">
+    $(function() {
+        $('.kc-wrap').KillerCarousel({
+            // Width of carousel.
+            width: 800,
+            // Item spacing in 3d (CSS3 3d) mode.
+            spacing3d: 120,
+            // Item spacing in 2d (no CSS3 3d) mode. 
+            spacing2d: 120,
+            // Path to images for shadows etc.
+            imagePath: "/sites/starplugins/js/killercarousel/",
+            showShadow: true,
+            showReflection: true,
+            // Looping mode.
+            infiniteLoop: true,
+            // Scale at 75% of parent element.
+            autoScale: 85
+
+        });
+
+        var kc = $('.kc-wrap').data('KillerCarousel');
+        var dir = 0;
+        setInterval(function() {
+            kc.position(kc.position() + dir * 50);
+        }, 100)
+        $(window).bind('mouseup touchend', function() {
+            dir = 0;
+            kc.lineUp();
+        })
+        $('.nav-but-left,.nav-but-right').bind('mousedown touchstart', function(evt) {
+            // console.log(evt.type + " "+Date.now());
+            dir = -1;
+            if ($(this).hasClass('nav-but-left'))
+                dir = 1;
+            evt.preventDefault();
+            return false;
+        })
+
+    });
+</script>
+
+<style>
+    .kc-wrapx {
+        top:-15px;
+        background-position: center 45%;
+        clear:both;
+    }
+
+
+
+    /* CSS for item wrapper */
+    .kc-item {
+        position:absolute;              
+        width:188px;
+        height:250px;
+    }
+
+    /* CSS for images inside item wrapper */
+    .kc-item img {
+        position:absolute;
+        pointer-events: none;   /* Make images non-selectable. */
+        width:100%;             /* Make images expand to wrapper size (used in 2d modes). */
+    }
+
+    #nav-buts {
+        position:absolute;
+        bottom:10px;
+        right:10px;
+    }
+
+    .nav-but-left,.nav-but-right {
+        font-family: arial;
+        width:32px;
+        height:28px;
+        border:2px solid #ccc;
+        background-color: #444;
+        border-radius: 5px;
+        text-align:center;
+        float:left;
+        color:#fff;
+        font-size: 16px;
+        margin-right:10px;
+        padding-top:0px;
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+        cursor: pointer;
+    }
+    .nav-but-left:hover,.nav-but-right:hover {
+        background-color:#666;
+    }
+</style>
+        <script type="text/javascript">
+            
+        CloudZoom.quickStart(); // cz
+        JetZoom.quickStart();
+        StarZoom.quickStart();
+           
+            // The following piece of code can be ignored.
+            if (window.location.hostname.indexOf("starplugins.") != -1) {
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-254857-7']);
+                _gaq.push(['_trackPageview']);
+                (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+            }
+             
+        </script>
+    </head>
+    <body>
+        
+       
+        <div style="padding-top:10px;">
+        <div class="container" >
+            <div class='row logo-area'>
+                <div class="col-sm-6">
+                     <a class="" href="/"><img src="/images/starplugins/starplugins-logo.png" alt ="Star Plugins logo"></a>
+                </div>
+                 
+                <div class='col-sm-6 text-right login-nav'>
+                   
+                                        <ul class="list-inline">
+                                            <li><a title ="Follow @StarPlugins" href="http://www.twitter.com/StarPlugins">
+                                                    <img class="twitter-logo" src="/images/starplugins/twitter-logo.png">
+                                                </a></li>
+                        <li><a href="/support">Support</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        
+                                                <li><a class="btn btn-primary" href="/login">Login</a></li>
+                                            
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            <div class='row mainnav'>
+                <div class='col-sm-12 login-nav'>
+                    <ul class="list-inline">
+                        <li class="dropdown">
+                            <a href="#" class="first dropdown-toggle" data-toggle="dropdown">Cloud Zoom <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/cloudzoom">Cloud Zoom Home</a></li>
+                                <li><a href="/cloudzoom/quickstart">Cloud Zoom Quick Start</a></li>
+                                <li><a href="/cloudzoom/examples">Cloud Zoom Examples</a></li>
+                                <li><a href="/cloudzoom/api">Cloud Zoom Developer's API</a></li>
+                                <li><a href="/cloudzoom/trial">Download Cloud Zoom Trial</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/cloudzoom/wordpress">WordPress Module</a></li>
+                                <li><a href="/cloudzoom/woocommerce">WooCommerce Module</a></li>
+                                <li><a href="/cloudzoom/magento">Magento Module</a></li>
+                                <li><a href="/cloudzoom/drupal">Drupal 7 Module</a></li>
+                                <li><a href="/cloudzoom/opencart">NEW! Open Cart Extension</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/checkout/cloudzoom">Buy Cloud Zoom <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jet Zoom <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/jetzoom">Jet Zoom Home</a></li>
+                                <li><a href="/jetzoom/quickstart">Jet Zoom Quick Start</a></li>
+                                <li><a href="/jetzoom/examples">Jet Zoom Examples</a></li>
+                                <li><a href="/jetzoom/api">Jet Zoom Developer's API</a></li>
+                                <li><a href="/checkout/jetzoom">Buy Jet Zoom <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Star Zoom <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                 <li><a href="/starzoom">Star Zoom Home</a></li>
+                                <li><a href="/starzoom/quickstart">Star Zoom Quick Start</a></li>
+                                <li><a href="/starzoom/examples">Star Zoom Examples</a></li>
+                                <li><a href="/atomiser">Atomiser</a></li>
+                                <li><a href="/starzoom/api">Star Zoom Developer's API</a></li>
+                                <li><a href="/starzoom/trial">Download Star Zoom Trial</a></li>
+                                <li><a href="/checkout/star-zoom">Buy Star Zoom <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Killer Carousel <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/killercarousel">Killer Carousel Home</a></li>
+                                <li><a href="/killercarousel/trial">Killer Carousel Trial</a></li>
+                                <li><a href="/checkout/killercarousel">Buy Killer Carousel <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                            </ul>
+                        </li>
+                        
+                         <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong>NEW!</strong> Bling3D <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/bling3d/home">Bling3D Home</a></li>
+                                <li><a href="/bling3d/trial">Bling3D Trial</a></li>
+                                <li><a href="/checkout/bling3d">Buy Bling3D <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="/software-development" class="dropdown-toggleX" data-toggleX="dropdown">Development</a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">FREE <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/thumbelina">Thumbelina Content Slider</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                </div>
+                
+
+
+            </div>
+           
+
+        </div>
+        </div>
+<!--
+        <div style="background-color:#000">
+            <div class="container">
+
+                <div class="row text-center" style="margin-top:20px;padding:10px 0px 10px 0px;margin:0px;line-height:0px">
+
+
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <ins class="adsbygoogle"
+                                     style="display:inline-block;width:728px;height:90px"
+                                     data-ad-client="ca-pub-3986248807237670"
+                                     data-ad-slot="2984464343"></ins>
+                                <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+
+                </div>
+            </div>
+        </div>
+-->
+        
+     
+<div class="band-color-2">
+    <div class='container'>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <h1>Killer Carousel</h1>
+                <p class="revision">Current: 1.2 rev 1501161200, 16 January 2015</p>
+
+                <!---------------------------------------->
+
+                <div class = "kc-wrap">
+                    <!-- Carousel items follow -->
+                    <div class="kc-item" >
+                        <img src="/kcimages/cropped-small/image1.jpg" alt = "Salvator Mundi 1519">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image2.jpg" alt = "St. John the Baptist 1516">
+                    </div> 
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image3.jpg" alt = "Lady with an Ermine 1490">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image4.jpg" alt = "St. Jerome in the Wilderness 1480">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image5.jpg" alt = "Head of a Woman 1508">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image6.jpg" alt = "St. John the Baptist 1516">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image7.jpg" alt = "The Virgin and Child with St Anne and St John the Baptist 1500">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image8.jpg" alt = "Madonna of the Yarnwinder 1507">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image9.jpg" alt = "The Virgin and Child with St. Anne 1508">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image10.jpg" alt = "Madonna of the Carnation 1480">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image11.jpg" alt = "La belle ferronnière 1496">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image12.jpg" alt = "Adoration of the Magi 1481">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image13.jpg" alt = "Portrait of a Musician 1490">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image14.jpg" alt = "Virgin of the Rocks 1486">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image15.jpg" alt = "Madonna of Laroque 1503">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image16.jpg" alt = "Benois Madonna 1478">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image17.jpg" alt = "Mona Lisa 1517">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image18.jpg" alt = "Portrait of a man in red chalk 1512">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image19.jpg" alt = "Ginevra de' Benci 1478">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image20.jpg" alt = "The Last Supper 1498">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image21.jpg" alt = "Annunciation 1475">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image22.jpg" alt = "The Battle of Anghiari 1505">
+                    </div>
+                    <div class="kc-item">
+                        <img src="/kcimages/cropped-small/image23.jpg" alt = "Madonna Litta 1491">
+                    </div>
+
+
+                    <div id="nav-buts">
+                        <div class="nav-but-left">&laquo;</div>
+                        <div class="nav-but-right">&raquo;</div>
+                    </div>
+
+                </div>
+
+             
+            </div>
+        </div>
+   <!---------------------------------------->
+        <div class='row'>
+            <div class='col-sm-6'>
+                <p class="lead">Powerful, responsive, touch-enabled carousel for modern websites and devices, plus legacy browser support.<p>
+
+                <p>Killer Carousel meets the needs of professional developers who need a responsive, touch-enabled, versatile and visually impressive 
+                    carousel. It uses the power of the latest browsers, but retains legacy support for the old ones too.</p>
+                <p>No matter what target device screen size, Killer Carousel will adapt itself within parameters 
+                    you specify to ensure your content is presented optimally to your site visitors.</p>
+
+                <div class='btn-group text-center'>
+                    <a class="btn btn-primary" href="/checkout/killercarousel">Buy <span class="glyphicon glyphicon-shopping-cart"></span></a>
+                    <a class="btn btn-primary" href="/killercarousel/trial">Trial</a>
+                    <a class="btn btn-primary" href="http://starplugins.freshdesk.com/categories/73129/forums/289810">Releases</a>
+                </div>
+            </div>
+            <div class='col-sm-6'>
+                <h2>Features</h2> 
+                <ul>
+                    <li><strong>Rendering modes</strong> - Choose different ways of displaying your content, 2d/3d, 'Cover Flow', HTML slides etc</li>
+                    <li><strong>Touch-enabled</strong> - Quickly swipe through carousels on touch-enabled devices</li>
+                    <li><strong>Extra responsive</strong> - Not just size adjustment; rendering modes and effects are changed to suit the target device</li>
+                    <li><strong>Full HTML carousel items</strong> - Use full HTML content, Canvas, etc., not just images
+                    <li><strong>Reflections and shadows</strong> - Add a sense of depth and realism to your carousels</li>
+                    <li><strong>Legacy browser support</strong> - Old browsers switch to rendering modes matched to their capabilities</li>
+                    <li><strong>Infinite or finite carousels</strong> - Allow users to loop forever or stop at each end</li>
+                    <li><strong>Callbacks and API calls</strong> - Allows developers to add their own behaviour</li>
+                </ul>
+            </div>
+        </div>
+        <!---------------------------------->
+
+
+    </div>
+</div>
+
+
+
+<div class="band-color-1">
+    <div class='container'>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <h2>Examples</h2>
+                <p class='lead'>We have created a rich set of examples to demonstrate how various options and effects can be implemented.
+                    Fluid layouts are used in all cases to illustrate how Killer Carousel will work in responsive websites.</p>
+                <p>The examples are standalone as this makes it easier to study the source code without pages of irrelevant HTML.
+                    Examples open in a new window/tab.</p>
+                <ul class='col-sm-4'>
+                    <li><a href="/killercarousel/tutorials/image-carousel" target="kc-example">Tutorial: image carousel</a></li>
+                    <li><a href="/killercarousel/examples/fixed-size" target="kc-example">Fixed size carousel</a></li>
+                    <li><a href="/killercarousel/examples/responsive" target="kc-example">Responsive carousel</a></li>
+                    <li><a href="/killercarousel/examples/html-items" target="kc-example">HTML carousel items</a></li>
+                    <li><a href="/killercarousel/examples/rendering-modes" target="kc-example">Rendering modes</a></li>
+                </ul>
+                <ul class="col-sm-4">
+                    <li><a href="/killercarousel/examples/using-events" target="kc-example">Using events with carousel items</a></li>
+                    <li><a href="/killercarousel/examples/extra-responsive" target="kc-example">Extra Responsive Carousel</a></li>
+                    <li><a href="/killercarousel/examples/api" target="kc-example">Killer Carousel API</a></li>
+                    <li><a href="/killercarousel/examples/callbacks" target="kc-example">Callbacks</a></li>
+                </ul>
+                <ul class="col-sm-4">
+                    <li><a href="/killercarousel/examples/banner" target="kc-example">Banner</a></li>
+                    <li><a href="/killercarousel/examples/navigation-buttons" target="kc-example">Navigation buttons</a></li>
+                    <li><a href="/killercarousel/examples/ajax-items" target="kc-example">Ajax Items</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <!---------------------------------->
+ 
+  <div class="band-color-4">
+    <div class='container'>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <h2>Properties</h2>
+                  <p class='lead'>Various properties are available to change the look and feel of Killer Carousel.</p>
+    
+                <p>Text values/strings should be surrounded by quotes e.g. <code>renderer2d: 'render2dCarousel'</code></p>
+                <p>Numbers, true and false, should not e.g. <code>infiniteLoop: true</code></p>
+              
+                <div class='table-responsive'>
+      <table class="table props-table">
+        <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Default Value</th>
+        </tr>
+        <tr>
+            <td>frontItemIndex</td>
+            <td>number</td>
+            <td>Index of the item placed at the front of the carousel on start up.</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>infiniteLoop</td>
+            <td>boolean</td>
+            <td>Makes the carousel an infinitely long loop, i.e. the the last item is displayed next the first item.</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>scale</td>
+            <td>number</td>
+            <td>Applies a finale scale (percentage) to the carousel's calculated size. 
+                Useful if you want to duplicate a carousel setup, but at different sizes for different devices.
+            </td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>spacing2d</td>
+            <td>number</td>
+            <td>Distance between carousel item in 2D modes.</td>
+            <td>200</td>
+        </tr>
+        <tr>
+            <td>spacing3d</td>
+            <td>number</td>
+            <td>Distance between carousel item in 3D modes.</td>
+            <td>200</td>
+        </tr>
+        <tr>
+            <td>horizon</td>
+            <td>string</td>
+            <td>CSS vertical position of the horizon line within the wrapping parent. You can alter this to move the carousel up or down.</td>
+            <td>top:50%</td>
+        </tr>
+        <tr>
+            <td>itemAlign</td>
+            <td>string</td>
+            <td>Defines which edge of the carousel items line up with the horizon line: top, middle, or bottom.</td>
+            <td>middle</td>
+        </tr>
+        <tr>
+            <td>showShadow</td>
+            <td>boolean</td>
+            <td>Displays the shadow graphic around carousel items. 
+                The CSS for the shadow is defined in killercarousel.css in class <code>.kc-shadow.</code>. You can create your own shadow image if desired.
+            </td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>showReflection</td>
+            <td>boolean</td>
+            <td>Displays a reflection underneath carousel items. 
+                There are some limitations to the reflection: it only works on Canvas-enabled browsers, and it it will only reflect the first image within the carousel item.
+                For other scenarios, you could should build reflection into the Carousel item manually.
+            </td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>renderer2d</td>
+            <td>string</td>
+            <td>
+                The rendering function to use in 2D mode. Options are currently, <code>render2dCarousel</code>, <code>render2dBasic</code> and <code>render2dFlow</code>
+            </td>
+            <td>render2dCarousel</td>
+        </tr>
+        <tr>
+            <td>renderer3d</td>
+            <td>string</td>
+            <td>
+                The rendering function to use in 3D mode. other options are currently, <code>render3dCarousel</code> and <code>render3dFlow</code>.
+                If you want to switch off 3D rendering, you can specify <code>null<code>.
+            </td>
+            <td>render3dCarousel</td>
+        </tr>
+        <tr>
+            <td>fadeEdgeItems</td>
+            <td>boolean</td>
+            <td>Makes the items at the edge for the carousel fade out smoothly before they disappear.
+                This is useful for linear style carousels where they are defined as a smaller width than the wrapping parent
+            </td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>perspectiveOrigin</td>
+            <td>string</td>
+            <td>Sets the vanishing point in 3D modes. Generally, the 50% horizontal
+                value will not need to change, but by altering the vertical value (in pixels), you can create different perspective effects.
+                The default 0px vertical position represents having your eyes perfectly level with the horizon line. By setting a value of, say, -100px, this would be equivalent to raising your eye level.  
+            </td>
+            <td>50% 0px</td>
+        </tr>
+        <tr>
+            <td>autoChangeDirection</td>
+            <td>number</td>
+            <td>Sets the direction of automatic timed movement through the carousel (e.g. for a slide show). Accetpable values are -1, 0, 1.</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>autoChangeDelay</td>
+            <td>number</td>
+            <td>Sets the delay (milliseconds) between automatic movement of the carousel.</td>
+            <td>4000</td>
+        </tr>
+        <tr>
+            <td>useMouseWheel</td>
+            <td>boolean</td>
+            <td>Sets use of the mouse wheel for navigation through the carousel.</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>showNavigation</td>
+            <td>boolean</td>
+            <td>Turns on the navigation buttons.</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>navigationHorizontalPos<br>from 1.1 rev 1311271343</td>
+            <td>string</td>
+            <td>Sets the horizontal position of the navigation buttons e.g. 'middle', 'left:10px', 'right:15px'.</td>
+            <td>right:15px</td>
+        </tr>
+        <tr>
+            <td>navigationVerticalPos<br>from 1.1 rev 1311271343</td>
+            <td>string</td>
+            <td>Sets the vertical position of the navigation buttons e.g. 'middle', 'top:10px', 'bottom:15px'.</td>
+            <td>bottom:15px</td>
+        </tr>
+        <tr>
+            <td>navigationParent<br>from 1.1 rev 1311271343</td>
+            <td>string</td>
+            <td>Selector to an element that will act as the parent of the navigation buttons e.g. '#my-element'.
+                Allows navigation buttons to appear anywhere on the page. Empty string defaults to 
+                using the carousel parent.</td>
+            <td>''</td>
+        </tr>
+    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+       
+      
+        
+        <div id="footer">
+            
+                <div class="container">
+                    
+                    <ul class="list-inline">
+                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="/terms">Terms</a></li>
+                        <li><a href="/license">License</a></li>
+                    </ul>
+                    
+                    
+                    <p>©2012-2015 Star Plugins. All rights reserved. Use of this website is deemed as acceptance of the terms of use.</p>
+                </div>
+        </div>
+          </div>
+          <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=raffaelec" async="async"></script>
+          
+    </body>
+</html

@@ -39,22 +39,7 @@
 </head>
 
 <body>
-<div class="topnav">
-<img id="logo" src="logo.jpeg" alt="LOGO pic">
-  <a class="active" href="index.html">Home</a>
-  <a href="discussions.html">Discussions</a>
-  <a href="#">News</a>
-  <a href="#">Contact</a>
-  <div class="dropdown">
-  <a href="#sidemenu"> -- </a>
-  <div class="dropdown-content">
-      <a href="#login">Login</a>
-      <a href="#editprofile">Edit Profile </a>
-      <a href="#about">About us </a>
-    </div>
-	</div>
-  
-</div>
+<?php include("toolbar.html");?>
 <div id="discussion_categories">
 <ul id="dis_cat">
 Categories
