@@ -12,3 +12,9 @@ TO BE DONE:
 ->add coins to users when add discussions and upvote and then they can purchase fragons and diwolfs HO HO HOOOO ohoh and and comment ability to discussions probably I shound move the comment thingy to 3rd step or copy it ...copies;)
 ->the 4 pics main page bla bla 
 ->custmize page bla bla 
++
+remove things i didnt use 
+remove margins l saro zyadi
+contact us !!!
+++
+delete remaining files in temp
