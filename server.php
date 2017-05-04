@@ -172,4 +172,24 @@ $rows = $db->query($query);
     return preg_replace(array("/</","/>/", "/\"/",  "/'/",  "/&/"),array("&lt;","&gt;", "&quot;", "&apos;","&amp;"  ) , $string
     );
 }
-?>	
+
+if(isSet($_POST["cname"])&&isSet($_POST["house"])&& isSet($_POST["cstory"])){
+	{
+		$query="INSERT INTO discussions(title,content,files,user,upvotes,downvotes) VALUES('$title','$text','$files','$user',0,0)";
+try{
+
+$db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->exec($query);
+
+
+}catch (PDOException $e){
+	
+	die("Connection failed: " . $e->getMessage());
+
+}
+	}
+}
+
+
+	?>
