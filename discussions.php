@@ -3,7 +3,11 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>!Discussions!</title>
-	<link href="GOT_style.css" rel="stylesheet" type="text/css"/>
+	<link href="GOT_style.css" rel="stylesheet" type="text/css" />
+	<style rel="stylesheet" type="text/css">
+	body{
+		background-color:#cccccc;
+	}</style>
 	<script src="jquery.js"></script>
 		<script type="text/javascript">
 	var ajax;
@@ -58,7 +62,7 @@ ajax.send();
 	</script>
 </head>
 
-<body>
+<body >
 <?php include("toolbar.html");?>
 <div id="discussion_categories">
 <ul id="dis_cat">

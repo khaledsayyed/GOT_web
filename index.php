@@ -51,6 +51,14 @@ endif;
 <body>
 <?php include("toolbar.html");?>
 
+<?php/*
+if():
+session
+<input 
+
+endif;*/?>
+
+
 
 <div id="snow" class="tm"><img   src="images/snow.jpg" /><div>
 
