@@ -11,8 +11,7 @@
 	width:65%;
 
 	
-	margin-left:auto;
-	margin-right:auto;
+	margin-left:23%;
 	
 }
 #dis_cat{
@@ -68,108 +67,17 @@ body {margin:0;}
 
 
 
-.dropdown {
-	float:right;
-position: absolute;
-right:7%;
-}
+
 #logo{ width:25px; height:50px; float:left; padding-right: 15px;}
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-	top:50px;
-	
-}
 
-
-.half-right-upcircle {
-    width: 200px;
-    height: 100px; /* as the half of the width */
-    background-color: gold;
-    border-top-left-radius: 110px;  /* 100px of height + 10px of border */
-    border-top-right-radius: 110px; /* 100px of height + 10px of border */
-    border: 10px solid gray;
-    border-bottom: 0;
-	box-sizing: border-box;
-}
-.cir_nav{
-	background-color:#490002;
-	border-radius:450px/450px;
-	position:relative;
-	left:350px;
-	top:50px;
-	width:500px;
-	height:500px;
-	z-index:2;
-}
-.cir_content{
-	background-color:#ffffff;
-	border-radius:390px/390px;
-	position:absolute;
-	left:25px;
-	top:25px;
-	width:450px;
-	height:450px;
-	z-index:1;
-}
-#t1{
-	position:absolute;
-	left:245px;
-	top:-5px;
-	width:35px;
-	height:35px;
-	border-radius:35px/35px;
-	border: 3px solid #555555;
-	background-color:#aa0000;
-	z-index:4;
-}
-#t2{
-	position:absolute;
-	left:-5px;
-	top:245px;
-	width:35px;
-	height:35px;
-	border-radius:35px/35px;
-	border: 3px solid #555555;
-	background-color:#0000aa;
-	z-index:4;
-}
-#t3{
-	position:absolute;
-	left:470px;
-	top:245px;
-	width:35px;
-	height:35px;
-	border-radius:35px/35px;
-	border: 3px solid #555555;
-	background-color:#00aa00;
-	z-index:4;
-}
-#t4{
-	position:absolute;
-	left:245px;
-	top:470px;
-	width:35px;
-	height:35px;
-	border-radius:35px/35px;
-	border: 3px solid #555555;
-	background-color:#00aaaa;
-	z-index:4;
-}
 #snow{
 	
 	overflow:hidden;
 	
 	
 }
-.tm{width:120px;
-	height:120px;
-	border-radius:60px;}
+
 .highlighted{
 	
 	width:180px;
@@ -200,21 +108,22 @@ right:7%;
 }
 
 #charac_div{
-margin-top:53px;
-    display: -webkit-flex; /* Safari */
-    display: flex;
+
+   display: -webkit-flex; /* Safari */ 
 
 
-}
+     display: flex; 
 
-	
-.char_pic{
+	 flex-wrap:wrap;
 
-    width: 150px;
-    height: 150px;
-	overflow:hidden;
+  
 
 }
+
+#charac_div img{
+	z-index:5;	
+}
+
 
 /* The following code is for the sidbar*/
 .main-navbar {
@@ -333,29 +242,96 @@ margin-top:53px;
 }
 
 /*Begining of discussion post styling*/
+.post_container{
+	width:70%;
+	
+	background-color:#dddddd;
+	border-radius:5px;
+}
 .post{
-	width:80%;
+	
 	border:2px solid #bbbbbb;
 	border-radius:5px;
 	margin-left:auto;
 	margin-right:auto;
 	margin-bottom:15px;
 	margin-top:5px;
-	padding:3px;
+	padding:14px;
 	background-color:white;
 }
-.post_head{
-	width:100%;
-	height:5px;
+.big_pic{
+	display:inline-block;
+	width:84%;
 	
+	margin:10%;
+	
+
+}
+img{
+	max-width:100%;
+}
+.small_pic{
+	display:inline-block;
+	width:21%;
+	height:21%;
+	margin:5%;
+	
+}
+.com_div{
+	width:90%;
+	min-height:35px;
+	margin:10px;
+}
+.post_head {
+	width:100%;
+	height:70px;
+	
+}
+.post_head h3{
+	
+	margin:9px;
+}
+.post_head p{
+	font-size:15px;
+margin:10px;
 }
 .user_posted_by{
 float:left;
-height:5px;
-width:5px;
+height:70px;
+width:70px;
+margin-right:5px;	
+}
+.commenter_pic{
+	float:left;
+
+height:32px;
+width:32px;
+margin-right:5px;
 	
 }
+.reaction_div{
+	width:85%;
+	height:40px;
+	
+	margin:auto;
+	
+}
+.vote{
+	float:left;
 
+}
+.votes_count{
+	color:#666666;
+	font-size:30px;
+	margin-right:6px;
+	margin-left:6px;
+	float:left;
+}
+.share{
+	margin-right:3px;
+	float:right;
+}
+	
 
 
 

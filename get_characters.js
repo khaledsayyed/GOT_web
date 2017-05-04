@@ -9,11 +9,11 @@ $( "#main-sidebar" ).simplerSidebar( {
       autoOpen: false,
       show: {
         effect: "scale",
-        duration: 1000
+        duration: 500
       },
       hide: {
         effect: "puff",
-        duration: 1000
+        duration: 500
       }
     });
 var ajax = new XMLHttpRequest();
@@ -25,7 +25,7 @@ function load_pics(){
 	
 	var data = JSON.parse(this.responseText);
 	for (var i = 0; i < data.characters.length; i++) {
-	var div= $('<div>',{class:"char_pic"});
+	
 	var name =data.characters[i].name;
 		var img = $('<img />', { 
 		id: 'p'+i,
@@ -36,30 +36,27 @@ function load_pics(){
 		height: 150
  
 		});
-	div.append(img);
-	$("#charac_div").append(div);
-	set_actions_to_image('p'+i);
+	set_actions_to_image(img);
 	
-
-
-
+	$("#charac_div").append(img);
+	
+	//
 	}
 }
-function set_actions_to_image(id){
-	$('#'+id).hover(function(){$('#'+id).animate({"width": "190px","height": "190px","marginTop":"-20px","marginLeft":"-20px"}, "medium");},function(){$('#'+id).animate({"width": "150px","height": "150px","marginTop":"0px","marginLeft":"0px"}, "medium")});
-	$('#'+id).click(show_char_info);
+function set_actions_to_image(img){
+	img.hover(function(){img.animate({"width": "180px","height": "180px","marginTop":"-20px","marginLeft":"-20px"}, "medium");},function(){img.animate({"width": "150px","height": "150px","marginTop":"0px","marginLeft":"0px"}, "medium")});
+
+	img.click(show_char_info);
+
 	
+
 }
 function show_char_info(){
 var ajax = new XMLHttpRequest();
 ajax.onload = load_char_info;
 ajax.open("GET", "server.php?characters="+this.alt, true);
 ajax.send()
-
  
-    
-    
-  
  
 }
 function load_char_info(){
