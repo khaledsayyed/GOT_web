@@ -140,8 +140,12 @@ endif;
 endif;	
 // sending discussions
  if(isSet($_GET["discussions"])&&$_GET["discussions"]=="all"):
+<<<<<<< HEAD
  #This is a very complicated query that get the discussion and the first 3 comments (if moore than 3 available)
  $query="SELECT d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user FROM discussions d LEFT OUTER JOIN discussion_comments c1 ON c1.dis_id=d.dis_id LEFT OUTER JOIN discussion_comments c2 ON c2.dis_id=d.dis_id AND c2.cid<>c1.cid LEFT OUTER JOIN discussion_comments c3 ON c3.dis_id=d.dis_id AND c3.cid<>c2.cid AND c3.cid<>c1.cid WHERE ( c1.cid is null OR (c1.cid=(SELECT MAX(cid) FROM discussion_comments where dis_id=d.dis_id))) AND ( c2.cid is null OR(c2.cid=(SELECT MAX(cid) FROM discussion_comments where dis_id=d.dis_id AND cid<>c1.cid))) ORDER BY d.time_posted DESC ";
+=======
+ $query="SELECT d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user FROM discussions d LEFT OUTER JOIN discussion_comments c1 ON c1.dis_id=d.dis_id LEFT OUTER JOIN discussion_comments c2 ON c2.dis_id=d.dis_id AND c2.cid<>c1.cid LEFT OUTER JOIN discussion_comments c3 ON c3.dis_id=d.dis_id AND c3.cid<>c2.cid AND c3.cid<>c1.cid WHERE ( c1.cid is null OR (c1.cid=(SELECT MAX(cid) FROM discussion_comments where dis_id=d.dis_id))) AND ( c2.cid is null OR(c2.cid=(SELECT MIN(cid) FROM discussion_comments where dis_id=d.dis_id))) ORDER BY d.time_posted DESC ";
+>>>>>>> origin/master
  try{
  $db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -172,4 +176,70 @@ $rows = $db->query($query);
     return preg_replace(array("/</","/>/", "/\"/",  "/'/",  "/&/"),array("&lt;","&gt;", "&quot;", "&apos;","&amp;"  ) , $string
     );
 }
-?>	
+function is_photo_uploaded_and_moved($charac) {
+	// bail if there were no upload forms
+   if(empty($_FILES)):
+       return false;
+endif;
+   $file = $_FILES['cphoto']['tmp_name']; // check for uploaded photo
+	if( !empty($file) && is_uploaded_file( $file )):
+            move_uploaded_file($file, "characters/$charac.jpg");//rename and move
+            return true;
+        endif;
+  
+    // return false if no files were found
+   return false;
+}
+
+if(isSet($_POST["cname"])&&isSet($_POST["house"])&& isSet($_POST["cstory"])&&isSet($_POST["state"])){
+	$cname=$_POST["cname"];
+	$house=$_POST["house"];
+	$cstory=xml_entities($_POST["cstory"]);
+	$state=$_POST["state"];
+	{if(isSet($_FILES["cphoto"])&& $_FILES["cphoto"]!=NULL){is_photo_uploaded_and_moved($cname);
+	
+		$query="INSERT INTO characters(name,house,story,state) VALUES('$cname','$house','$cstory','$state')";
+try{
+
+$db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->exec($query);
+
+header("Location: ./Admin/adminpage.php?st=success");
+
+
+
+}catch (PDOException $e){
+	
+	die("Connection failed: " . $e->getMessage());
+
+}
+	}
+	}
+
+}
+/*if( isset( $_POST["aemail"]))
+{
+$anam=$_POST["aemail"];
+try{
+$query1="SELECT name, password, email FROM users WHERE name='$anam'";
+
+
+$db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->exec($query);
+
+header("Location: ./Admin/adminpage.php?st=success");
+
+
+
+}catch (PDOException $e){
+	
+	die("Connection failed: " . $e->getMessage());
+
+}
+	}*/
+	
+
+
+	?>

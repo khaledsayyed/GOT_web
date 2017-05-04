@@ -20,3 +20,6 @@ contact us !!!
 delete remaining files in temp
 +++
 add loading when needed
+++++++
+change query to get 3 cimments
+select bla from ( select bla)
