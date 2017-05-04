@@ -12,11 +12,7 @@ try{
 	//in my laptop mysql at port 3307 you may need to change this
 $db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
 $rows = $db->query($query);
-
-
 header("Content-type: application/json");
 ?>
 {
@@ -41,10 +37,6 @@ if($order==$count):?>
 
 }
 endif;
-?>
-
-<?php
-
 if(isSet($_POST["title"])&&isSet($_POST["text"])):
 session_start();
 if(!isset($_SESSION["logged_in_name"])):die("u need to log in first");
@@ -121,17 +113,12 @@ if(isset($_FILES["file"]))
 	  }
 	
 	}
-  
-	
  }
  endif;
- ?>
- <?php
  if(isSet($_POST["login_name"])&&isSet($_POST["login_password"])):
 			$name=$_POST["login_name"];
 			$pass=$_POST["login_password"];
 $query="SELECT name,password FROM users where name='$name'";
-
 try{
 	//in my laptop mysql at port 3307 you may need to change this
 $db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
@@ -140,7 +127,8 @@ $user_result = $db->query($query);
 $user_result = $user_result->fetch(); 
 if($user_result[0]==$name&&$user_result[1]==$pass):
 session_start();
-$_SESSION["logged_in_name"] = $name; ?>
+$_SESSION["logged_in_name"] = $name; 
+$db=null;#closedb?>
 <h1>You have logged in successfully</h1>
 <?php
 endif;	
@@ -149,5 +137,38 @@ endif;
 	die("Connection failed: " . $e->getMessage());
 
 }		
-endif;		
+endif;	
+// sending discussions
+ if(isSet($_GET["discussions"])&&$_GET["discussions"]=="all"):
+ $query="SELECT d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user FROM discussions d LEFT OUTER JOIN discussion_comments c1 ON c1.dis_id=d.dis_id LEFT OUTER JOIN discussion_comments c2 ON c2.dis_id=d.dis_id AND c2.cid<>c1.cid LEFT OUTER JOIN discussion_comments c3 ON c3.dis_id=d.dis_id AND c3.cid<>c2.cid AND c3.cid<>c1.cid WHERE ( c1.cid is null OR (c1.cid=(SELECT MAX(cid) FROM discussion_comments where dis_id=d.dis_id))) AND ( c2.cid is null OR(c2.cid=(SELECT MIN(cid) FROM discussion_comments where dis_id=d.dis_id))) ORDER BY d.time_posted DESC ";
+ try{
+ $db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$rows = $db->query($query);	
+	 header("Content-type: application/xml"); ?>
+<?xml version="1.0" encoding="UTF-8"?>
+<discussions>
+<?php if ($rows->rowCount() > 0) :
+ foreach ($rows as $row) : 
+ $txt=xml_entities($row[4]);?>
+<discussion title="<?=$row[0];?>" datetime="<?=$row[1]?>" upvotes="<?=$row[2]?>" downvotes="<?=$row[3]?>" postedBy="<?=$row[15]?>">
+		<text> <?=$txt ?></text>
+	<?php if($row[5]!==null):?>	<img><?= $row[5]; ?></img><?php endif;?>
+	<comments> <?php
+	for($i=6;$row[$i]!==NULL&&$i<13;$i=$i+3): ?>
+		<comment user_commented="<?= $row[$i]; ?>" comment_datetime="<?= $row[$i+1]; ?>">
+		<?= $row[$i+2]; ?>
+		</comment>
+	<?php endfor;?>
+	</comments>
+</discussion>   <?php endforeach;   endif;	
+?></discussions><?php	  
+ }catch (PDOException $e){
+	die("Connection failed: " . $e->getMessage());
+}		
+ endif;
+ function xml_entities($string) {#used to escape xml spcial characters
+    return preg_replace(array("/</","/>/", "/\"/",  "/'/",  "/&/"),array("&lt;","&gt;", "&quot;", "&apos;","&amp;"  ) , $string
+    );
+}
 ?>	

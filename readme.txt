@@ -1,6 +1,6 @@
 TO BE DONE:
 ->the timer of remaining days 
-->fill the disscutions page OHHH I FORGOT TO ADD COLUMN FOR THE CATEGORY WHEN I CREATED DISCUSSION DATABASE SOOO and this
+->fill the disscutions page
 ->comment ability to discussions
 ->fill the characters table
 ->about us bla 
@@ -18,3 +18,5 @@ remove margins l saro zyadi
 contact us !!!
 ++
 delete remaining files in temp
++++
+add loading when needed

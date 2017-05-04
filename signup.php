@@ -12,6 +12,10 @@ window.onload=function(){
 	    quitter: ".close-sb"
 	  }
 	});
+
+	
+	
+	
 }
 function check_name(){
 

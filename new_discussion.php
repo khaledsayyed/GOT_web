@@ -52,10 +52,10 @@ Categories
 		<div>
 			Title:<input name="title" type="text" />
 		</div>
-		<div>
-		<textarea name="text" type="text" placeholder="Enter your text here" cols="50" rows="10"></textarea>
-		</div>
+		
 		<div id="fileuploader" name="file">Upload</div>
+		
+		
 		<div>
 		
 			<input id="submit" type="submit" value="Submit" />

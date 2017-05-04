@@ -331,3 +331,19 @@ margin-top:53px;
 	width:500px;
 	background-color:#bbaacc;
 }
+
+/*Begining of discussion post styling*/
+.post{
+	width:80%;
+	border:2px solid purple;
+	border-radius:4px;
+	margin-left:auto;
+	margin-right:auto;
+	padding:3px;
+	background-color:white;
+}
+
+
+
+
+/*End of discussion post styling*/
