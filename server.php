@@ -140,12 +140,13 @@ endif;
 endif;	
 // sending discussions
  if(isSet($_GET["discussions"])&&$_GET["discussions"]=="all"):
-<<<<<<< HEAD
+
  #This is a very complicated query that get the discussion and the first 3 comments (if moore than 3 available)
- $query="SELECT d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user FROM discussions d LEFT OUTER JOIN discussion_comments c1 ON c1.dis_id=d.dis_id LEFT OUTER JOIN discussion_comments c2 ON c2.dis_id=d.dis_id AND c2.cid<>c1.cid LEFT OUTER JOIN discussion_comments c3 ON c3.dis_id=d.dis_id AND c3.cid<>c2.cid AND c3.cid<>c1.cid WHERE ( c1.cid is null OR (c1.cid=(SELECT MAX(cid) FROM discussion_comments where dis_id=d.dis_id))) AND ( c2.cid is null OR(c2.cid=(SELECT MAX(cid) FROM discussion_comments where dis_id=d.dis_id AND cid<>c1.cid))) ORDER BY d.time_posted DESC ";
-=======
- $query="SELECT d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user FROM discussions d LEFT OUTER JOIN discussion_comments c1 ON c1.dis_id=d.dis_id LEFT OUTER JOIN discussion_comments c2 ON c2.dis_id=d.dis_id AND c2.cid<>c1.cid LEFT OUTER JOIN discussion_comments c3 ON c3.dis_id=d.dis_id AND c3.cid<>c2.cid AND c3.cid<>c1.cid WHERE ( c1.cid is null OR (c1.cid=(SELECT MAX(cid) FROM discussion_comments where dis_id=d.dis_id))) AND ( c2.cid is null OR(c2.cid=(SELECT MIN(cid) FROM discussion_comments where dis_id=d.dis_id))) ORDER BY d.time_posted DESC ";
->>>>>>> origin/master
+ 
+ $query="SELECT distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,COM.total FROM discussions d LEFT OUTER JOIN discussion_comments c1 ON c1.dis_id=d.dis_id LEFT OUTER JOIN discussion_comments c2 ON c2.dis_id=d.dis_id AND c2.cid<>c1.cid LEFT OUTER JOIN discussion_comments c3 ON c3.dis_id=d.dis_id AND c3.cid<>c2.cid AND c3.cid<>c1.cid JOIN (SELECT dis_id AS id,COUNT(cid) as total FROM discussion_comments GROUP BY dis_id )AS COM ON COM.id=d.dis_id WHERE ( c1.cid is null OR (c1.cid=(SELECT MAX(cid) FROM discussion_comments where dis_id=d.dis_id))) AND ( c2.cid is null OR(c2.cid=(SELECT MAX(cid) FROM discussion_comments  where dis_id=d.dis_id AND cid<>c1.cid))) ORDER BY d.time_posted DESC";
+#=======
+
+#>>>>>>> origin/master
  try{
  $db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -156,10 +157,10 @@ $rows = $db->query($query);
 <?php if ($rows->rowCount() > 0) :
  foreach ($rows as $row) : 
  $txt=xml_entities($row[4]);?>
-<discussion title="<?=$row[0];?>" datetime="<?=$row[1]?>" upvotes="<?=$row[2]?>" downvotes="<?=$row[3]?>" postedBy="<?=$row[15]?>">
+<discussion id="<?=$row[16];?>" title="<?=$row[0];?>" datetime="<?=$row[1]?>" upvotes="<?=$row[2]?>" downvotes="<?=$row[3]?>" postedBy="<?=$row[15]?>">
 		<text> <?=$txt ?></text>
 	<?php if($row[5]!==null):?>	<img><?= $row[5]; ?></img><?php endif;?>
-	<comments> <?php
+	<comments count="<?=$row[17];?>" > <?php
 	for($i=6;$row[$i]!==NULL&&$i<13;$i=$i+3): ?>
 		<comment user_commented="<?= $row[$i]; ?>" comment_datetime="<?= $row[$i+1]; ?>">
 		<?= $row[$i+2]; ?>
