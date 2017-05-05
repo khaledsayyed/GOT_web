@@ -60,7 +60,7 @@ endif;*/?>
 
 
 
-<div id="snow" class="tm"><img   src="images/snow.jpg" /><div>
+<!--<div id="snow" class="tm"><img   src="images/snow.jpg" /><div>-->
 
 
 </body>
