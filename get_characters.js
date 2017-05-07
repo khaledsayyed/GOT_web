@@ -1,4 +1,7 @@
-$(document).ready(function(){
+	$(document).ready(function(){
+		$(".active").removeClass("active");
+		$("#characters").addClass("active");
+alert("kkkkl");
 $( "#main-sidebar" ).simplerSidebar( {
 	  selectors: {
 	    trigger: "#toggle-sidebar",
@@ -16,13 +19,14 @@ $( "#main-sidebar" ).simplerSidebar( {
         duration: 500
       }
     });
+
 var ajax = new XMLHttpRequest();
 ajax.onload = load_pics;
 ajax.open("GET", "server.php?characters=all", true);
 ajax.send();
-	
+});
 function load_pics(){
-	
+	alert("kkkkl");
 	var data = JSON.parse(this.responseText);
 	for (var i = 0; i < data.characters.length; i++) {
 	
@@ -69,4 +73,3 @@ function load_char_info(){
 	$( "#dialog" ).dialog( "open" );
 }
 
-});

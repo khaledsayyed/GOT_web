@@ -1,4 +1,5 @@
 <?php
+ session_start();	
 function is_photo_uploaded_and_moved($user) {
 	// bail if there were no upload forms
    if(empty($_FILES)):
@@ -28,7 +29,7 @@ $db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->exec($query);
 if(isSet($_GET["photo"])&&$_GET["photo"]!=NULL){is_photo_uploaded_and_moved($name);}
-session_start();
+
 $_SESSION["logged_in_name"] = $name; 
 }catch (PDOException $e){
 	
@@ -46,21 +47,37 @@ endif;
 	<title>Main </title>
 	<link href="GOT_style.css" rel="stylesheet" type="text/css"/>
 <script src="jquery.js"></script>
-	<script src="GOT.js" type="text/javascript"></script>
+	<script  type="text/javascript">
+	
+$(document).ready(function(){
+	$(".active").removeClass("active");
+		$("#index").addClass("active");
+
+		$( "#main-sidebar" ).simplerSidebar( {
+	  selectors: {
+	    trigger: "#toggle-sidebar",
+	    quitter: ".close-sb"
+	  }
+	});
+	
+
+	
+	
+}
+);
+	</script>
 </head>
 <body>
-<?php include("toolbar.html");?>
+<?php include("toolbar.php");?>
+<!--viframe src="//giphy.com/embed/2VZEyhyd9jduM" width="480" height="422" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/game-of-thrones-dragon-fantasy-2VZEyhyd9jduM">via GIPHY</a></p-->
+<!--video width="320" height="240" autoplay loop controls muted>
+  <source src="assets/main_page_video/long_walk.mp4" type="video/mp4" /-->
 
-<?php/*
-if():
-session
-<input 
-
-endif;*/?>
+</video>
 
 
 
-<div id="snow" class="tm"><img   src="images/snow.jpg" /><div>
+
 
 
 </body>

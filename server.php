@@ -1,24 +1,28 @@
 <?php
-if(isSet($_GET["characters"])):
+session_start();
+ob_start();
+ini_set('display_errors', 1);
+date_default_timezone_set("asia/beirut");
+if(isset($_GET["characters"])):
 
 if($_GET["characters"]=="all"):
-$query="SELECT * FROM characters";
+$query="select * from characters";
 
 else:
 $char=$_GET["characters"];
-$query="SELECT * FROM characters where name='$char'";
+$query="select * from characters where name='$char'";
 endif;
 try{
 	//in my laptop mysql at port 3307 you may need to change this
-$db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
 $rows = $db->query($query);
-header("Content-type: application/json");
+header("content-type: application/json");
 ?>
 {
 	"characters":  [
 <?php
-$count = $rows->rowCount();
+$count = $rows->rowcount();
 if ($count > 0) :
 $order=1;
 foreach ($rows as $row) :
@@ -31,28 +35,28 @@ if($order==$count):?>
   endif;  	?>]
 }
 <?php
-}catch (PDOException $e){
+}catch (pdoexception $e){
 	
-	die("Connection failed: " . $e->getMessage());
+	die("connection failed: " . $e->GETmessage());
 
 }
 endif;
-if(isSet($_POST["title"])&&isSet($_POST["text"])):
-session_start();
-if(!isset($_SESSION["logged_in_name"])):die("u need to log in first");
+if(isset($_POST["title"])&&isset($_POST["text"])):
+
+if(!isset($_session["logged_in_name"])):die("u need to log in first");
 endif;
 $files="";
 $dir="./temp";
 if (is_dir($dir)) {
     if ($dh = opendir($dir)) {
 		if (($file = readdir($dh)) !== false) {    
-		   if(preg_match("/^(.)*.([jJ][pP][gG]|[pP][Nn][gG])$/",$file)):
+		   if(preg_match("/^(.)*.([jj][pp][gg]|[pp][nn][gg])$/",$file)):
 		 $files=$file;
 		endif;
 		}
 	
         while (($file = readdir($dh)) !== false) {    
-		   if(preg_match("/^(.)*.([jJ][pP][gG]|[pP][Nn][gG])$/",$file)):
+		   if(preg_match("/^(.)*.([jj][pp][gg]|[pp][nn][gg])$/",$file)):
 		   
 		   $files=$files.'|'.$file;
 		 rename($dir."/".$file,"discussion_files/".$file);
@@ -64,104 +68,97 @@ if (is_dir($dir)) {
 }
 $title=$_POST["title"];
 $text=$_POST["text"];
-
-$user = $_SESSION["logged_in_name"] ; 
-$query="INSERT INTO discussions(title,content,files,user,upvotes,downvotes) VALUES('$title','$text','$files','$user',0,0)";
+$date =date("y-m-d h:i:s");
+$user = $_session["logged_in_name"] ; 
+$query="insert into discussions(title,content,files,user,upvotes,downvotes,time_POSTed) values('$title','$text','$files','$user',0,0,$date)";
 try{
 
-$db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
 $db->exec($query);
 
 
-}catch (PDOException $e){
+}catch (pdoexception $e){
 	
-	die("Connection failed: " . $e->getMessage());
+	die("connection failed: " . $e->GETmessage());
 
 }
 endif;
 
-if(isSet($_GET["save_pic_temporarly"])&&$_GET["save_pic_temporarly"]==true):
+if(isset($_GET["save_pic_temporarly"])&&$_GET["save_pic_temporarly"]==true):
 $output_dir = "temp/";
-if(isset($_FILES["file"]))
+if(isset($_files["file"]))
 {
 	$ret = array();
-	
-//	This is for custom errors;	
-/*	$custom_error= array();
-	$custom_error['jquery-upload-file-error']="File already exists";
-	echo json_encode($custom_error);
-	die();
-*/
-	$error =$_FILES["file"]["error"];
-	//You need to handle  both cases
-	//If Any browser does not support serializing of multiple files using FormData() 
-	if(!is_array($_FILES["file"]["name"])) //single file
+	$error =$_files["file"]["error"];
+
+	if(!is_array($_files["file"]["name"])) //single file
 	{
- 	 	$fileName = $_FILES["file"]["name"];
- 		move_uploaded_file($_FILES["file"]["tmp_name"],$output_dir.$fileName);
-    	$ret[]= $fileName;
+ 	 	$filename = $_files["file"]["name"];
+ 		move_uploaded_file($_files["file"]["tmp_name"],$output_dir.$filename);
+    	$ret[]= $filename;
 	}
-	else  //Multiple files, file[]
+	else  //multiple files, file[]
 	{
-	  $fileCount = count($_FILES["file"]["name"]);
-	  for($i=0; $i < $fileCount; $i++)
+	  $filecount = count($_files["file"]["name"]);
+	  for($i=0; $i < $filecount; $i++)
 	  {
-	  	$fileName = $_FILES["file"]["name"][$i];
-		move_uploaded_file($_FILES["file"]["tmp_name"][$i],$output_dir.$fileName);
-	  	$ret[]= $fileName;
+	  	$filename = $_files["file"]["name"][$i];
+		move_uploaded_file($_files["file"]["tmp_name"][$i],$output_dir.$filename);
+	  	$ret[]= $filename;
 	  }
 	
 	}
  }
  endif;
- if(isSet($_POST["login_name"])&&isSet($_POST["login_password"])):
+ if(isset($_POST["login_name"])&&isset($_POST["login_password"])):
 			$name=$_POST["login_name"];
 			$pass=$_POST["login_password"];
-$query="SELECT name,password FROM users where name='$name'";
+$query="select name,password from users where name='$name'";
 try{
 	//in my laptop mysql at port 3307 you may need to change this
-$db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
 $user_result = $db->query($query);	
 $user_result = $user_result->fetch(); 
-if($user_result[0]==$name&&$user_result[1]==$pass):
-session_start();
-$_SESSION["logged_in_name"] = $name; 
+if($user_result[0]==$name&&$user_result[1]==$pass):;
+$_SESSION["logged_in_name"] = $name;
+
 $db=null;#closedb?>
-<h1>You have logged in successfully</h1>
+<h1>you have logged in successfully</h1>
 <?php
+#session_write_close();
+header("location: index.php");
+#exit();
 endif;	
-}catch (PDOException $e){
+}catch (pdoexception $e){
 	
-	die("Connection failed: " . $e->getMessage());
+	die("connection failed: " . $e->GETmessage());
 
 }		
 endif;	
 // sending discussions
- if(isSet($_GET["discussions"])&&$_GET["discussions"]=="all"):
+ if(isset($_GET["discussions"])&&$_GET["discussions"]=="all"):
 
- #This is a very complicated query that get the discussion and the first 3 comments (if moore than 3 available)
+ #this is a very complicated query that GET the discussion and the first 3 comments (if moore than 3 available)
  
- $query="SELECT distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,COM.total FROM discussions d LEFT OUTER JOIN discussion_comments c1 ON c1.dis_id=d.dis_id LEFT OUTER JOIN discussion_comments c2 ON c2.dis_id=d.dis_id AND c2.cid<>c1.cid LEFT OUTER JOIN discussion_comments c3 ON c3.dis_id=d.dis_id AND c3.cid<>c2.cid AND c3.cid<>c1.cid JOIN (SELECT dis_id AS id,COUNT(cid) as total FROM discussion_comments GROUP BY dis_id )AS COM ON COM.id=d.dis_id WHERE ( c1.cid is null OR (c1.cid=(SELECT MAX(cid) FROM discussion_comments where dis_id=d.dis_id))) AND ( c2.cid is null OR(c2.cid=(SELECT MAX(cid) FROM discussion_comments  where dis_id=d.dis_id AND cid<>c1.cid))) ORDER BY d.time_posted DESC";
-#=======
+ $query="select distinct d.title, d.time_POSTed, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id where ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.time_POSTed desc";
 
-#>>>>>>> origin/master
  try{
- $db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ $db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
 $rows = $db->query($query);	
-	 header("Content-type: application/xml"); ?>
-<?xml version="1.0" encoding="UTF-8"?>
+	 header("content-type: application/xml"); ?>
+<?xml version="1.0" encoding="utf-8"?>
 <discussions>
-<?php if ($rows->rowCount() > 0) :
+<?php if ($rows->rowcount() > 0) :
  foreach ($rows as $row) : 
  $txt=xml_entities($row[4]);?>
-<discussion id="<?=$row[16];?>" title="<?=$row[0];?>" datetime="<?=$row[1]?>" upvotes="<?=$row[2]?>" downvotes="<?=$row[3]?>" postedBy="<?=$row[15]?>">
+<discussion id="<?=$row[16];?>" title="<?=$row[0];?>" datetime="<?=$row[1]?>" upvotes="<?=$row[2]?>" downvotes="<?=$row[3]?>" POSTedby="<?=$row[15]?>">
 		<text> <?=$txt ?></text>
 	<?php if($row[5]!==null):?>	<img><?= $row[5]; ?></img><?php endif;?>
 	<comments count="<?=$row[17];?>" > <?php
-	for($i=6;$row[$i]!==NULL&&$i<13;$i=$i+3): ?>
+	for($i=6;$row[$i]!==null&&$i<13;$i=$i+3): ?>
 		<comment user_commented="<?= $row[$i]; ?>" comment_datetime="<?= $row[$i+1]; ?>">
 		<?= $row[$i+2]; ?>
 		</comment>
@@ -169,8 +166,8 @@ $rows = $db->query($query);
 	</comments>
 </discussion>   <?php endforeach;   endif;	
 ?></discussions><?php	  
- }catch (PDOException $e){
-	die("Connection failed: " . $e->getMessage());
+ }catch (pdoexception $e){
+	die("connection failed: " . $e->GETmessage());
 }		
  endif;
  function xml_entities($string) {#used to escape xml spcial characters
@@ -179,10 +176,10 @@ $rows = $db->query($query);
 }
 function is_photo_uploaded_and_moved($charac) {
 	// bail if there were no upload forms
-   if(empty($_FILES)):
+   if(empty($_files)):
        return false;
 endif;
-   $file = $_FILES['cphoto']['tmp_name']; // check for uploaded photo
+   $file = $_files['cphoto']['tmp_name']; // check for uploaded photo
 	if( !empty($file) && is_uploaded_file( $file )):
             move_uploaded_file($file, "characters/$charac.jpg");//rename and move
             return true;
@@ -191,56 +188,164 @@ endif;
     // return false if no files were found
    return false;
 }
+//next:handeling upvotes and downvotes
+if(isset($_GET['user_voted'])&&isset($_GET['dis_id'])):
+$dis_id=$_GET['dis_id'];
+$name=$_GET['user_voted'];
+if(isset($_GET['vote'])):
+if($_GET['vote']=='up'):
+$query = "select * from upvotes where dis_id=".$dis_id." and name='".$name."'";
+$query1 = "insert into upvotes values(".$dis_id.",'".$name."')";
 
-if(isSet($_POST["cname"])&&isSet($_POST["house"])&& isSet($_POST["cstory"])&&isSet($_POST["state"])){
+elseif($_GET['vote']=='down'):
+$query = "select * from downvotes where dis_id=".$dis_id." and name='".$name."'";
+$query1 = "insert into downvotes values(".$dis_id.",'".$name."')";
+endif;
+
+try{
+
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+$already_there = $db->query($query);
+if($already_there->rowcount() === 0):
+$db->exec($query1);
+endif;
+
+
+}catch (pdoexception $e){
+	
+	die("connection failed: " . $e->GETmessage());
+
+}
+endif;
+
+if(isset($_GET['unvote'])):
+if($_GET['unvote']=='up'):
+$query1 = "delete from upvotes where dis_id=".$dis_id." and name='".$name."'";
+elseif($_GET['unvote']=='down'):
+$query1 = "delete from downvotes where dis_id=".$dis_id." and name='".$name."'";
+endif;
+
+try{
+
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+$db->exec($query1);
+
+}catch (pdoexception $e){	
+	die("connection failed: " . $e->GETmessage());
+}
+endif;
+
+endif;
+
+//end of upvotes and downvotes thingies
+
+//next is inserting comment into the database
+if(isset($_GET["name"])&&isset($_GET["dis_id"])&&isset($_GET["comment_text"])):
+$date =date("y-m-d h:i:s");
+$name=$_GET["name"];
+$dis_id=$_GET["dis_id"];
+$comment=$_GET["comment_text"];
+$query="insert into discussion_comments(dis_id,user_commented,comment_text,com_time) values($dis_id,'$name','$comment','$date')";
+try{
+
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+$db->exec($query);
+
+}catch (pdoexception $e){	
+	die("connection failed: " . $e->GETmessage());
+}
+
+endif;
+
+//end of comment insertion
+//update votes and comments
+if(isset($_GET["update_me_on_discussion"])):
+$dis_id = $_GET["update_me_on_discussion"];
+
+
+$query="select d.upvotes,d.downvotes from discussions d  where dis_id=$dis_id";
+	$query2="select c.user_commented,c.comment_text,c.com_time from discussion_comments c where dis_id=$dis_id";
+ try{
+ $db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+$votes = $db->query($query);	
+$vote =$votes->fetch();
+$upvotes=$vote[0];
+$downvotes=$vote[1];
+$rows = $db->query($query2);
+$count=$rows->rowcount();
+	 header("content-type: application/xml"); ?>
+<?xml version="1.0" encoding="utf-8"?>
+<discussion id="<?=$dis_id?>" upvotes="<?=$upvotes?>" downvotes="<?=$downvotes?>">
+	<comments count="<?=$count?>" > 
+	<?php if ( $count> 0) :
+ foreach ($rows as $row) : ?>
+		<comment user_commented="<?=$row[0]; ?>" comment_datetime="<?=$row[2]; ?>">
+		<?= $row[1]; ?>
+		</comment>
+	<?php endforeach;endif; ?>
+	</comments>
+</discussion>     	
+	  <?php
+ }catch (pdoexception $e){
+	die("connection failed: " . $e->GETmessage());
+}
+
+endif;
+
+//end of update votes and comments
+if(isset($_POST["cname"])&&isset($_POST["house"])&& isset($_POST["cstory"])&&isset($_POST["state"])){
 	$cname=$_POST["cname"];
 	$house=$_POST["house"];
 	$cstory=xml_entities($_POST["cstory"]);
 	$state=$_POST["state"];
-	{if(isSet($_FILES["cphoto"])&& $_FILES["cphoto"]!=NULL){is_photo_uploaded_and_moved($cname);
+	{if(isset($_files["cphoto"])&& $_files["cphoto"]!=null){is_photo_uploaded_and_moved($cname);
 	
-		$query="INSERT INTO characters(name,house,story,state) VALUES('$cname','$house','$cstory','$state')";
+		$query="insert into characters(name,house,story,state) values('$cname','$house','$cstory','$state')";
 try{
 
-$db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
 $db->exec($query);
 
-header("Location: ./Admin/adminpage.php?st=success");
+header("location: ./admin/adminpage.php?st=success");
 
 
 
-}catch (PDOException $e){
+}catch (pdoexception $e){
 	
-	die("Connection failed: " . $e->getMessage());
+	die("connection failed: " . $e->GETmessage());
 
 }
 	}
 	}
 
 }
+
 /*if( isset( $_POST["aemail"]))
 {
 $anam=$_POST["aemail"];
 try{
-$query1="SELECT name, password, email FROM users WHERE name='$anam'";
+$query1="select name, password, email from users where name='$anam'";
 
 
-$db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
 $db->exec($query);
 
-header("Location: ./Admin/adminpage.php?st=success");
+header("location: ./admin/adminpage.php?st=success");
 
 
 
-}catch (PDOException $e){
+}catch (pdoexception $e){
 	
-	die("Connection failed: " . $e->getMessage());
+	die("connection failed: " . $e->GETmessage());
 
 }
 	}*/
 	
-
 
 	?>

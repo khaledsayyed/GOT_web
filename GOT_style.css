@@ -9,9 +9,9 @@
 }
 #discussion_main_content{
 	width:65%;
-
+	min-width:550px;
 	
-	margin-left:23%;
+	margin-left:35%;
 	
 }
 #dis_cat{
@@ -149,12 +149,16 @@ body {margin:0;}
 	 
 
 	.main-navbar-content { padding: 4px 16px; }
-	 .main-navbar-content a {
+	.main-navbar-content a{
+		 float: left;
+  display: block;
+	}
+	 .main-navbar-content .tab {
   float: left;
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 13px 16px;
   text-decoration: none;
   font-size: 17px;
 }
@@ -222,14 +226,16 @@ body {margin:0;}
     display: block;
 }*/
 
-	.main-navbar-content a:hover {
+	.main-navbar-content .tab:hover {
   background-color: #ddd;
   color: black;
 }
-
+.main-navbar-content img{
+	margin-right:5px;
+}
 .main-navbar-content a.active {
-    background-color: #4CAF50;
-    color: white;
+    border:4px solid #aa99cc;
+	padding: 9px 12px;
 }
 /* END OF sidebar css*/
 #NEW_POST_FIELDSET{
@@ -318,6 +324,17 @@ margin-right:5px;
 }
 .vote{
 	float:left;
+	opacity:0.6;
+
+}
+.downvote{
+	float:left;
+	opacity:0.6;
+
+}
+.upvote{
+	float:left;
+	opacity:0.6;
 
 }
 .votes_count{
@@ -332,7 +349,52 @@ margin-right:5px;
 	float:right;
 }
 	
+.gray_text{
+color:#888888;
+float:right;	
+margin-bottom:4px;
+}
 
 
+.reply_div{
+	margin-left:10px;
+	margin-right:8px;
+  display: flex;
+  align-items: center;
+}
+.reply_div img{
+	width:33px;
+	height:33px;
+	
+}
+.insert_comment{/*input to hold comment to bee inserted*/
 
+	margin-top:0px;
+	padding-top:0px;
+	width:80%;
+	height:25px;
+	margin-left:3px;
+	margin-right:3px;
+	border:2px solid #888899;
+}
+.comments{
+	
+}
+.reply{
+		color:#666666;
+	font-size:28px;
+	margin-right:6px;
+	margin-left:6px;
+	float:left;
+}
 /*End of discussion post styling*/
+#user_holder{
+float:right;
+border-radius:5px;
+border:2px solid #999999;
+  display: flex;
+  align-items: center;
+}
+.round_small_image{
+	border-radius:10px;
+}

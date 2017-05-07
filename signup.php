@@ -42,7 +42,7 @@ function view_pic(){
 </script>
 </head>
 <body>
-<?php include("toolbar.html");?>
+<?php include("toolbar.php");?>
 <div id="hello_pic"><img id="pic1" src="" title="hello_pic" alt=""></div>
 <form action="index.php" method="GET" enctype="multipart/form-data">
 	<fieldset id="signup_fieldset">

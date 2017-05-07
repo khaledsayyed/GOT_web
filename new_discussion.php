@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +35,7 @@
 	</head>
 
 <body>
-<?php include("toolbar.html");?>
+<?php include("toolbar.php");?>
 
 <div id="discussion_categories">
 <ul id="dis_cat">
