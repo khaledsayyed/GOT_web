@@ -71,14 +71,9 @@ $(document).ready(function(){
 <?php include("toolbar.php");?>
 <!--viframe src="//giphy.com/embed/2VZEyhyd9jduM" width="480" height="422" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/game-of-thrones-dragon-fantasy-2VZEyhyd9jduM">via GIPHY</a></p-->
 <!--video width="320" height="240" autoplay loop controls muted>
-  <source src="assets/main_page_video/long_walk.mp4" type="video/mp4" /-->
+  <source src="assets/main_page_video/long_walk.mp4" type="video/mp4" />
 
-</video>
-
-
-
-
-
+</video-->
 
 </body>
 </html>
