@@ -15,7 +15,7 @@ session_start();
 	<script src="jquery.js"></script>
 		<script type="text/javascript">
 		
-	var ajax;
+	var ajax,ajax2;
 	$(document).ready(function(){
 		$(".active").removeClass("active");
 		$("#discussions").addClass("active");
@@ -87,10 +87,10 @@ ajax.send();
 	
 	var vote_div = $('<div>',{class:'reaction_div'});
 	vote_div.append($('<img>',{class:'upvote',src:'assets/icons/upvote.png',alt:"false",click:upvote,width:30,height:30}));//alt refers if it is pressed or not
-	vote_div.append($('<span>',{text:'0',class:'votes_count'}));
+	vote_div.append($('<span>',{text:data[i].getAttribute("upvotes"),class:'upvotes_count'}));
 	
 	vote_div.append($('<img>',{class:'downvote',src:'assets/icons/downvote.png',alt:"false",click:downvote,width:30,height:30}));
-	vote_div.append($('<span>',{text:'0',class:'votes_count'}));
+	vote_div.append($('<span>',{text:data[i].getAttribute("downvotes"),class:'downvotes_count'}));
 		vote_div.append($('<img>',{class:'share',src:'assets/icons/share.png',click:share,width:30,height:30}));
 	vote_div.append($('<a>',{click:comment,text:"Reply",class:'reply'}).append($('<img>',{class:'vote',src:'assets/icons/comment.png',width:35,height:35})));
 	div.append(vote_div);
@@ -105,7 +105,7 @@ ajax.send();
 		var comment_text = comments[k].firstChild.nodeValue;
 		var com_div=$('<div>',{class:'com_div'});
 		com_div.append($('<img>', { 
-		id:"img"+i,
+		id:"img"+k,
 		src: "./users_photos/"+commenter+".jpg",
 		class:"commenter_pic",
 		onerror:"this.error=null;this.src='./users_photos/user.png';" 
@@ -138,10 +138,10 @@ ajax.send();
 		
 		var link="server.php?unvote=up&&user_voted="+document.getElementById("user_name").innerHTML+"&&dis_id="+dis_id;
 			}
-		var ajax = new XMLHttpRequest();
+		var ajax3 = new XMLHttpRequest();
 	
-	ajax.open("GET", link, true);
-	ajax.send()
+	ajax3.open("GET", link, true);
+	ajax3.send()
  
 	}
 	function downvote(){
@@ -159,10 +159,10 @@ ajax.send();
 		
 		var link="server.php?unvote=down&&user_voted="+document.getElementById("user_name").innerHTML+"&&dis_id="+dis_id;
 			}
-		var ajax = new XMLHttpRequest();
+		var ajax2 = new XMLHttpRequest();
 	
-	ajax.open("GET", link, true);
-	ajax.send()
+	ajax2.open("GET", link, true);
+	ajax2.send()
 	}
 	function share(){
 		
@@ -193,18 +193,48 @@ ajax.send();
 		}
 	}
 	function send_comment(){
-			var dis_id =$(this).closest('.post_container').children(".post").attr("id");
+			var dis_id =$(this).closest(".post_container").children(".post").attr("id");
 			var user = document.getElementById("user_name").innerHTML;
 			var comment_text=$(this).closest(".reply_div").children(".insert_comment").val();
 
-		var ajax = new XMLHttpRequest();
-ajax.onload = update_comments;
-ajax.open("GET", "server.php?name="+user+"&&dis_id="+dis_id+"&&comment_text="+comment_text, true);
-ajax.send()
+		ajax2 = new XMLHttpRequest();
+ajax2.onload = update_comments;
+ajax2.open("GET", "server.php?name="+user+"&&dis_id="+dis_id+"&&comment_text="+comment_text, true);
+ajax2.send()
 	$(this).closest('.post_container').children(".reply_div").empty();
 	}
 	function update_comments(){
+		var  data = ajax2.responseXML;
+		var id= data.getElementsByTagName("discussion")[0].getAttribute("id");
 		
+		var updated_upvotes = data.getElementsByTagName("discussion")[0].getAttribute("upvotes");
+		var updated_downvotes = data.getElementsByTagName("discussion")[0].getAttribute("downvotes");
+		var updated_comments_count =data.getElementsByTagName("comments")[0].getAttribute("count");
+		var comments = data.getElementsByTagName("comment");
+	//	alert($("#"+id).children(".reaction_div").children(".upvote").text());
+		$("#"+id).children(".reaction_div").children(".upvotes_count").text(updated_upvotes);
+		$("#"+id).children(".reaction_div").children(".downvote_count").text(updated_downvotes);
+		$("#"+id).children(".gray_text").text(updated_comments_count+"comments");
+		var all_comments_div = $("#"+id).closest(".post_container").children(".comments");
+		all_comments_div.empty();
+	for (var k =comments.length-1; k > comments.length-4; k--) {
+		var commenter=comments[k].getAttribute("user_commented");
+		var comment_text = comments[k].firstChild.nodeValue;
+		var com_div=$('<div>',{class:'com_div'});
+		com_div.append($('<img>', { 
+		id:"img"+k,
+		src: "./users_photos/"+commenter+".jpg",
+		class:"commenter_pic",
+		onerror:"this.error=null;this.src='./users_photos/user.png';" 
+		
+		}));
+		com_div.append($('<strong>',{text:commenter+":"}));
+		com_div.append($('<span>',{text:comment_text}));
+		all_comments_div.append(com_div);
+		
+	}
+	
+	
 	}
 	
 	</script>

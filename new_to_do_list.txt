@@ -1,0 +1,22 @@
+khaled
+finish discution(share btn+heiglight upvote bla)
+create div with recommended pages and and videos
+delete a post
+teams on main page and jjoin 
+logout
+
+
+huda
+finish admin page(and edit main page buttons... AND (form to add link or video to the recommended videos div))
+add admin(simple just add someone that already have account)
+main page changing photos
+login signup styling
+about us page
+timer for next episode
+
+
+someone
+complete validation sign up mfrood copy paste
+fill characters 
+about us mesh droori aslan
+contact us msh droori aslan(we can copy paste from HW1)

@@ -154,7 +154,7 @@ $rows = $db->query($query);
 <?php if ($rows->rowcount() > 0) :
  foreach ($rows as $row) : 
  $txt=xml_entities($row[4]);?>
-<discussion id="<?=$row[16];?>" title="<?=$row[0];?>" datetime="<?=$row[1]?>" upvotes="<?=$row[2]?>" downvotes="<?=$row[3]?>" POSTedby="<?=$row[15]?>">
+<discussion id="<?=$row[16];?>" title="<?=$row[0];?>" datetime="<?=$row[1]?>" upvotes="<?=$row[2]?>" downvotes="<?=$row[3]?>" postedBy="<?=$row[15]?>">
 		<text> <?=$txt ?></text>
 	<?php if($row[5]!==null):?>	<img><?= $row[5]; ?></img><?php endif;?>
 	<comments count="<?=$row[17];?>" > <?php
@@ -262,12 +262,12 @@ endif;
 
 //end of comment insertion
 //update votes and comments
-if(isset($_GET["update_me_on_discussion"])):
-$dis_id = $_GET["update_me_on_discussion"];
+if(isset($_GET["update_me_on_discussion"])||(isset($_GET["name"])&&isset($_GET["dis_id"])&&isset($_GET["comment_text"]))):
+$dis_id = isset($_GET["update_me_on_discussion"])?$_GET["update_me_on_discussion"]:$_GET["dis_id"];
 
 
 $query="select d.upvotes,d.downvotes from discussions d  where dis_id=$dis_id";
-	$query2="select c.user_commented,c.comment_text,c.com_time from discussion_comments c where dis_id=$dis_id";
+	$query2="select c.user_commented,c.comment_text,c.com_time from discussion_comments c where dis_id=$dis_id ORDER BY c.com_time";
  try{
  $db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
 //$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
@@ -284,7 +284,7 @@ $count=$rows->rowcount();
 	<?php if ( $count> 0) :
  foreach ($rows as $row) : ?>
 		<comment user_commented="<?=$row[0]; ?>" comment_datetime="<?=$row[2]; ?>">
-		<?= $row[1]; ?>
+				<?= $row[1]; ?>
 		</comment>
 	<?php endforeach;endif; ?>
 	</comments>
