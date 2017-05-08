@@ -23,18 +23,29 @@
 	      <img alt="menu" height="24px" src="menu.png" width="24px">
 
 	    </div>
+		<div class="clickFade">
 	   <?php
 if(isset($_SESSION["logged_in_name"]))
 {
 $user= $_SESSION["logged_in_name"];?>
-<div id="user_holder"><span class="round_small_image"><img id="user" src="users_photos/<?=$user?>" alt="<?=$user?>" title="<?=$user?>" width="25" height="25"/></span><span id="user_name"><?=$user?></span></div><!-- this will be styled and placed at thee corner bla bla-->
+<a href="javascript:void(0)" id="user_holder"><span class="round_small_image"><img id="user" src="users_photos/<?=$user?>" alt="<?=$user?>" title="<?=$user?>" width="25" height="25"/></span><span id="user_name"><?=$user?></span><span>&#x25BC;</span></a><!-- this will be styled and placed at thee corner bla bla-->
+
+            <ul>
+                <li><a href="#">Edit Your Account</a></li>
+                <li><a href="#">Log Out</a></li>
+            </ul>
 <?php }
 else{
 $user=	"";?>
-<div id="user_holder"><span class="round_small_image"><img id="user" src="users_photos/user.png" alt="<?=$user?>" title="<?=$user?>" width="25" height="25"/></span><span id="user_name"><?=$user?></span></div><!-- this will be styled and placed at thee corner bla bla-->
+<a href="javascript:void(0)" id="user_holder"><span class="round_small_image"><img id="user" src="users_photos/user.png" alt="<?=$user?>" title="<?=$user?>" width="25" height="25"/></span><span id="user_name"><?=$user?></span><span>&#x25BC;</span></a><!-- this will be styled and placed at thee corner bla bla-->
+		<ul>
+                <li><a href="#">Log In</a></li>
+                <li><a href="#">Sign Up</a></li>
+            </ul>
 <?php }
 ?>	
 		
+	  </div>
 	  </div>
 
 </div>

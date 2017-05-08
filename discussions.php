@@ -30,7 +30,12 @@ session_start();
 	    quitter: ".close-sb"
 	  }
 	});
-		
+		 $(".clickFade ul").hide();
+    $(".clickFade").click(function(){
+        $(this).children("ul").stop(true,true).fadeToggle("fast"),
+        $(this).toggleClass("dropdown-active");
+    });
+	
 		 $( "#dialog" ).dialog({
       autoOpen: false,
       show: {

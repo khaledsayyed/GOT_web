@@ -60,7 +60,11 @@ $(document).ready(function(){
 	  }
 	});
 	
-
+ $(".clickFade ul").hide();
+    $(".clickFade").click(function(){
+        $(this).children("ul").stop(true,true).fadeToggle("medium"),
+        $(this).toggleClass("dropdown-active");
+    });
 	
 	
 }

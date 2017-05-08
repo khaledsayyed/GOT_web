@@ -152,6 +152,7 @@ body {margin:0;}
 	.main-navbar-content a{
 		 float: left;
   display: block;
+  text-decoration: none; 
 	}
 	 .main-navbar-content .tab {
   float: left;
@@ -162,6 +163,29 @@ body {margin:0;}
   text-decoration: none;
   font-size: 17px;
 }
+
+ .main-navbar-content ul{ position: relative; background-color: #B71C1C; }
+	.main-navbar-content ul li{ display: block; }
+	
+	.clickFade{
+float:right;	
+	
+}
+.clickFade a{
+	display:block;
+	color: #FFF;
+}
+.dropdown-active{ background-color: #B71C1C;  }
+.dropdown-active a,visited{ color: white; text-decoration: none; }
+	.main-navbar-content ul li a,visited{ display: block; padding: 15px; color: #FFF; text-decoration: none;
+    transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+}
+ .main-navbar-content ul{ list-style-type: none; padding: 0; margin: 0; }
+
+ .main-navbar-content ul li span{ margin: 0 0 0 7px; }
 	.left { float: left; }
 	 
 	.right { float: right; }
@@ -396,12 +420,15 @@ margin-bottom:4px;
 }
 /*End of discussion post styling*/
 #user_holder{
-float:right;
+display:block;
 border-radius:5px;
-border:2px solid #999999;
   display: flex;
   align-items: center;
+  border:2px solid #999999;
+  width:146px;
 }
+
 .round_small_image{
 	border-radius:10px;
 }
+

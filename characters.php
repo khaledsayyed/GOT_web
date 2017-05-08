@@ -32,6 +32,12 @@ $( "#main-sidebar" ).simplerSidebar( {
         duration: 500
       }
     });
+	
+	 $(".clickFade ul").hide();
+    $(".clickFade").click(function(){
+        $(this).children("ul").stop(true,true).fadeToggle("fast"),
+        $(this).toggleClass("dropdown-active");
+    });
 
 var ajax = new XMLHttpRequest();
 ajax.onload = load_pics;

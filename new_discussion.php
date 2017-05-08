@@ -26,6 +26,11 @@ session_start();
 	fileName:"file"
 	});
 	
+	 $(".clickFade ul").hide();
+    $(".clickFade").click(function(){
+        $(this).children("ul").stop(true,true).fadeToggle("fast"),
+        $(this).toggleClass("dropdown-active");
+    });
     
     
 	});
