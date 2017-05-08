@@ -5,11 +5,12 @@ session_start();
 <html>
 <head>
 <title>Characters!</title>
+<script type="text/javascript" src="jquery.js"></script>
 <link href="GOT_style.css" rel="stylesheet" type="text/css"/>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="jquery.js"></script>
+
 <script type="text/javascript"  >
 $(document).ready(function(){
 		$(".active").removeClass("active");
