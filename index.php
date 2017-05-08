@@ -29,12 +29,10 @@ $db = new PDO("mysql:host=localhost:3307;dbname=got", "root", "");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->exec($query);
 if(isSet($_GET["photo"])&&$_GET["photo"]!=NULL){is_photo_uploaded_and_moved($name);}
-
 $_SESSION["logged_in_name"] = $name; 
 }catch (PDOException $e){
 	
 	die("Connection failed: " . $e->getMessage());
-
 }
 
 
@@ -50,6 +48,8 @@ endif;
 
 	<script  type="text/javascript">
 	
+var images = [];var i = 0;
+
 $(document).ready(function(){
 	$(".active").removeClass("active");
 		$("#index").addClass("active");
@@ -66,19 +66,66 @@ $(document).ready(function(){
         $(this).children("ul").stop(true,true).fadeToggle("medium"),
         $(this).toggleClass("dropdown-active");
     });
+//jason response to get images to display on main page	
+var ajax = new XMLHttpRequest();
+ajax.onload = load_pics;
+ajax.open("GET", "server.php?mainImages=all", true);
+ajax.send();	
 	
-	
+
+setInterval(fadeDivs, 3000);
 }
 );
+
+function load_pics(){
+	
+	var data = JSON.parse(this.responseText);
+	for (var i = 0; i < data.imag.length; i++) {
+	
+	var source =data.imag[i].source;
+	images[i]= source;
+	
+	}
+}
+//fading images 
+
+ 
+
+function fadeDivs() {
+	 i = i < images.length ? i : 0;
+
+    $('#image1').fadeOut(100, function(){
+        $(this).attr('src',images[i++]).fadeIn(100);
+    })
+	 $('#image2').fadeOut(100, function(){
+        $(this).attr('src',images[i++]).fadeIn(100);
+    })
+	 $('#image3').fadeOut(100, function(){
+        $(this).attr('src',images[i++]).fadeIn(100);
+    })
+	 $('#image4').fadeOut(100, function(){
+        $(this).attr('src',images[i++]).fadeIn(100);
+    })
+	
+   // i++;
+}
 	</script>
 </head>
 <body>
 <?php include("toolbar.php");?>
+<div id="fadingimg">
+<img id="image1" src="./images/cersei.jpg" />
+<img id="image2" src="./images/dany.jpg" />
+<img id="image3" src="./images/snow.jpg" />
+<img id="image4" src="./images/finger.jpg" />
+</div>
+
+
 <!--viframe src="//giphy.com/embed/2VZEyhyd9jduM" width="480" height="422" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/game-of-thrones-dragon-fantasy-2VZEyhyd9jduM">via GIPHY</a></p-->
 <!--video width="320" height="240" autoplay loop controls muted>
   <source src="assets/main_page_video/long_walk.mp4" type="video/mp4" />
 
-</video-->
+</video>-->
 
 </body>
 </html>

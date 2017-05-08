@@ -304,6 +304,7 @@ $count=$rows->rowcount();
 endif;
 
 //end of update votes and comments
+//add character 
 if(isset($_POST["cname"])&&isset($_POST["house"])&& isset($_POST["cstory"])&&isset($_POST["state"])){
 	$cname=$_POST["cname"];
 	$house=$_POST["house"];
@@ -354,5 +355,23 @@ header("location: ./admin/adminpage.php?st=success");
 }
 	}*/
 	
+if(isset($_GET["mainImages"])){
+	if($_GET["mainImages"]=="all"){
+//json to get images
+$images = glob("./assets/main_page_images/*.jpg");
 
+header("Content-type: application/json");?>
+{ "imag": [
+<?php
+$i=0;
+$ilen= count($images);
+foreach ($images as $image) :
+if(++$i!==$ilen){
+
+?>
+{"source": "<?=$image?>" },
+<?php  }
+else{?>
+{"source":"<?=$images[$ilen-1]?>" }]}
+<?php } endforeach; }};
 	?>
