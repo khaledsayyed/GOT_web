@@ -46,7 +46,8 @@ endif;
 <meta charset="UTF-8" />
 	<title>Main </title>
 	<link href="GOT_style.css" rel="stylesheet" type="text/css"/>
-<script src="jquery.js"></script>
+<script src="jquery.js"  type="text/javascript">></script>
+
 	<script  type="text/javascript">
 	
 $(document).ready(function(){
