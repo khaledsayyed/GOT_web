@@ -7,12 +7,16 @@ session_start();
 <head>
 	<meta charset="UTF-8" />
 	<title>!Discussions!</title>
+	<script type="text/javascript" src="jquery.js"></script>
 	<link href="GOT_style.css" rel="stylesheet" type="text/css" />
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	<style rel="stylesheet" type="text/css">
 	body{
 		background-color:#cccccc;
 	}</style>
-	<script src="jquery.js"></script>
+
 		<script type="text/javascript">
 		
 	var ajax,ajax2;
@@ -27,6 +31,17 @@ session_start();
 	  }
 	});
 		
+		 $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "scale",
+        duration: 150
+      },
+      hide: {
+        effect: "scale",
+        duration: 150
+      }
+    });
 		
 ajax = new XMLHttpRequest();
 ajax.onload = load_posts ;
@@ -78,7 +93,8 @@ ajax.send();
 		var img_div = $('<div>',{class:'big_pic'});
 		img_div.append(img);
 	div.append(img_div);
-	div.append($("<span>",{class:"gray_text",text:data[i].getElementsByTagName("comments")[0].getAttribute("count")+"comments"}))
+	
+	div.append($("<span>",{class:"gray_text",click:show_all_comments,text:data[i].getElementsByTagName("comments")[0].getAttribute("count")+"comments"}))
 	
 	div.append('<hr style="width:83%;color:#cccccc;clear:right;"/>');
 	//}
@@ -86,10 +102,15 @@ ajax.send();
 	
 	
 	var vote_div = $('<div>',{class:'reaction_div'});
-	vote_div.append($('<img>',{class:'upvote',src:'assets/icons/upvote.png',alt:"false",click:upvote,width:30,height:30}));//alt refers if it is pressed or not
+	var upvote_icon =$('<img>',{class:'upvote',src:'assets/icons/upvote.png',alt:(data[i].getAttribute("upvoted_by_me")==="yes")?"true":"false",click:upvote,width:30,height:30})
+	//alt refers if it is pressed or not
+		if(data[i].getAttribute("upvoted_by_me")==="yes"){upvote_icon.css("opacity",1);}
+	vote_div.append(upvote_icon );
 	vote_div.append($('<span>',{text:data[i].getAttribute("upvotes"),class:'upvotes_count'}));
+	 var downvote_icon = $('<img>',{class:'downvote',src:'assets/icons/downvote.png',alt:(data[i].getAttribute("downvoted_by_me")==="yes")?"true":"false",click:downvote,width:30,height:30}) ;
 	
-	vote_div.append($('<img>',{class:'downvote',src:'assets/icons/downvote.png',alt:"false",click:downvote,width:30,height:30}));
+	if(data[i].getAttribute("downvoted_by_me")==="yes"){downvote_icon.css("opacity",1);}
+	vote_div.append(downvote_icon);
 	vote_div.append($('<span>',{text:data[i].getAttribute("downvotes"),class:'downvotes_count'}));
 		vote_div.append($('<img>',{class:'share',src:'assets/icons/share.png',click:share,width:30,height:30}));
 	vote_div.append($('<a>',{click:comment,text:"Reply",class:'reply'}).append($('<img>',{class:'vote',src:'assets/icons/comment.png',width:35,height:35})));
@@ -122,6 +143,29 @@ ajax.send();
 	
 	
     }
+	function show_all_comments(){
+	var dis_id =$(this).closest('.post').attr("id");
+		ajax2 = new XMLHttpRequest();
+ajax2.onload = fill_all_comments;
+ajax2.open("GET", "server.php?update_me_on_discussion="+dis_id, true);
+ajax2.send()	
+		$(this).click(show_three_comments);
+	}
+	function show_three_comments(){
+	var dis_id =$(this).closest('.post').attr("id");
+		ajax2 = new XMLHttpRequest();
+ajax2.onload = update_comments;
+ajax2.open("GET", "server.php?update_me_on_discussion="+dis_id, true);
+ajax2.send()	
+		$(this).on('click',show_all_comments);
+	}
+		function update_discussion(dis_id){
+
+	ajax2 = new XMLHttpRequest();
+ajax2.onload = update_comments;
+ajax2.open("GET", "server.php?update_me_on_discussion="+dis_id, true);
+ajax2.send()	
+	}
 	function upvote(){
 			var dis_id =$(this).closest('.post').attr("id");
 		if(this.alt=="false"){
@@ -141,8 +185,8 @@ ajax.send();
 		var ajax3 = new XMLHttpRequest();
 	
 	ajax3.open("GET", link, true);
-	ajax3.send()
- 
+	ajax3.send();
+		update_discussion(dis_id);
 	}
 	function downvote(){
 			var dis_id =$(this).closest('.post').attr("id");
@@ -162,11 +206,16 @@ ajax.send();
 		var ajax2 = new XMLHttpRequest();
 	
 	ajax2.open("GET", link, true);
-	ajax2.send()
+	ajax2.send();
+	update_discussion(dis_id);
 	}
 	function share(){
 		
-		alert('shared');
+	var dis_id =$(this).closest('.post').attr("id");
+	$( "#dialog" ).empty();
+	$( "#dialog" ).dialog('option','title', 'SHARE');
+	$( "#dialog" ).append($("<p>",{text:'localhost:81/GOT_website/discussions.php?id='+dis_id}));
+	$( "#dialog" ).dialog( "open" );
 	}
 	function comment(){
 		
@@ -209,15 +258,51 @@ ajax2.send()
 		
 		var updated_upvotes = data.getElementsByTagName("discussion")[0].getAttribute("upvotes");
 		var updated_downvotes = data.getElementsByTagName("discussion")[0].getAttribute("downvotes");
+
 		var updated_comments_count =data.getElementsByTagName("comments")[0].getAttribute("count");
 		var comments = data.getElementsByTagName("comment");
 	//	alert($("#"+id).children(".reaction_div").children(".upvote").text());
 		$("#"+id).children(".reaction_div").children(".upvotes_count").text(updated_upvotes);
-		$("#"+id).children(".reaction_div").children(".downvote_count").text(updated_downvotes);
+		$("#"+id).children(".reaction_div").children(".downvotes_count").text(updated_downvotes);
+
 		$("#"+id).children(".gray_text").text(updated_comments_count+"comments");
 		var all_comments_div = $("#"+id).closest(".post_container").children(".comments");
 		all_comments_div.empty();
 	for (var k =comments.length-1; k > comments.length-4; k--) {
+		var commenter=comments[k].getAttribute("user_commented");
+		var comment_text = comments[k].firstChild.nodeValue;
+		var com_div=$('<div>',{class:'com_div'});
+		com_div.append($('<img>', { 
+		id:"img"+k,
+		src: "./users_photos/"+commenter+".jpg",
+		class:"commenter_pic",
+		onerror:"this.error=null;this.src='./users_photos/user.png';" 
+		
+		}));
+		com_div.append($('<strong>',{text:commenter+":"}));
+		com_div.append($('<span>',{text:comment_text}));
+		all_comments_div.append(com_div);
+		
+	}
+	}
+
+	function fill_all_comments(){
+		var  data = ajax2.responseXML;
+		var id= data.getElementsByTagName("discussion")[0].getAttribute("id");
+		
+		var updated_upvotes = data.getElementsByTagName("discussion")[0].getAttribute("upvotes");
+		var updated_downvotes = data.getElementsByTagName("discussion")[0].getAttribute("downvotes");
+
+		var updated_comments_count =data.getElementsByTagName("comments")[0].getAttribute("count");
+		var comments = data.getElementsByTagName("comment");
+	//	alert($("#"+id).children(".reaction_div").children(".upvote").text());
+		$("#"+id).children(".reaction_div").children(".upvotes_count").text(updated_upvotes);
+		$("#"+id).children(".reaction_div").children(".downvotes_count").text(updated_downvotes);
+		
+		$("#"+id).children(".gray_text").text(updated_comments_count+"comments");
+		var all_comments_div = $("#"+id).closest(".post_container").children(".comments");
+		all_comments_div.empty();
+	for (var k =comments.length-1; k >=0; k--) {
 		var commenter=comments[k].getAttribute("user_commented");
 		var comment_text = comments[k].firstChild.nodeValue;
 		var com_div=$('<div>',{class:'com_div'});
@@ -256,7 +341,7 @@ Categories
 
 
 </div>
-
+<div id="dialog"></div>
 
 <a href="new_discussion.php"><input type="button" id="add_discussion" value="+" /></a>
 </body>

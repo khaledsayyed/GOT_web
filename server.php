@@ -141,9 +141,14 @@ endif;
  if(isset($_GET["discussions"])&&$_GET["discussions"]=="all"):
 
  #this is a very complicated query that GET the discussion and the first 3 comments (if moore than 3 available)
- 
- $query="select distinct d.title, d.time_POSTed, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id where ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.time_POSTed desc";
+ $check_for_votes=isSet($_SESSION["logged_in_name"]);
+ if($check_for_votes):
+ $username = $_SESSION["logged_in_name"];
+  $query="select distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total, uv.name,dv.name from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid left outer join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id left outer join upvotes uv ON uv.name= '$username' AND uv.dis_id=d.dis_id left outer join downvotes dv ON dv.name= 'admin' AND dv.dis_id=d.dis_id where ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.time_POSTed desc";
+ else:
+   $query="select distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid left outer join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id  where ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.time_POSTed desc";
 
+ endif;
  try{
  $db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
 //$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
@@ -153,8 +158,10 @@ $rows = $db->query($query);
 <discussions>
 <?php if ($rows->rowcount() > 0) :
  foreach ($rows as $row) : 
+ $is_upvoted = $check_for_votes?($row[18]===$username?"yes":"no"):"not_applicable";
+  $is_downvoted = $check_for_votes?($row[19]===$username?"yes":"no"):"not_applicable";
  $txt=xml_entities($row[4]);?>
-<discussion id="<?=$row[16];?>" title="<?=$row[0];?>" datetime="<?=$row[1]?>" upvotes="<?=$row[2]?>" downvotes="<?=$row[3]?>" postedBy="<?=$row[15]?>">
+<discussion id="<?=$row[16];?>" title="<?=$row[0];?>" datetime="<?=$row[1]?>" upvotes="<?=$row[2]?>" downvotes="<?=$row[3]?>" postedBy="<?=$row[15]?>" upvoted_by_me="<?=$is_upvoted?>" downvoted_by_me="<?=$is_downvoted?>" >
 		<text> <?=$txt ?></text>
 	<?php if($row[5]!==null):?>	<img><?= $row[5]; ?></img><?php endif;?>
 	<comments count="<?=$row[17];?>" > <?php

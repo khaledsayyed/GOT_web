@@ -4,7 +4,7 @@ create div with recommended pages and and videos
 delete a post
 teams on main page and jjoin 
 logout
-
+handle more than 1 pic in posts
 
 huda
 finish admin page(and edit main page buttons... AND (form to add link or video to the recommended videos div))
