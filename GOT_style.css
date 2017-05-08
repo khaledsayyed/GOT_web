@@ -438,7 +438,7 @@ border-radius:5px;
 	
 }
 #dany{
-	z-index:2;
+	z-index:1;
 position:absolute;	
 top:15px;	
 left:25px;
@@ -446,7 +446,7 @@ left:25px;
 
 
 #jon{
-		z-index:2;
+		z-index:1;
 position:absolute;	
 top:15px;
 right:25px;
@@ -454,14 +454,14 @@ right:25px;
 }
 
 #cersei{
-		z-index:2;
+		z-index:3;
 position:absolute;		
 top:250px;
 right:25px;
 }
 
 #finger{
-		z-index:2;
+		z-index:1;
 	position:absolute;	
 	top:250px;
 	left:25px;
@@ -471,6 +471,7 @@ right:25px;
 position:absolute;	
 top:15px;	
 left:25px;
+opacity:0.4;
 }
 
 
@@ -479,7 +480,7 @@ left:25px;
 position:absolute;	
 top:15px;
 right:25px;
-	
+opacity:0.4;	
 }
 
 #cersei2{
@@ -487,11 +488,40 @@ right:25px;
 position:absolute;		
 top:250px;
 right:25px;
+opacity:0.4;
+}
+#cersei3{
+		z-index:2;
+position:absolute;		
+top:250px;
+right:25px;
+opacity:0.8;
 }
 #finger2{
 		z-index:1;
 	position:absolute;	
 	top:250px;
+	left:25px;opacity:0.4;
+}
+#jon3{
+		z-index:2;
+position:absolute;		
+top:250px;
+right:25px;
+opacity:0.8;
+}
+#dany3{
+		z-index:2;
+position:absolute;		
+top:15px;	
+left:25px;
+opacity:0.8;
+}
+#finger3{
+		z-index:2;
+position:absolute;		
+top:250px;
 	left:25px;
+opacity:0.8;
 }
 /*END of */
