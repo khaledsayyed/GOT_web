@@ -32,7 +32,7 @@ $user= $_SESSION["logged_in_name"];?>
 
             <ul>
                 <li><a href="#">Edit Your Account</a></li>
-                <li><a href="#">Log Out</a></li>
+                <li><a href="server.php?log_me_out_please=true">Log Out</a></li>
             </ul>
 <?php }
 else{

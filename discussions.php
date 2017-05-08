@@ -164,7 +164,10 @@ ajax2.open("GET", "server.php?update_me_on_discussion="+dis_id, true);
 ajax2.send()	
 		$(this).on('click',show_all_comments);
 	}
-		function update_discussion(dis_id){
+	
+	
+	
+	function update_discussion(dis_id){
 
 	ajax2 = new XMLHttpRequest();
 ajax2.onload = update_comments;
@@ -172,13 +175,19 @@ ajax2.open("GET", "server.php?update_me_on_discussion="+dis_id, true);
 ajax2.send()	
 	}
 	function upvote(){
+			var logged_username=document.getElementById("user_name").innerHTML;	
+		if(logged_username===""){
+		alert("you must log in first");
+		// to be changed
+	}
+	else{
 			var dis_id =$(this).closest('.post').attr("id");
 		if(this.alt=="false"){
 		this.alt="true"
 		$(this).css("opacity",1);
 		$(this).closest('.reaction_div').children(".downvote").attr("alt","false");
 		$(this).closest('.reaction_div').children(".downvote").css("opacity",0.6);
-		var link="server.php?vote=up&&unvote=down&&user_voted="+document.getElementById("user_name").innerHTML+"&&dis_id="+dis_id;
+		var link="server.php?vote=up&&unvote=down&&user_voted="+logged_username+"&&dis_id="+dis_id;
 		
 			}
 			else{
@@ -193,14 +202,21 @@ ajax2.send()
 	ajax3.send();
 		update_discussion(dis_id);
 	}
+	}
 	function downvote(){
+		var logged_username=document.getElementById("user_name").innerHTML;	
+		if(logged_username===""){
+		alert("you must log in first");
+		// to be changed
+	}
+	else{
 			var dis_id =$(this).closest('.post').attr("id");
 		if(this.alt=="false"){
 		this.alt="true"
 		$(this).css("opacity",1);
 		$(this).closest('.reaction_div').children(".upvote").attr("alt","false");
 		$(this).closest('.reaction_div').children(".upvote").css("opacity",0.6);
-		var link="server.php?vote=down&&unvote=up&&user_voted="+document.getElementById("user_name").innerHTML+"&&dis_id="+dis_id;
+		var link="server.php?vote=down&&unvote=up&&user_voted="+ logged_username +"&&dis_id="+dis_id;
 			}
 			else{
 				this.alt="false"
@@ -213,6 +229,7 @@ ajax2.send()
 	ajax2.open("GET", link, true);
 	ajax2.send();
 	update_discussion(dis_id);
+	}
 	}
 	function share(){
 		

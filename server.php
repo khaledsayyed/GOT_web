@@ -3,6 +3,12 @@ session_start();
 ob_start();
 ini_set('display_errors', 1);
 date_default_timezone_set("asia/beirut");
+if(isSet($_GET["log_me_out_please"])&&$_GET["log_me_out_please"]==="true"):
+session_destroy();
+
+header("Location: index");
+
+endif;
 if(isset($_GET["characters"])):
 
 if($_GET["characters"]=="all"):

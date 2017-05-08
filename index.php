@@ -66,7 +66,11 @@ $(document).ready(function(){
         $(this).toggleClass("dropdown-active");
     });
 	
-	
+	$(".team").hover(function(){
+		
+	},function(){
+		
+	});
 }
 );
 	</script>
@@ -78,6 +82,17 @@ $(document).ready(function(){
   <source src="assets/main_page_video/long_walk.mp4" type="video/mp4" />
 
 </video-->
+<div id="our_cool_div">
+<img id="dany" src="images/dany.jpg" class="team" title="Danerys Targarian" alt="Danerys Targarian" height="170" width="70"/>
+<img id="jon" src="images/snow.jpg" class="team" title="Jon Snow" alt="Jon Snow" height="170" width="70"/>
+<img id="cersei" src="images/cersei.jpg" class="team" title="Cersei Lannister" alt="Cersei Lannister" height="170" width="70"/>
+<img id="finger" src="images/finger.jpg" class="team" title="Little Finger" alt="Little Finger" height="170" width="70"/>
+<img id="dany2" src="images/dany2.jpg" class="team" title="Danerys Targarian" alt="Danerys Targarian" height="170" width="70"/>
+<img id="jon2" src="images/snow2.jpg" class="team" title="Jon Snow" alt="Jon Snow" height="170" width="70"/>
+<img id="cersei2" src="images/cersei2.jpg" class="team" title="Cersei Lannister" alt="Cersei Lannister" height="170" width="70"/>
+<img id="finger2" src="images/finger2.jpg" class="team" title="Little Finger" alt="Little Finger" height="170" width="70"/>
 
+
+</div>
 </body>
 </html>

@@ -164,7 +164,7 @@ body {margin:0;}
   font-size: 17px;
 }
 
- .main-navbar-content ul{ position: relative; background-color: #B71C1C; }
+ .main-navbar-content ul{ position: relative; background-color: #B71C1C; border-radius:5px;}
 	.main-navbar-content ul li{ display: block; }
 	
 	.clickFade{
@@ -432,3 +432,66 @@ border-radius:5px;
 	border-radius:10px;
 }
 
+/*main page styling*/
+#our_cool_div{
+	position:relative;
+	
+}
+#dany{
+	z-index:2;
+position:absolute;	
+top:15px;	
+left:25px;
+}
+
+
+#jon{
+		z-index:2;
+position:absolute;	
+top:15px;
+right:25px;
+	
+}
+
+#cersei{
+		z-index:2;
+position:absolute;		
+top:250px;
+right:25px;
+}
+
+#finger{
+		z-index:2;
+	position:absolute;	
+	top:250px;
+	left:25px;
+}
+#dany2{
+	z-index:1;
+position:absolute;	
+top:15px;	
+left:25px;
+}
+
+
+#jon2{
+		z-index:1;
+position:absolute;	
+top:15px;
+right:25px;
+	
+}
+
+#cersei2{
+		z-index:1;
+position:absolute;		
+top:250px;
+right:25px;
+}
+#finger2{
+		z-index:1;
+	position:absolute;	
+	top:250px;
+	left:25px;
+}
+/*END of */
