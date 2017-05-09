@@ -52,7 +52,7 @@ endif;
   <!-- JavaScript includes-->
 		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script src="timer/countdown/jquery.countdown.js"></script>
-		<!--script src="timer/js/script.js"></script-->
+		
 	`	<!--  **********   --> 
 	<script  type="text/javascript">
 	
@@ -126,7 +126,7 @@ ajax.send();
 	
 
 
-setInterval(fadeDivs, 3000);
+setInterval(fadeDivs, 10000);
 }
 );
 	
@@ -181,17 +181,17 @@ function load_pics(){
 function fadeDivs() {
 	 i = i < images.length ? i : 0;
 
-    $('#image1').fadeOut(100, function(){
-        $(this).attr('src',images[i++]).fadeIn(100);
+    $('#image1').fadeOut(200, function(){
+        $(this).attr('src',images[i++]).fadeIn(200);
     })
-	 $('#image2').fadeOut(100, function(){
-        $(this).attr('src',images[i++]).fadeIn(100);
+	 $('#image2').fadeOut(400, function(){
+        $(this).attr('src',images[i++]).fadeIn(400);
     })
-	 $('#image3').fadeOut(100, function(){
-        $(this).attr('src',images[i++]).fadeIn(100);
+	 $('#image3').fadeOut(300, function(){
+        $(this).attr('src',images[i++]).fadeIn(300);
     })
-	 $('#image4').fadeOut(100, function(){
-        $(this).attr('src',images[i++]).fadeIn(100);
+	 $('#image4').fadeOut(500, function(){
+        $(this).attr('src',images[i++]).fadeIn(500);
     })
 	
    // i++;
@@ -256,17 +256,14 @@ var t=new Date();
 <img id="image2" src="./images/dany.jpg" />
 <img id="image3" src="./images/snow.jpg" />
 <img id="image4" src="./images/finger.jpg" />
-</div>
-
-      
 
 
-<!--viframe src="//giphy.com/embed/2VZEyhyd9jduM" width="480" height="422" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/game-of-thrones-dragon-fantasy-2VZEyhyd9jduM">via GIPHY</a></p-->
-<!--video width="320" height="240" autoplay loop controls muted>
+<!--iframe src="//giphy.com/embed/2VZEyhyd9jduM" width="480" height="422" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/game-of-thrones-dragon-fantasy-2VZEyhyd9jduM">via GIPHY</a></p-->
+<video id= "vd" autoplay loop controls muted>
   <source src="assets/main_page_video/long_walk.mp4" type="video/mp4" />
+</video>
 
-
-</video-->
+</div>
 
 
 <img id="dany1" src="images/dany.jpg" class="team" title="Danerys Targarian" alt="Danerys Targarian" height="170" width="70"/>
