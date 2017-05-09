@@ -198,7 +198,6 @@ function fadeDivs() {
 <body>
 <?php include("toolbar.php");?>
 <div id="our_cool_div">
-
 <div id="countdown"></div>
   <p id="note"></p> 
     	
