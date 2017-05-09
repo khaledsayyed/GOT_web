@@ -22,6 +22,8 @@ $( "#main-sidebar" ).simplerSidebar( {
 	    quitter: ".close-sb"
 	  }
 	});
+	$("#login_message").hide();
+	$("#login_message,.toggle-sidebar").click(function(){$("#login_message").hide();});
     $( "#dialog" ).dialog({
       autoOpen: false,
       show: {

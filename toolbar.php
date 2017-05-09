@@ -95,4 +95,5 @@ Edit Profile
 
 
 <div id="dummy_div">	</div>
+<div id="login_message"><img src="assets/icons/please_log_in_first.png" alt="please log in to perform this" height="165" width="165"/></div>
 

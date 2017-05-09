@@ -597,3 +597,13 @@ html{
 	padding:0;
 }
 
+#login_message{
+	position:fixed;
+	top:53px;
+	right:0px;
+	z-index:50;
+
+	
+	
+	
+}

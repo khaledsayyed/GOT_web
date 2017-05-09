@@ -6,12 +6,15 @@
 <link href="GOT_style.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
 window.onload=function(){
+	
 	$( "#main-sidebar" ).simplerSidebar( {
 	  selectors: {
 	    trigger: ".toggle-sidebar",
 	    quitter: ".close-sb"
 	  }
 	});
+	$("#login_message").hide();
+	$("#login_message.toggle-sidebar").click(function(){$("#login_message").hide();});
 	 $(".clickFade ul").hide();
     $(".clickFade").click(function(){
         $(this).children("ul").stop(true,true).fadeToggle("fast"),

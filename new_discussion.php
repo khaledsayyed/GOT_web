@@ -19,6 +19,8 @@ session_start();
 	    quitter: ".close-sb"
 	  }
 	});
+	$("#login_message").hide();
+	$("#login_message,.toggle-sidebar").click(function(){$("#login_message").hide();});
 		$("#fileuploader").uploadFile({
 	url:"server.php?save_pic_temporarly=true",
 	

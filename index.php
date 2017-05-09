@@ -68,6 +68,8 @@ $(document).ready(function(){
 	    quitter: ".close-sb"
 	  }
 	});
+	$("#login_message").hide();
+	$("#login_message,.toggle-sidebar").click(function(){$("#login_message").hide();});
 	$(".box").hide();
  $(".clickFade ul").hide();
  $(".contento button").click(join);
@@ -139,7 +141,7 @@ function dump_members(){
 function join(){
 		var logged_username=document.getElementById("user_name").innerHTML;
 		if(logged_username===""){
-		alert("you must log in first");
+		$("#login_message").show(500);
 		// to be changed
 		}else{
 		

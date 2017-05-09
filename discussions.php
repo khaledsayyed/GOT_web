@@ -30,6 +30,8 @@ session_start();
 	    quitter: ".close-sb"
 	  }
 	});
+	$("#login_message").hide();
+	$("#login_message,.toggle-sidebar").click(function(){$("#login_message").hide();});
 		 $(".clickFade ul").hide();
     $(".clickFade").click(function(){
         $(this).children("ul").stop(true,true).fadeToggle("fast"),
@@ -177,7 +179,7 @@ ajax2.send()
 	function upvote(){
 			var logged_username=document.getElementById("user_name").innerHTML;	
 		if(logged_username===""){
-		alert("you must log in first");
+		$("#login_message").show(500);
 		// to be changed
 	}
 	else{
@@ -206,7 +208,7 @@ ajax2.send()
 	function downvote(){
 		var logged_username=document.getElementById("user_name").innerHTML;	
 		if(logged_username===""){
-		alert("you must log in first");
+		$("#login_message").show(500);
 		// to be changed
 	}
 	else{
@@ -245,7 +247,7 @@ ajax2.send()
 		if($(this).closest('.post_container').children(".reply_div").is(':empty')){
 	var logged_username=document.getElementById("user_name").innerHTML;
 	if(logged_username===""){
-		alert("you must log in first");
+		$("#login_message").show(500);
 		// to be changed
 	}
 	else{
