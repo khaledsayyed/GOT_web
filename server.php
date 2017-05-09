@@ -370,6 +370,7 @@ $count=$rows->rowcount();
 endif;
 
 //end of update votes and comments
+//add character 
 if(isset($_POST["cname"])&&isset($_POST["house"])&& isset($_POST["cstory"])&&isset($_POST["state"])){
 	$cname=$_POST["cname"];
 	$house=$_POST["house"];
@@ -420,5 +421,55 @@ header("location: ./admin/adminpage.php?st=success");
 }
 	}*/
 	
+if(isset($_GET["mainImages"])){
+	if($_GET["mainImages"]=="all"){
+		if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+			$query="select team from users where name='". $_SESSION['username'] ."'";
+		try{
 
+	$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+	$t = $db->query($query);
+	$team=$t->fetchColumn();
+}
+catch (pdoexception $e){
+die("connection failed: " . $e->GETmessage());
+}
+	//json to get images
+$images = glob("./assets/main_page_images/".$team."/*.jpg");
+	} else $images = glob("./assets/main_page_images/none/*.jpg");
+header("Content-type: application/json");?>
+{ "imag": [
+<?php
+$i=0;
+$ilen= count($images);
+foreach ($images as $image) :
+if(++$i!==$ilen){
+
+?>
+{"source": "<?=$image?>" },
+<?php  }
+else{?>
+{"source":"<?=$images[$ilen-1]?>" }]}
+<?php } endforeach; }}
+
+//get timer to json 
+if(isset($_GET["timer"])){
+if($_GET["timer"]=="yes"){
+	$query="select val from editable where Things='timer'";
+try{
+
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+	$t = $db->query($query);
+	$time=$t->fetchColumn();
+}
+catch (pdoexception $e){
+die("connection failed: " . $e->GETmessage());
+}
+header("Content-type: application/json");?>
+{ "timer": [
+{"time": "<?= $time ?>" }]}
+
+ <?php }}
 	?>
