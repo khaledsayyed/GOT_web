@@ -9,6 +9,39 @@ session_destroy();
 header("Location: index");
 
 endif;
+
+if(isset($_GET["get_members"])&&$_GET["get_members"]=="true"):
+
+
+$query="select team, COUNT(*) from users GROUP BY team";
+
+try{
+	//in my laptop mysql at port 3307 you may need to change this
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+$rows = $db->query($query);
+
+header("content-type: application/json");
+?>
+{
+	"members":  [
+<?php $order=1;
+$count=$rows->rowcount(); 
+ foreach($rows as $row):
+if($order===$count): ?>
+{"team": "<?= $row[0]; ?>", "count": "<?= $row[1]; ?>"}
+<?php else:?>
+{"team": "<?= $row[0]; ?>", "count": "<?= $row[1]; ?>"},
+<?php endif; $order++; endforeach; ?>
+]
+}
+<?php
+}catch (pdoexception $e){
+	
+	die("connection failed: " . $e->GETmessage());
+
+}
+endif;
 if(isset($_GET["characters"])):
 
 if($_GET["characters"]=="all"):
@@ -274,6 +307,33 @@ $db->exec($query);
 endif;
 
 //end of comment insertion
+//start of join team
+if(isset($_GET["join_team"])):
+			$name=$_SESSION["logged_in_name"];
+			$team=$_GET["join_team"];
+$query="UPDATE users SET team='$team' WHERE name='$name'";
+try{
+	//in my laptop mysql at port 3307 you may need to change this
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+$user_result = $db->exec($query);	
+
+
+
+
+$db=null;#closedb
+
+
+	
+}catch (pdoexception $e){
+	
+	die("connection failed: " . $e->GETmessage());
+
+}	
+
+endif;
+//end of join team
+
 //update votes and comments
 if(isset($_GET["update_me_on_discussion"])||(isset($_GET["name"])&&isset($_GET["dis_id"])&&isset($_GET["comment_text"]))):
 $dis_id = isset($_GET["update_me_on_discussion"])?$_GET["update_me_on_discussion"]:$_GET["dis_id"];
