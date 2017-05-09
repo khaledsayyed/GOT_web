@@ -3,9 +3,6 @@
 
 <script src="simpler-sidebar.js"></script>
 
-
-
-
 	<div class="main-navbar main-navbar-fixed-top" id="main-navbar">
 
 	  <div class="main-navbar-content">
@@ -20,9 +17,10 @@
  
 	    <div class="icon right toggle-sidebar">
 
-	      <img alt="menu" height="26px" src="menu.png" width="26px">
+	      <img alt="menu" height="26px" src="menu.png" width="26px" />
 
 	    </div>
+		
 		<div class="clickFade">
 	   <?php
 if(isset($_SESSION["logged_in_name"]))
@@ -46,6 +44,11 @@ $user=	"";?>
 ?>	
 		
 	  </div>
+	  <div id="play_sound">
+
+	      <img  id="play_sound_pic" alt="0" height="24px" src="assets/icons/voice.png" width="24px" title="play"/>
+
+	    </div>
 	  </div>
 
 </div>
@@ -97,3 +100,6 @@ Edit Profile
 <div id="dummy_div">	</div>
 <div id="login_message"><img src="assets/icons/please_log_in_first.png" alt="please log in to perform this" height="165" width="165"/></div>
 
+<audio id="page_audio" preload="auto" src="assets/audio/Light of the Seven.mp3" loop="true" autobuffer>
+Unsupported in Firefox
+</audio>

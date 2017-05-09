@@ -157,9 +157,14 @@ background-color: white;
  .main-navbar-content ul{ position: relative; background-color: #B71C1C; border-radius:5px;}
 	.main-navbar-content ul li{ display: block; }
 	
-	.clickFade{
+	.clickFade,#play_sound{
 float:right;	
 	
+}
+#play_sound{
+float:right;	
+	margin-top:5px;
+margin-right:4px;	
 }
 .clickFade a{
 	display:block;

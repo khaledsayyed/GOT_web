@@ -57,8 +57,52 @@ endif;
 	<script  type="text/javascript">
 	
 var images = [];var i = 0;
+//test
 
+//test
+function update_play_from(){
+localStorage['play_from'] = (parseInt(localStorage['play_from'])+1 ).toString();
+	
+}
+function play_stop_music(){
+		var sound_button =document.getElementById("play_sound_pic");
+	var audio = document.getElementById("page_audio");
+	if(localStorage['audio']==="stop"){
+		
+		audio.play();
+		localStorage['audio']="play";
+		sound_button.src="assets/icons/muted.png";
+		  interval = setInterval(update_play_from, 1000);
+	}else{
+	audio.pause();
+	localStorage['audio']="stop";
+	sound_button.src="assets/icons/voice.png";
+	clearInterval(interval);
+	}
+	
+}
+var continue_music,continue_from;
+var interval;
 $(document).ready(function(){
+	
+	continue_music = localStorage['audio'] || 'stop';
+	continue_from = localStorage['play_from'] || '0';
+$("#play_sound").click(play_stop_music);	
+if(continue_music!=='stop'){
+	$("#play_sound_pic").attr("src","assets/icons/muted.png");
+document.getElementById("page_audio").oncanplay=function() {
+  this.currentTime = parseInt( localStorage['play_from']); 
+  document.getElementById("page_audio").play();
+};
+  interval = setInterval(update_play_from, 1000);
+
+}else{
+	localStorage['audio']= 'stop';
+	localStorage['play_from'] = '0';
+}
+
+
+
 	$(".active").removeClass("active");
 		$("#index").addClass("active");
 
