@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: May 08, 2017 at 10:30 PM
+-- Generation Time: May 09, 2017 at 10:13 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -19,6 +19,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `got`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `name` varchar(20) NOT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -223,6 +235,17 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `editable`
+--
+
+CREATE TABLE `editable` (
+  `Things` varchar(20) NOT NULL,
+  `val` text
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `upvotes`
 --
 
@@ -282,6 +305,12 @@ INSERT INTO `users` (`name`, `email`, `password`, `team`) VALUES
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`name`);
+
+--
 -- Indexes for table `discussions`
 --
 ALTER TABLE `discussions`
@@ -299,6 +328,12 @@ ALTER TABLE `discussion_comments`
 --
 ALTER TABLE `downvotes`
   ADD PRIMARY KEY (`dis_id`,`name`);
+
+--
+-- Indexes for table `editable`
+--
+ALTER TABLE `editable`
+  ADD PRIMARY KEY (`Things`);
 
 --
 -- Indexes for table `upvotes`
