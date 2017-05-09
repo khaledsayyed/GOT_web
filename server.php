@@ -373,5 +373,25 @@ if(++$i!==$ilen){
 <?php  }
 else{?>
 {"source":"<?=$images[$ilen-1]?>" }]}
-<?php } endforeach; }};
+<?php } endforeach; }}
+
+//get timer to json 
+if(isset($_GET["timer"])){
+if($_GET["timer"]=="yes"){
+	$query="select val from editable where Things='timer'";
+try{
+
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+	$t = $db->query($query);
+	$time=$t->fetchColumn();
+}
+catch (pdoexception $e){
+die("connection failed: " . $e->GETmessage());
+}
+header("Content-type: application/json");?>
+{ "timer": [
+{"time": "<?= $time ?>" }]}
+
+ <?php }}
 	?>
