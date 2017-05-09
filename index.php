@@ -255,18 +255,21 @@ var t=new Date();
 <img id="image1" src="./images/cersei.jpg" />
 <img id="image2" src="./images/dany.jpg" />
 <img id="image3" src="./images/snow.jpg" />
-<img id="image4" src="./images/finger.jpg" />
+<img id="image4" src="./images/finger.jpg" /><br/>
+<video id="main_page_video" width="320" height="240" autoplay loop controls muted>
+  <source src="assets/main_page_video/long_walk.mp4" type="video/mp4" />
+
+
+</video>
 </div>
 
       
 
 
 <!--viframe src="//giphy.com/embed/2VZEyhyd9jduM" width="480" height="422" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/game-of-thrones-dragon-fantasy-2VZEyhyd9jduM">via GIPHY</a></p-->
-<!--video width="320" height="240" autoplay loop controls muted>
-  <source src="assets/main_page_video/long_walk.mp4" type="video/mp4" />
 
 
-</video-->
+</video>
 
 
 <img id="dany1" src="images/dany.jpg" class="team" title="Danerys Targarian" alt="Danerys Targarian" height="170" width="70"/>
