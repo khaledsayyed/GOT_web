@@ -65,8 +65,8 @@ function validateadmin()
 		<legend>add Admin:</legend>
 
 		<div>
-			<strong>email:</strong>
-			<input id="anm" type="text" name="aemail" size="16" />
+			<strong>usename of new admin:</strong>
+			<input id="anm" type="text" name="aname" size="16" />
 		</div>
 		<div>
 			<input type="submit" value="Add admin" />

@@ -398,28 +398,33 @@ header("location: ./admin/adminpage.php?st=success");
 	}
 
 }
-
-/*if( isset( $_POST["aemail"]))
+//add new admin 
+if( isset( $_POST["aname"]))
 {
-$anam=$_POST["aemail"];
+$anam=$_POST["aname"];
 try{
 $query1="select name, password, email from users where name='$anam'";
 
-
 $db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
 //$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+$rows= $db->query($query1);
+$row= $rows->fetch();
+if ($rows->rowcount() > 0) {
+	$query="insert into admin(name, password,email) values ('".$row["name"]."','".$row["password"]."','".$row["email"]."')";
+ 
 $db->exec($query);
 
 header("location: ./admin/adminpage.php?st=success");
+}
 
 
-
-}catch (pdoexception $e){
+}
+catch (pdoexception $e){
 	
 	die("connection failed: " . $e->GETmessage());
 
 }
-	}*/
+	}
 	
 if(isset($_GET["mainImages"])){
 	if($_GET["mainImages"]=="all"){
