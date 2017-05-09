@@ -451,10 +451,12 @@ catch (pdoexception $e){
 if (isset($_REQUEST['uploadvideo']))
 {
 echo "set";
+$vd=$_FILES['video']['name'];
    $file = $_FILES['video']['tmp_name']; // check for uploaded video
 	if( !empty($file) && is_uploaded_file( $file )):
-            move_uploaded_file($file, "./assets/main_page_video/".$_FILES["video"]['name']." ".$_FILES['video']['type']);//rename and move
-        endif;
+            move_uploaded_file($file, "./assets/main_page_video/".$_FILES['video']['name']);//rename and move
+      
+	  endif;
 
 try{
 $db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
@@ -473,7 +475,21 @@ catch (pdoexception $e){
 }
 	}
 /**************************************/
-	
+		//add photo
+	/**************************************/
+if (isset($_POST["tm"]))
+{ 
+$tm= $_POST["tm"];
+if(isset ($_FILES['pic'])){
+   $file = $_FILES['pic']['tmp_name']; // check for uploaded photo
+	if( !empty($file) && is_uploaded_file( $file )):
+            move_uploaded_file($file, "./assets/main_page_images/".$tm."/".$_FILES['pic']['name']);//rename and move
+       header("location: ./admin/adminpage.php?st=success");
+	   endif;
+}
+else { header("location: ./admin/adminpage.php?st=fail");}
+}
+	/**********************************************/
 	//get images for main page
 if(isset($_GET["mainImages"])){
 	if($_GET["mainImages"]=="all"){
@@ -506,7 +522,7 @@ if(++$i!==$ilen){
 else{?>
 {"source":"<?=$images[$ilen-1]?>" }]}
 <?php } endforeach; }}
-
+/**********************************************/
 //get timer to json 
 if(isset($_GET["timer"])){
 if($_GET["timer"]=="yes"){
@@ -526,4 +542,5 @@ header("Content-type: application/json");?>
 {"time": "<?= $time ?>" }]}
 
  <?php }}
+  /*******************************************/
 	?>

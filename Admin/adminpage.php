@@ -126,7 +126,7 @@ endif;
 		</div>
 	</fieldset>
 </form>
-<form action="../server.php" method="POST" enctype="multipart/form-data" >
+<form action="../server.php" method="POST" enctype="multipart/form-data">
 	<fieldset>
 		<legend>add pic to main page:</legend>
 
@@ -151,7 +151,11 @@ endif;
 if(isset($_GET["st"])){
 	if($_GET["st"]=="success"){?>
 <script>alert(" changes done successfuly!");</script>
-<?php }}
+<?php }
+if($_GET["st"]=="fail"){?>
+<script>alert(" invalid input");</script>
+<?php }
+}
 ?>
 </body>
 </html>
