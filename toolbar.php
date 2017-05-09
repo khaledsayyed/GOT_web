@@ -40,7 +40,7 @@ $user=	"";?>
 <a href="javascript:void(0)" id="user_holder"><span class="round_small_image"><img id="user" src="users_photos/user.png" alt="<?=$user?>" title="<?=$user?>" width="25" height="25"/></span><span id="user_name"><?=$user?></span><span>&#x25BC;</span></a><!-- this will be styled and placed at thee corner bla bla-->
 		<ul>
                 <li><a class="toggle-sidebar">&nbsp;&nbsp;Log In</a></li>
-                <li><a href="#">&nbsp;&nbsp;Sign Up</a></li>
+                <li><a href="signup.php">&nbsp;&nbsp;Sign Up</a></li>
             </ul>
 <?php }
 ?>	
