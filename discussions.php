@@ -26,7 +26,7 @@ session_start();
 
 	$( "#main-sidebar" ).simplerSidebar( {
 	  selectors: {
-	    trigger: "#toggle-sidebar",
+	    trigger: ".toggle-sidebar",
 	    quitter: ".close-sb"
 	  }
 	});

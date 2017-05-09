@@ -64,7 +64,7 @@ $(document).ready(function(){
 
 		$( "#main-sidebar" ).simplerSidebar( {
 	  selectors: {
-	    trigger: "#toggle-sidebar",
+	    trigger: ".toggle-sidebar",
 	    quitter: ".close-sb"
 	  }
 	});
@@ -231,10 +231,10 @@ function fadeDivs() {
 <img id="finger13" src="images/finger3.jpg"  title="Little Finger" alt="Little Finger" height="170" width="70"/>
 <img id="cersei13" src="images/cersei3.jpg"  title="Cersei Lannister" alt="Cersei Lannister" height="170" width="70"/>
 
-<div id="dany_box" class="box"><h3><button class="close">X</button>Danerys Targaryan- Tyrion Lannister</h3><div class="contento"  ><p>Daenerys Stormborn of the House Targaryen, the Unburnt, the First of Her Name, Queen of Meereen, Queen of the Andals, the Rhoynar and the First Men, Lady Regnant of the Seven Kingdoms, Protector of the Realm, Khaleesi of the Great Grass Sea, Breaker of Chains and Mother of Dragons</p><p><button id="dany">JOIN</button><strong id="dany_members">0</strong> members in team danerys</p></div></div>
-<div id="balish_box" class="box"><h3><button class="close">X</button>Petyr Balish - SanSa Stark</h3><div class="contento" ><p>Lord Petyr Baelish, popularly called Littlefinger, was the Master of Coin on the Small Council. He is a skilled manipulator and uses his ownership of brothels in King's Landing to both accrue intelligence on political rivals and acquire vast wealth. </p><p><button id="finger">JOIN</button><strong id="finger_members">0</strong> members in team Balish</p></div></div>
-<div id="cersei_box" class="box"><h3><button class="close">X</button>Cersei Lannister</h3><div class="contento"><p>Queen Cersei I Lannister is the widow of King Robert Baratheon and Queen of the Seven Kingdoms.Cersei assumed the throne under the name of Cersei of the House Lannister, the First of Her Name, Queen of the Andals and the First Men, Protector of the Seven Kingdoms</p><p><button  id="cersei">JOIN</button><strong id="cersei_members">0</strong> members in team Cersei Lannister</p></div></div>
-<div id="jon_box" class="box"><h3><button class="close">X</button>Jon Sno-Liana Mormund</h3><div class="contento"><p>King Jon Snow is the son of Lady Lyanna Stark and Rhaegar Targaryen, the Prince of Dragonstone.After securing help from a few other Northern Houses and the Vale of Arryn, they successfully retake the castle from Ramsay Bolton, restoring House Stark's dominion over the North with Jon being declared the new King in the North by the Northern Lords.  </p><p><button id="snow">JOIN</button><strong id="snow_members">0</strong> members in team Jon Snow </p></div></div>
+<div id="dany_box" class="box"><h3><button class="close"> X </button>Danerys Targaryan- Tyrion Lannister</h3><div class="contento"  ><p>Daenerys Stormborn of the House Targaryen, the Unburnt, the First of Her Name, Queen of Meereen, Queen of the Andals, the Rhoynar and the First Men, Lady Regnant of the Seven Kingdoms, Protector of the Realm, Khaleesi of the Great Grass Sea, Breaker of Chains and Mother of Dragons</p><p><button id="dany">JOIN</button><strong id="dany_members">0</strong> members in team danerys</p></div></div>
+<div id="balish_box" class="box"><h3><button class="close"> X </button>Petyr Balish - SanSa Stark</h3><div class="contento" ><p>Lord Petyr Baelish, popularly called Littlefinger, was the Master of Coin on the Small Council. He is a skilled manipulator and uses his ownership of brothels in King's Landing to both accrue intelligence on political rivals and acquire vast wealth. </p><p><button id="finger">JOIN</button><strong id="finger_members">0</strong> members in team Balish</p></div></div>
+<div id="cersei_box" class="box"><h3><button class="close"> X </button>Cersei Lannister</h3><div class="contento"><p>Queen Cersei I Lannister is the widow of King Robert Baratheon and Queen of the Seven Kingdoms.Cersei assumed the throne under the name of Cersei of the House Lannister, the First of Her Name, Queen of the Andals and the First Men, Protector of the Seven Kingdoms</p><p><button  id="cersei">JOIN</button><strong id="cersei_members">0</strong> members in team Cersei Lannister</p></div></div>
+<div id="jon_box" class="box"><h3><button class="close"> X </button>Jon Sno-Liana Mormund</h3><div class="contento"><p>King Jon Snow is the son of Lady Lyanna Stark and Rhaegar Targaryen, the Prince of Dragonstone.After securing help from a few other Northern Houses and the Vale of Arryn, they successfully retake the castle from Ramsay Bolton, restoring House Stark's dominion over the North with Jon being declared the new King in the North by the Northern Lords.  </p><p><button id="snow">JOIN</button><strong id="snow_members">0</strong> members in team Jon Snow </p></div></div>
 
 
 

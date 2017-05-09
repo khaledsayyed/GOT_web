@@ -18,9 +18,9 @@
 
 
  
-	    <div class="icon right" id="toggle-sidebar">
+	    <div class="icon right toggle-sidebar">
 
-	      <img alt="menu" height="24px" src="menu.png" width="24px">
+	      <img alt="menu" height="26px" src="menu.png" width="26px">
 
 	    </div>
 		<div class="clickFade">
@@ -31,7 +31,7 @@ $user= $_SESSION["logged_in_name"];?>
 <a href="javascript:void(0)" id="user_holder"><span class="round_small_image"><img id="user" src="users_photos/<?=$user?>" alt="<?=$user?>" title="<?=$user?>" width="25" height="25"/></span><span id="user_name"><?=$user?></span><span>&#x25BC;</span></a><!-- this will be styled and placed at thee corner bla bla-->
 
             <ul>
-                <li><a href="#">Edit Your Account</a></li>
+                <li><a href="#">&nbsp;&nbsp;Edit Your Account</a></li>
                 <li><a href="server.php?log_me_out_please=true">Log Out</a></li>
             </ul>
 <?php }
@@ -39,8 +39,8 @@ else{
 $user=	"";?>
 <a href="javascript:void(0)" id="user_holder"><span class="round_small_image"><img id="user" src="users_photos/user.png" alt="<?=$user?>" title="<?=$user?>" width="25" height="25"/></span><span id="user_name"><?=$user?></span><span>&#x25BC;</span></a><!-- this will be styled and placed at thee corner bla bla-->
 		<ul>
-                <li><a href="#">Log In</a></li>
-                <li><a href="#">Sign Up</a></li>
+                <li><a class="toggle-sidebar">&nbsp;&nbsp;Log In</a></li>
+                <li><a href="#">&nbsp;&nbsp;Sign Up</a></li>
             </ul>
 <?php }
 ?>	

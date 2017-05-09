@@ -62,22 +62,6 @@
 }
 body {margin:0;}
 
-
-
-
-
-
-
-#logo{ width:25px; height:50px; float:left; padding-right: 15px;}
-
-
-#snow{
-	
-	overflow:hidden;
-	
-	
-}
-
 .highlighted{
 	
 	width:180px;
@@ -185,7 +169,8 @@ float:right;
 }
  .main-navbar-content ul{ list-style-type: none; padding: 0; margin: 0; }
 
- .main-navbar-content ul li span{ margin: 0 0 0 7px; }
+.main-navbar-content ul li span{ margin: 0 0 0 7px; }
+
 	.left { float: left; }
 	 
 	.right { float: right; }
@@ -420,7 +405,7 @@ margin-bottom:4px;
 }
 /*End of discussion post styling*/
 #user_holder{
-display:block;
+margin-top:3px;
 border-radius:5px;
   display: flex;
   align-items: center;
@@ -503,6 +488,7 @@ border-radius:5px;
 .close{
 	float:right;
 background-color:red;
+width:20px;
 	}
 #jon1{
 		z-index:3;
