@@ -45,16 +45,15 @@ endif;
 	<title>Main </title>
 	<link href="GOT_style.css" rel="stylesheet" type="text/css"/>
 <script src="jquery.js"  type="text/javascript">></script>
-<!-- for the count down timer -->
+<!-- for the count down timer-->
  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
-<link rel="stylesheet" href="timer/css/styles.css" />
  <link rel="stylesheet" href="timer/countdown/jquery.countdown.css" />
 
-  <!-- JavaScript includes -->
+  <!-- JavaScript includes-->
 		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script src="timer/countdown/jquery.countdown.js"></script>
 		<script src="timer/js/script.js"></script>
-	`	<!--  **********   -->
+	`	<!--  **********   --> 
 	<script  type="text/javascript">
 	
 var images = [];var i = 0;
@@ -124,16 +123,16 @@ function fadeDivs() {
 </head>
 <body>
 <?php include("toolbar.php");?>
+<div id="countdown"></div>
+  <p id="note"></p> 
+    	
 <div id="fadingimg">
 <img id="image1" src="./images/cersei.jpg" />
 <img id="image2" src="./images/dany.jpg" />
 <img id="image3" src="./images/snow.jpg" />
 <img id="image4" src="./images/finger.jpg" />
 </div>
-<div id="countdown"></div>
-	<p id="note"></p>
 
-        
       
 
 
