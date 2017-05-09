@@ -5,10 +5,10 @@
 function validate()
 {
 	var nam, house, story, pic;
-	nam= document.getElementbyID("nm");
-	house= document.getElementbyID("house");
-	story=document.getElementbyID("story");
-	pic= document.getElementbyID("cphoto");
+	nam=document.getElementById("nm").value;
+	house= document.getElementById("house").value;
+	story=document.getElementById("story").value;
+	pic= document.getElementById("cphoto");
 	if(nam.length!=0 && house.length!=0 && story.length!=0 && pic.value!= null)
 	{return true;}
 	else return false;
@@ -17,12 +17,38 @@ function validate()
 function validateadmin()
 {
 	var nam;
-	nam= document.getElementbyID("anm");
+	nam= document.getElementById("anm").value;
 	if(nam.length!=0)return true;
 	else return false;
 	
 }
+function validatetime()
+{
+	var t;
+	t= document.getElementById("ntime").value;
+	if(t.match(/^[0-9]{4}\/[0-9]{1}\/[0-9]{2}$/) )return true;
+	else {alert("invalid formate of time"); return false; }
+	
+}
 </script>
+<?php
+/*
+function is_photo_uploaded_and_moved($user) {
+	// bail if there were no upload forms
+   if(empty($_FILES)):
+       return false;
+endif;
+   $file = $_FILES['photo']['tmp_name']; // check for uploaded photo
+	if( !empty($file) && is_uploaded_file( $file )):
+            move_uploaded_file($file, "users_photos/$user.jpg");//rename and move
+            return true;
+        endif;
+  
+    // return false if no files were found
+   return false;
+}
+*/
+?>
 </head>
 
 <body>
@@ -73,6 +99,35 @@ function validateadmin()
 		</div>
 	</fieldset>
 </form>
+<form action="../server.php" method="POST" enctype="multipart/form-data" onsubmit="return validatetime()">
+	<fieldset>
+		<legend>change next episode's timer:</legend>
+
+		<div>
+			<strong>time of new episode ([yyyy/m/dd], where m= 0->11):</strong>
+			<input id="ntime" type="text" name="nexttimer" size="16" />
+		</div>
+		<div>
+			<input type="submit" value="change timer" />
+		</div>
+	</fieldset>
+</form>
+
+<form action="../server.php" method="POST" enctype="multipart/form-data" >
+	<fieldset>
+		<legend>change video:</legend>
+
+		<div>
+			<strong>video link:</strong>
+			<input id="video" type="file" name="video" size="16" />
+		</div>
+		<div>
+			<input type="submit" name="uploadvideo" value="change video" />
+		</div>
+	</fieldset>
+</form>
+
+
 <?php
 if(isset($_GET["st"])){
 	if($_GET["st"]=="success"){?>

@@ -425,7 +425,56 @@ catch (pdoexception $e){
 
 }
 	}
+	/***************************/
+	//nexttimer
+if( isset( $_POST["nexttimer"]))
+{
+$ntime=$_POST["nexttimer"];
+try{
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+
+	$query="update editable set val='$ntime' where Things='timer'";
+ 
+$db->exec($query);
+
+header("location: ./admin/adminpage.php?st=success");
+}
+catch (pdoexception $e){
 	
+	die("connection failed: " . $e->GETmessage());
+
+}
+	}	
+	/**********************************************/
+	//change video
+if (isset($_REQUEST['uploadvideo']))
+{
+echo "set";
+   $file = $_FILES['video']['tmp_name']; // check for uploaded video
+	if( !empty($file) && is_uploaded_file( $file )):
+            move_uploaded_file($file, "./assets/main_page_video/".$_FILES["video"]['name']." ".$_FILES['video']['type']);//rename and move
+        endif;
+
+try{
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+
+	$query="update editable set val='$vd' where Things='video'";
+ 
+$db->exec($query);
+
+header("location: ./admin/adminpage.php?st=success");
+}
+catch (pdoexception $e){
+	
+	die("connection failed: " . $e->GETmessage());
+
+}
+	}
+/**************************************/
+	
+	//get images for main page
 if(isset($_GET["mainImages"])){
 	if($_GET["mainImages"]=="all"){
 		if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {

@@ -1,5 +1,18 @@
 <?php
  session_start();	
+ //get trailer link
+ $q="select val from editable where Things='video'";
+try{
+
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+	$t = $db->query($q);
+	$video=$t->fetchColumn();
+}
+catch (pdoexception $e){
+die("connection failed: " . $e->GETmessage());
+}
+/************************************/
 function is_photo_uploaded_and_moved($user) {
 	// bail if there were no upload forms
    if(empty($_FILES)):
@@ -299,12 +312,9 @@ var t=new Date();
 <img id="image1" src="./images/cersei.jpg" />
 <img id="image2" src="./images/dany.jpg" />
 <img id="image3" src="./images/snow.jpg" />
-
 <img id="image4" src="./images/finger.jpg" /><br/>
-<video id="main_page_video" width="320" height="240" autoplay loop controls muted>
-  <source src="assets/main_page_video/long_walk.mp4" type="video/mp4" />
-
-
+<video id="vd" autoplay loop controls muted>
+  <source src="assets/main_page_video/<?= $video ?>" type="video/mp4" />
 </video>
 </div>
 
