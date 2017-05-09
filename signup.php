@@ -52,33 +52,32 @@ function view_pic(){
 <body>
 <?php include("toolbar.php");?>
 <div id="hello_pic"><img id="pic1" src="" title="hello_pic" alt=""></div>
-<form action="index.php" method="GET" enctype="multipart/form-data">
+<div id="signup">
+<form id="register-form" action="index.php" method="GET" enctype="multipart/form-data">
 	<fieldset id="signup_fieldset">
 		<legend>New User Signup:</legend>
 
 		<div>
 			<strong>Name:</strong>
-			<input type="text" name="name" size="16" onblur="check_name();" />
+			<input class="data" type="text" name="name" size="16" onblur="check_name();" />
 		</div>
 		<div>
 			<strong>Email:</strong>
-			<input type="email" name="email" size="16" onblur="check_email();" />
+			<input class="data" type="email" name="email" size="16" onblur="check_email();" />
 		</div>
 		<div>
 			<strong>Password:</strong>
-			<input id="pass1" type="password" name="passwd" size="16" onblur="check_password()"  />
+			<input class="data" id="pass1" type="password" name="passwd" size="16" onblur="check_password()"  />
 		</div>
 		<div>
-			<strong>Confirm Password:</strong>
-			<input id="pass2"type="password" name="passwd1" size="16" onblur="check_password_confirm()" />
+			<strong  >Confirm Password:</strong>
+			<input class="data" id="pass2"type="password" name="passwd1" size="16" onblur="check_password_confirm()" />
 		</div>
-		<div>
 		
 
 
-
 		<div>
-			<strong>Team:</strong>
+			<strong >Team:</strong>
 			<select name="team" id="team_select1" onchange="view_pic()">
 			<option value="none">none</option>
 				<option value="dany">Danaerys - Tyrion</option>
@@ -87,19 +86,20 @@ function view_pic(){
 				<option value="cersei">Cersei</option>
 			</select>
 		</div>
-
-		
-
-
+		<br />
 		<div>
-			<strong>Photo:</strong>(optional)
+			<strong  >Photo:</strong>(optional)
 			<input name="photo" type="file" />
 		</div>
-
+		<br />
 
 		<div>
 			<input id="submit" type="submit" value="Sign Up" />
 		</div>
+		<div>
+		 <p id="message">Already registered? <a href="./index.php">Sign In</a></p>
+		</div>
 	</fieldset>
 </form>
+</div>
 </body></html>
