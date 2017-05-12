@@ -93,20 +93,22 @@ function play_stop_music(){
 	
 	</head>
 
-<body>
+<body style="background-color:#cccccc">
 <?php include("toolbar.php");?>
 
 <div id="discussion_categories">
-<ul id="dis_cat">
+<ul >
 Categories
-<li>Hot</li>
-<li>Recent</li>
-<li>Funny</li>
-<li>Theories</li>
+<a href="discussions.php?cat=hot"> <li>Hot</li></a>
+<a href="discussions.php?cat=uploaded_by_me"><li>Uploaded By Me</li></a>
+</ul>
+<ul>links
+<a href=""><li>official facebook page</li></a>
+<a href=""><li>official instagram page</li></a>
+<a href=""><li>official website</li></a>
 </ul>
 </div>
-
-<div>
+<?php include("links.php");?>
 
 <form action="server.php" method="POST" enctype="multipart/form-data">
 	<fieldset id="NEW_POST_FIELDSET">

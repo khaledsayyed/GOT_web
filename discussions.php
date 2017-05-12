@@ -52,7 +52,7 @@ audio.oncanplay=function() {
 
 
 
-
+	$('.link').hover(function(){$(this).children("h5").css("background-color","#eedddd");},function(){$(this).children("h5").css("background-color","#ffffff");});
 
 
 		$(".active").removeClass("active");
@@ -137,7 +137,7 @@ ajax.send();
 	
 	div.append($("<span>",{class:"gray_text",click:show_all_comments,text:data[i].getElementsByTagName("comments")[0].getAttribute("count")+"comments"}))
 	
-	div.append('<hr style="width:83%;color:#cccccc;clear:right;"/>');
+	div.append('<br/><br/><hr style="width:83%;color:#cccccc;"/>');
 	//}
 	
 	
@@ -156,6 +156,7 @@ ajax.send();
 		vote_div.append($('<img>',{class:'share',src:'assets/icons/share.png',click:share,width:30,height:30}));
 	vote_div.append($('<a>',{click:comment,text:"Reply",class:'reply'}).append($('<img>',{class:'vote',src:'assets/icons/comment.png',width:35,height:35})));
 	div.append(vote_div);
+
 	big_div.append(div);
 	
 	big_div.append($("<div>",{class:"reply_div"}));// to be filled when reply pressed
@@ -185,20 +186,26 @@ ajax.send();
 	
     }
 	function show_all_comments(){
+		
 	var dis_id =$(this).closest('.post').attr("id");
 		ajax2 = new XMLHttpRequest();
 ajax2.onload = fill_all_comments;
 ajax2.open("GET", "server.php?update_me_on_discussion="+dis_id, true);
 ajax2.send()	
-		$(this).click(show_three_comments);
+$(this).prop('onclick',null).off('click');
+		$(this).on('click',show_three_comments);
+		
 	}
 	function show_three_comments(){
+		
 	var dis_id =$(this).closest('.post').attr("id");
 		ajax2 = new XMLHttpRequest();
 ajax2.onload = update_comments;
 ajax2.open("GET", "server.php?update_me_on_discussion="+dis_id, true);
 ajax2.send()	
+$(this).prop('onclick',null).off('click');
 		$(this).on('click',show_all_comments);
+		
 	}
 	
 	
@@ -345,6 +352,7 @@ ajax2.send()
 	}
 
 	function fill_all_comments(){
+		if (this.status == 200) {
 		var  data = ajax2.responseXML;
 		var id= data.getElementsByTagName("discussion")[0].getAttribute("id");
 		
@@ -378,7 +386,7 @@ ajax2.send()
 	}
 	
 	
-	}
+	}}
 	function update_play_from(){
 localStorage['play_from'] = (parseInt(localStorage['play_from'])+1 ).toString();
 	
@@ -407,12 +415,15 @@ function play_stop_music(){
 <body >
 <?php include("toolbar.php");?>
 <div id="discussion_categories">
-<ul id="dis_cat">
+<ul >
 Categories
-<li>Hot</li>
-<li>Recent</li>
-<li>Funny</li>
-<li>Theories</li>
+<a href="discussions.php?cat=hot"> <li>Hot</li></a>
+<a href="discussions.php?cat=uploaded_by_me"><li>Uploaded By Me</li></a>
+</ul>
+<ul>links
+<a href=""><li>official facebook page</li></a>
+<a href=""><li>official instagram page</li></a>
+<a href=""><li>official website</li></a>
 </ul>
 </div>
 <?php include("links.php");?>

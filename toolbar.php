@@ -26,7 +26,7 @@
 if(isset($_SESSION["logged_in_name"]))
 {
 $user= $_SESSION["logged_in_name"];?>
-<a href="javascript:void(0)" id="user_holder"><span class="round_small_image"><img id="user" src="users_photos/<?=$user?>" alt="<?=$user?>" title="<?=$user?>" width="25" height="25"/></span><span id="user_name"><?=$user?></span><span>&#x25BC;</span></a><!-- this will be styled and placed at thee corner bla bla-->
+<a href="javascript:void(0)" id="user_holder"><span class="round_small_image"><img id="user" src="users_photos/<?=$user?>" onerror="this.error=null;this.src='./users_photos/user.png';" alt="<?=$user?>" title="<?=$user?>" width="25" height="25"/></span><span id="user_name"><?=$user?></span><span>&#x25BC;</span></a><!-- this will be styled and placed at thee corner bla bla-->
 
             <ul>
                 <li><a href="#">&nbsp;&nbsp;Edit Your Account</a></li>
