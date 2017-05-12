@@ -59,7 +59,7 @@ function view_pic(){
 
 		<div>
 			<strong>Name:</strong>
-			<input class="data" type="text" name="name" size="16" onblur="check_name();" />
+			<input class="data" id="nam" type="text" name="name" size="16" onblur="check_name();" />
 		</div>
 		<div>
 			<strong>Email:</strong>

@@ -1,0 +1,79 @@
+body {
+    height: 2000px;
+    font-family: Helvetica, Arial;
+	background: url("admin.jpg") no-repeat center center fixed;
+  background-size: cover;
+   -webkit-background-size: cover;
+   color: white;
+	
+}
+
+#top-menu {
+    position: fixed;
+    z-index: 1;
+    background: #D4AF37;
+    left: 0;
+    right: 0;
+    top: 0;
+	width:100%;
+ border: 3px solid white;
+ list-style-type: none;
+
+}
+
+#top-menu li {
+    float: left;
+}
+
+#top-menu a {
+    display: block;
+    padding: 5px 10px 7px 10px;
+    width: 7em;
+    text-align: center;
+    -webkit-transition: .5s all ease-out;
+    -moz-transition: .5s all ease-out;
+    transition: .5s all ease-out;
+  /*  border-top: 3px solid white;*/
+    color: #802A2A;
+    text-decoration: none;
+}
+
+#top-menu a:hover {
+    color: #FF3030;
+}
+
+#top-menu li.active a {
+    border-top: 3px solid #333;
+    color: #333;
+}
+
+#ad{
+	  position: absolute;
+    top: 50px;
+	padding-top:80px;
+
+}
+#char {
+    position: absolute;
+    top: 250px;
+	padding-top:85px;
+}
+
+#vid {
+    position: absolute;
+    top: 550px;
+	padding-top:85px;
+}
+
+#pc {
+    position: absolute;
+    top: 750px;
+    padding-top:85px;
+}
+#t {
+    position: absolute;
+    top: 950px;
+	padding-top:85px;
+}
+#admin{     float: right;
+    margin: 0 0 10px 450px;}

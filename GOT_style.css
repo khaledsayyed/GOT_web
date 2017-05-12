@@ -86,10 +86,7 @@ body {
 	background-color: #ffffff;
 	z-index:3;
 }
-#signup_fieldset{
-	width:50%;
-	
-}
+
 #hello_pic{
 	float:right;
 	width:205px;
@@ -633,7 +630,7 @@ html{
   z-index: 1;
   background: #1AFFFFFF;
   max-width: 360px;
-  margin: 0 auto 100px;
+  margin: 0 auto 300px;
   padding: 0px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);

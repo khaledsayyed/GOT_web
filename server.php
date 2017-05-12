@@ -543,4 +543,28 @@ header("Content-type: application/json");?>
 
  <?php }}
   /*******************************************/
+  /*admin login*/
+   if(isset($_POST["AdminName"])&&isset($_POST["AdminPasswd"])){
+			$name=$_POST["AdminName"];
+			$pass=$_POST["AdminPasswd"];
+$query="select name, password from admin where name='$name'";
+try{
+	//in my laptop mysql at port 3307 you may need to change this
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+$user_result = $db->query($query);	
+$user_result = $user_result->fetch(); 
+if($user_result[0]==$name && $user_result[1]==$pass){
+$db=null;#closed
+$_SESSION["AdminName"] = $name;
+header("location: ./Admin/adminpage.php");
+#exit();
+} 
+else {header("location: ./Admin/index.php?status=fail");}
+}
+catch (pdoexception $e){
+die("connection failed: " . $e->GETmessage());
+}
+   }
+/*****************************************************/
 	?>

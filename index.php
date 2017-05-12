@@ -57,7 +57,7 @@ endif;
 <meta charset="UTF-8" />
 	<title>Main </title>
 	<link href="GOT_style.css" rel="stylesheet" type="text/css"/>
-<script src="jquery.js"  type="text/javascript">></script>
+<script src="jquery.js"  type="text/javascript"></script>
 <!-- for the count down timer-->
  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
  <link rel="stylesheet" href="timer/countdown/jquery.countdown.css" />
