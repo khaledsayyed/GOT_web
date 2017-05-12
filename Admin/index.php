@@ -31,13 +31,15 @@ var pass = document.getElementsById("pass1");
 
 </script>
 <style>
+body{	background: url("../signup.jpg") no-repeat center center fixed;
+  background-size: cover;
+   -webkit-background-size: cover;
+-moz-background-size: cover;}
+
 #signup{
 	width:100%;
 	height:100%;
-	background: url("../signup.jpg") no-repeat center center fixed;
-  background-size: cover;
-   -webkit-background-size: cover;
-  -moz-background-size: cover;
+
   -o-background-size: cover;
   font-family: "Cursive", sans-serif;
   -webkit-font-smoothing: antialiased;
