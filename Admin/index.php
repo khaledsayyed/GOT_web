@@ -50,9 +50,7 @@ body{	background: url("../signup.jpg") no-repeat center center fixed;
 
 	 position: relative;
   z-index: 1;
-  background: #1AFFFFFF;
-  -moz-background: #1AFFFFFF;
-  -webkit-background:#1AFFFFFF;
+
   max-width: 360px;
   margin: 0 auto 300px;
   padding: 100px;
