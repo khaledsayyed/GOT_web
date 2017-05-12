@@ -493,21 +493,22 @@ else { header("location: ./admin/adminpage.php?st=fail");}
 	//get images for main page
 if(isset($_GET["mainImages"])){
 	if($_GET["mainImages"]=="all"){
-		if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-			$query="select team from users where name='". $_SESSION['username'] ."'";
+		if (isset($_SESSION['logged_in_name'])) {
+			$query="select team from users where name='". $_SESSION['logged_in_name'] ."'";
 		try{
 
 	$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
 //$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
 	$t = $db->query($query);
 	$team=$t->fetchColumn();
+
 }
 catch (pdoexception $e){
 die("connection failed: " . $e->GETmessage());
 }
 	//json to get images
 $images = glob("./assets/main_page_images/".$team."/*.jpg");
-	} else $images = glob("./assets/main_page_images/none/*.jpg");
+	} else {$images = glob("./assets/main_page_images/none/*.jpg");}
 header("Content-type: application/json");?>
 { "imag": [
 <?php
