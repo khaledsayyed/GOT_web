@@ -451,10 +451,10 @@ catch (pdoexception $e){
 
 if (isset($_FILES['cvideo'])) {
 
-$vd=$_FILES['video']['name'];
-   $file = $_FILES['video']['tmp_name']; // check for uploaded video
+$vd=$_FILES['cvideo']['name'];
+   $file = $_FILES['cvideo']['tmp_name']; // check for uploaded video
 	if( !empty($file) && is_uploaded_file( $file )):
-            move_uploaded_file($file, "./assets/main_page_video/".$_FILES['video']['name']);//rename and move
+            move_uploaded_file($file, "./assets/main_page_video/".$_FILES['cvideo']['name']);//rename and move
       
 	  endif;
 

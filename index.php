@@ -309,10 +309,10 @@ var t=new Date();
   <p id="note"></p> 
     	
 <div id="fadingimg">
-<img id="image1" src="./images/cersei.jpg" />
-<img id="image2" src="./images/dany.jpg" />
-<img id="image3" src="./images/snow.jpg" />
-<img id="image4" src="./images/finger.jpg" /><br/>
+<img id="image1" src="./images/stark.jpg" />
+<img id="image2" src="./images/Lannister.jpg" />
+<img id="image3" src="./images/Baratheon.jpg" />
+<img id="image4" src="./images/Arryn.jpg" /><br/>
 <video id="vd" autoplay loop controls muted>
   <source src="assets/main_page_video/<?= $video ?>" type="video/mp4" />
 </video>
