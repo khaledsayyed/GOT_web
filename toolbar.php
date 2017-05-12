@@ -2,6 +2,33 @@
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script src="simpler-sidebar.js"></script>
+<script type="text/javascript">
+function validatelogin(){
+	if(checkname() && checkpassword()){ return true;}
+	else alert("invalid data"); return false;
+}
+function checkname(){
+var name = document.getElementById("user");
+	name.style.backgroundColor="#f2f2f2";
+if(name.value==""){
+		name.style.backgroundColor="#ff6666";
+		/*document.getElementById("submit").disabled="disabled";*/
+		return false;
+	}
+	return true;
+}
+
+function checkpassword(){
+var pass = document.getElementById("pass");
+	pass.style.backgroundColor="#f2f2f2";
+if(pass.value.match(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/)==null){
+		pass.style.backgroundColor="#ff6666";
+	/*	document.getElementById("submit").disabled="disabled";*/
+	return false;
+	}
+	return true;
+}
+</script>
 
 	<div class="main-navbar main-navbar-fixed-top" id="main-navbar">
 
@@ -57,12 +84,12 @@ $user=	"";?>
 
 	  <div class="main-sidebar-wrapper" id="main-sidebar-wrapper">
 
-	  <form action="server.php" method="post">
+	  <form action="server.php" method="post" Onsubmit= "return validatelogin();">
 		
 						<div>
-							<strong>UserName:</strong><input id="user" name="login_name" type="text" size="20"  /> <br />
-							<strong>Password: </strong><input id="pass" name="login_password" type="text" size="20"  /> <br />
-							<input type="submit" value="Log In" />
+							<strong>UserName:</strong><input id="user" name="login_name" type="text" size="20" onblur="checkname();"  /> <br />
+							<strong>Password: </strong><input id="pass" name="login_password" type="text" size="20" onblur="checkpassword();" /> <br />
+							<input id="submit" type="submit" value="Log In" />
 						</div>
 	
 		</form>

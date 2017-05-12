@@ -8,24 +8,30 @@ if($_GET["destroy"]==1){session_start(); session_destroy();}
 <head>
 <title>login</title>
 <script type="text/javascript">
-
+function validate(){
+	if(check_name() && check_password()){ return true;}
+	else alert("invalid data"); return false;
+}
 function check_name(){
-var name = document.getElementsById("nam");
-
-	if(name.value=""){
+var name = document.getElementById("nam");
+	name.style.backgroundColor="#f2f2f2";
+if(name.value.length==0){
 		name.style.backgroundColor="#ff6666";
 		document.getElementById("submit").disabled="disabled";
-		//unvalid.push("passwd1");
+		return false;
 	}
+	return true;
 }
-function check_password(){
-var pass = document.getElementsById("pass1");
 
-	if(pass.value=""){
+function check_password(){
+var pass = document.getElementById("pass1");
+	pass.style.backgroundColor="#f2f2f2";
+if(pass.value.match(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/)==null){
 		pass.style.backgroundColor="#ff6666";
 		document.getElementById("submit").disabled="disabled";
-		//unvalid.push("passwd1");
+	return false;
 	}
+	return true;
 }
 
 
@@ -94,7 +100,7 @@ width:100%;
 </head>
 <body>
 <div id="signup">
-<form id="register-form" action="../server.php" method="POST" enctype="multipart/form-data">
+<form id="register-form" action="../server.php" method="POST" enctype="multipart/form-data" Onsubmit= "return validate();">
 	<fieldset id="signup_fieldset">
 		<legend>Admin Login:</legend>
 
