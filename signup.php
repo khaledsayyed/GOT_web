@@ -35,9 +35,10 @@ function check_email(){
 
 }
 function check_password_confirm(){
+	
 	var pass = document.getElementsByName("passwd");
 	var pass2 = document.getElementsByName("passwd1");
-	
+	pass2[0].style.backgroundColor="#f2f2f2";
 	if(pass[0].value!=pass2[0].value){
 		pass2[0].style.backgroundColor="#ff6666";
 		document.getElementById("submit").disabled="disabled";
