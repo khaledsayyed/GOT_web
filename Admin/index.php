@@ -28,16 +28,6 @@ var pass = document.getElementsById("pass1");
 	}
 }
 
-function check_password_confirm(){
-	var pass = document.getElementsById("pass2");
-	var pass2 = document.getElementsById("pass1");
-	
-	if(pass.value!=pass2.value){
-		pass2.style.backgroundColor="#ff6666";
-		document.getElementById("submit").disabled="disabled";
-		//unvalid.push("passwd1");
-	}
-}
 
 </script>
 <style>
@@ -59,6 +49,8 @@ function check_password_confirm(){
 	 position: relative;
   z-index: 1;
   background: #1AFFFFFF;
+  -moz-background: #1AFFFFFF;
+  -webkit-background:#1AFFFFFF;
   max-width: 360px;
   margin: 0 auto 300px;
   padding: 100px;
@@ -115,10 +107,7 @@ width:100%;
 			<strong>Password:</strong>
 			<input class="data" id="pass1" type="password" name="AdminPasswd" size="16" onblur="check_password()"  />
 		</div>
-		<div>
-			<strong  >Confirm Password:</strong>
-			<input class="data" id="pass2"type="password" name="AdminPasswd1" size="16" onblur="check_password_confirm()" />
-		</div>
+
 
 		<div>
 			<input id="submit" type="submit" value="Login" />

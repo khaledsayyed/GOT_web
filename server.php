@@ -448,9 +448,9 @@ catch (pdoexception $e){
 	}	
 	/**********************************************/
 	//change video
-if (isset($_REQUEST['uploadvideo']))
-{
-echo "set";
+
+if (isset($_FILES['cvideo'])) {
+
 $vd=$_FILES['video']['name'];
    $file = $_FILES['video']['tmp_name']; // check for uploaded video
 	if( !empty($file) && is_uploaded_file( $file )):

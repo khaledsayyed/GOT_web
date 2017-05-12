@@ -124,7 +124,7 @@ endif;
 
 		<div>
 			<strong>video link:</strong>
-			<input id="video" type="file" name="video" size="16" />
+			<input id= "cvideo" name="cvideo" type="file" accept="video/mp4,video/x-m4v,video/*" />
 		</div>
 		<div>
 			<input type="submit" name="uploadvideo" value="change video" />
@@ -139,7 +139,8 @@ endif;
 
 		<div>
 			<strong>add pic:</strong>
-			<input id="pic" type="file" name="pic" size="16" />
+			<input id="pic" type="file" name="pic" size="16" /></br>
+			<strong>State:</strong>
 			<select name="tm"  >
 			<option value="none">none</option>
 				<option value="dany">Danaerys - Tyrion</option>
