@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: May 09, 2017 at 10:13 AM
+-- Generation Time: May 12, 2017 at 01:29 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -27,9 +27,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `name` varchar(20) NOT NULL,
-  `password` varchar(20) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL
+  `name` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `password` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+  `email` varchar(20) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -243,6 +243,37 @@ CREATE TABLE `editable` (
   `val` text
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `editable`
+--
+
+INSERT INTO `editable` (`Things`, `val`) VALUES
+('timer', '2017/6/16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `links`
+--
+
+CREATE TABLE `links` (
+  `lid` int(11) NOT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `pic` varchar(30) DEFAULT NULL,
+  `uploader` varchar(40) DEFAULT NULL,
+  `url` varchar(60) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `links`
+--
+
+INSERT INTO `links` (`lid`, `title`, `pic`, `uploader`, `url`) VALUES
+(1, 'Coldplay\'s Game of Thrones: The Musical', 'coldplay_got.jpg', 'Coldplay', 'https://www.youtube.com/watch?v=zs7xO5P3Az4'),
+(2, 'Game of Desks', 'game_of_desks.jpg', 'The Tonight Show Starring Jimmy Fallon', 'https://www.youtube.com/watch?v=Gqgdyn6wg7E&t=321s'),
+(3, 'Game of Thrones Hall of Faces', 'hall of faces.jpg', 'The Late Late Show with James Corden', 'https://www.youtube.com/watch?v=pk7E5HNqgxY'),
+(4, 'GRAHAM OF THRONES', 'got graham norton.jpg', 'The Graham Norton Show', 'https://www.youtube.com/watch?v=2enLWj3dVQw&t=314s');
+
 -- --------------------------------------------------------
 
 --
@@ -297,18 +328,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`name`, `email`, `password`, `team`) VALUES
-('admin', 'khd.sayed@gmail.com', 'KK', 'dany'),
+('admin', 'khd.sayed@gmail.com', 'KK', 'cersei'),
 ('kholid', 'h2@W', 'KK', 'snow');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`name`);
 
 --
 -- Indexes for table `discussions`
@@ -330,10 +355,10 @@ ALTER TABLE `downvotes`
   ADD PRIMARY KEY (`dis_id`,`name`);
 
 --
--- Indexes for table `editable`
+-- Indexes for table `links`
 --
-ALTER TABLE `editable`
-  ADD PRIMARY KEY (`Things`);
+ALTER TABLE `links`
+  ADD PRIMARY KEY (`lid`);
 
 --
 -- Indexes for table `upvotes`
@@ -362,6 +387,11 @@ ALTER TABLE `discussions`
 --
 ALTER TABLE `discussion_comments`
   MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+--
+-- AUTO_INCREMENT for table `links`
+--
+ALTER TABLE `links`
+  MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

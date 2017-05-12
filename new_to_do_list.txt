@@ -2,8 +2,6 @@ khaled
 finish discution(share btn+heiglight upvote bla)
 create div with recommended pages and and videos
 delete a post
-teams on main page and jjoin 
-logout
 handle more than 1 pic in posts
 
 huda
@@ -20,3 +18,5 @@ complete validation sign up mfrood copy paste
 fill characters 
 about us mesh droori aslan
 contact us msh droori aslan(we can copy paste from HW1)
+
+CREATE TABLE links(lid int PRIMARY KEY,title varchar (20),pic_loc varchar(20),uploader varchar(20))

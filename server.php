@@ -526,4 +526,24 @@ header("Content-type: application/json");?>
 {"time": "<?= $time ?>" }]}
 
  <?php }}
-	?>
+#next: contact us mail sending
+ if(isSet($_POST['msg_name'])&&isSet($_POST['msg_body'])&&isSet($_POST['msg_subject'])&&isSet($_POST['msg_email'])&&$_POST['msg_email']!==""):
+ $subject = "GOT_WEB:".$_POST['msg_subject'];
+ $message = $_POST['msg_name'].":\n";
+
+ $email=$_POST['msg_email'];
+
+   $headers = "From:$email";
+
+ $message=$message.$_POST['msg_body'];
+ #$message = wordwrap($message,70);
+ mail("khd.sayed@gmail.com", $subject,$message,$headers);
+ header("Location: ./about_us.php?sent=yes");
+ endif;
+ 
+ 
+ 
+ 
+ 
+ 
+ ?>

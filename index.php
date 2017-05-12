@@ -71,44 +71,32 @@ endif;
 	
 var images = [];var i = 0;
 //test
-
-//test
-function update_play_from(){
-localStorage['play_from'] = (parseInt(localStorage['play_from'])+1 ).toString();
-	
-}
-function play_stop_music(){
-		var sound_button =document.getElementById("play_sound_pic");
-	var audio = document.getElementById("page_audio");
-	if(localStorage['audio']==="stop"){
-		
-		audio.play();
-		localStorage['audio']="play";
-		sound_button.src="assets/icons/muted.png";
-		  interval = setInterval(update_play_from, 1000);
-	}else{
-	audio.pause();
-	localStorage['audio']="stop";
-	sound_button.src="assets/icons/voice.png";
-	clearInterval(interval);
-	}
-	
-}
+var audio;
 var continue_music,continue_from;
 var interval;
+//test
+
+
 $(document).ready(function(){
-	
+		audio=document.getElementById("page_audio");
+		/*audio = new Audio('audio_file.mp3');
+	audio.loop=true;
+	audio.preload="auto";
+	var s1 = document.createElement("source");
+	s1.src="assets/audio/Light of the Seven.mp3";
+	audio.appendChild(s1);*/
 	continue_music = localStorage['audio'] || 'stop';
 	continue_from = localStorage['play_from'] || '0';
 $("#play_sound").click(play_stop_music);	
-if(continue_music!=='stop'){
+if(continue_music==='play'){
 	$("#play_sound_pic").attr("src","assets/icons/muted.png");
-document.getElementById("page_audio").oncanplay=function() {
-  this.currentTime = parseInt( localStorage['play_from']); 
-  document.getElementById("page_audio").play();
-};
-  interval = setInterval(update_play_from, 1000);
+audio.oncanplay=function() {
+  audio.currentTime = parseInt(localStorage['play_from']); 
 
+};
+audio.play();
+  interval = setInterval(update_play_from, 1000);
+ 
 }else{
 	localStorage['audio']= 'stop';
 	localStorage['play_from'] = '0';
@@ -182,7 +170,7 @@ ajax.open("GET", "server.php?timer=yes", true);
 ajax.send();	
 	
 
-
+fadeDivs();
 setInterval(fadeDivs, 10000);
 }
 );
@@ -299,7 +287,27 @@ var t=new Date();
 	
 }
 
+function update_play_from(){
+localStorage['play_from'] = (parseInt(localStorage['play_from'])+1 ).toString();
 
+}
+function play_stop_music(){
+	var sound_button =document.getElementById("play_sound_pic");
+
+	if(localStorage['audio']==="stop"){
+		
+		audio.play();
+		localStorage['audio']="play";
+		sound_button.src="assets/icons/muted.png";
+		  interval = setInterval(update_play_from, 1000);
+	}else{
+	audio.pause();
+	localStorage['audio']="stop";
+	sound_button.src="assets/icons/voice.png";
+	clearInterval(interval);
+	}
+	
+}
 	</script>
 </head>
 <body>
@@ -307,17 +315,20 @@ var t=new Date();
 <div id="our_cool_div">
 <div id="countdown"></div>
   <p id="note"></p> 
-    	
+    <div id="imgs_video">	
 <div id="fadingimg">
-<img id="image1" src="./images/cersei.jpg" />
-<img id="image2" src="./images/dany.jpg" />
-<img id="image3" src="./images/snow.jpg" />
-<img id="image4" src="./images/finger.jpg" /><br/>
+<img id="image1" />
+<img id="image2"  />
+<img id="image3"  />
+<img id="image4" /><br/>
+</div>
+
 <video id="vd" autoplay loop controls muted>
   <source src="assets/main_page_video/<?= $video ?>" type="video/mp4" />
 </video>
-</div>
 
+
+</div>
       
 
 

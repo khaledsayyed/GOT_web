@@ -164,7 +164,7 @@ float:right;
 #play_sound{
 float:right;	
 	margin-top:5px;
-margin-right:4px;	
+margin-right:7px;	
 }
 .clickFade a{
 	display:block;
@@ -432,7 +432,7 @@ border-radius:5px;
 /*main page styling*/
 #our_cool_div{
 	position:relative;
-	
+	text-align:center;
 }
 #dany1{
 	z-index:3;
@@ -570,28 +570,22 @@ opacity:0.8;
 }
 /*END of */
 
+#imgs_video{
+
+	width:80%;
+	margin: 0 auto;
+	align-content: center;
+}
 #fadingimg img {
 	width:20%;
 
 	height:200px;
 }
-#fadingimg {
-	width:80%;
-	margin: 0 auto;
-	height:200px;
-	 
-align-content: center;
-}
 
 
-body {
-	background: url('./timer/img/page_bg_center.jpg') no-repeat center center;
-	min-height: 600px;
-    padding: 4px 0 0;
-	font:14px/1.3 'Segoe UI',Arial, sans-serif;
-}
+
 #vd{
-	
+
 	margin: 0 auto;
 	height: 240px;
 	padding: 10px;
@@ -619,7 +613,54 @@ html{
 	right:0px;
 	z-index:50;
 }
+/*about us styling*/
+#about_us{
+	width:65%;
+	min-width:350px;
+	background-color:white;
+	margin-left:15%;
+	margin-right:20%;
+	margin-top:0px;
+	padding:7px;
+}
+#about_us fieldset{
+margin:15px;
+	background-color:#faeeee;
 
-	
-	
+}
+#about_us strong{
+width:120px;
+display:inline-block;
+}
+#about_us textarea,input[type=submit]{
+margin-top:8px;
+margin-left:120px;
+
+
+}
+
+/*end of about us styling*/
+	#sent{
+		
+		
+		font-size:30px;
+		background-color:#ccffcc;
+		
+	}
+	#links{
+		
+		width:230px;
+		
+		float:right;
+		margin: 7px 10px;
+	}
+	#links li{
+	list-style-type:none;	
+	}
+	.link{
+		
+		background-color:#ffffff;
+		background-radius:5px;
+		margin-bottom:5px;
+	}
 

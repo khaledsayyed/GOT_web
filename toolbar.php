@@ -6,12 +6,12 @@
 	<div class="main-navbar main-navbar-fixed-top" id="main-navbar">
 
 	  <div class="main-navbar-content">
-	   <div><a href="index.php"><img src="assets/logo.png" width="168" height="43"/></a></div>
+	   <div><a href="index.php"><img src="assets/logo.png" width="168" height="41"/></a></div>
   <div><a id="index" class="tab" href="index.php">Home</a></div>
   <div> <a id="discussions" class="tab" href="discussions.php">Discussions</a></div>
    <div><a id="characters" class="tab" href="characters.php">Characters</a> </div>
-  <div> <a class="tab" href="#">News</a></div>
-   <div><a id="contact" class="tab" href="#">Contact</a></div>
+
+   <div><a id="contact" class="tab" href="about_us.php">Contact</a></div>
 
 
  
@@ -80,7 +80,7 @@ Sign Up
 Edit Profile 
 	        </li></a>
 
-	     <a href="#about">     <li class="close-sb">
+	     <a href="about_us.php">     <li class="close-sb">
  About us 
 	        </li></a>
 			
@@ -98,8 +98,10 @@ Edit Profile
 
 
 <div id="dummy_div">	</div>
-<div id="login_message"><img src="assets/icons/please_log_in_first.png" alt="please log in to perform this" height="165" width="165"/></div>
+<div id="login_message"><img src="assets/icons/please_log_in_first.png" alt="please log in to perform this" height="165" width="165" /></div>
 
-<audio id="page_audio" preload="auto" src="assets/audio/Light of the Seven.mp3" loop="true" autobuffer>
+<audio id="page_audio" preload="auto"  loop="true" autobuffer>
+<source src="assets/audio/Light of the Seven.mp3"/>	
+<source src="assets/audio/Light of the Seven.ogg"/>	
 Unsupported in Firefox
 </audio>
