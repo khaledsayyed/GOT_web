@@ -57,7 +57,7 @@ endif;
 <meta charset="UTF-8" />
 	<title>Main </title>
 	<link href="GOT_style.css" rel="stylesheet" type="text/css"/>
-<script src="jquery.js"  type="text/javascript">></script>
+<script src="jquery.js"  type="text/javascript"></script>
 <!-- for the count down timer-->
  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
  <link rel="stylesheet" href="timer/countdown/jquery.countdown.css" />
@@ -224,7 +224,7 @@ function load_pics(){
  
 
 function fadeDivs() {
-	 i = i < images.length ? i : 0;
+	 i = i < images.length-5 ? i : 0;
 
     $('#image1').fadeOut(200, function(){
         $(this).attr('src',images[i++]).fadeIn(200);
@@ -317,12 +317,16 @@ function play_stop_music(){
   <p id="note"></p> 
     <div id="imgs_video">	
 <div id="fadingimg">
-<img id="image1" />
-<img id="image2"  />
-<img id="image3"  />
-<img id="image4" /><br/>
-</div>
 
+
+
+
+
+<img id="image1" src="./images/stark.jpg" />
+<img id="image2" src="./images/Lannister.jpg" />
+<img id="image3" src="./images/Baratheon.jpg" />
+<img id="image4" src="./images/Arryn.jpg" /><br/>
+</div>
 <video id="vd" autoplay loop controls muted>
   <source src="assets/main_page_video/<?= $video ?>" type="video/mp4" />
 </video>

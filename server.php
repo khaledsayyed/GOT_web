@@ -448,13 +448,13 @@ catch (pdoexception $e){
 	}	
 	/**********************************************/
 	//change video
-if (isset($_REQUEST['uploadvideo']))
-{
-echo "set";
-$vd=$_FILES['video']['name'];
-   $file = $_FILES['video']['tmp_name']; // check for uploaded video
+
+if (isset($_FILES['cvideo'])) {
+
+$vd=$_FILES['cvideo']['name'];
+   $file = $_FILES['cvideo']['tmp_name']; // check for uploaded video
 	if( !empty($file) && is_uploaded_file( $file )):
-            move_uploaded_file($file, "./assets/main_page_video/".$_FILES['video']['name']);//rename and move
+            move_uploaded_file($file, "./assets/main_page_video/".$_FILES['cvideo']['name']);//rename and move
       
 	  endif;
 
@@ -493,21 +493,22 @@ else { header("location: ./admin/adminpage.php?st=fail");}
 	//get images for main page
 if(isset($_GET["mainImages"])){
 	if($_GET["mainImages"]=="all"){
-		if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-			$query="select team from users where name='". $_SESSION['username'] ."'";
+		if (isset($_SESSION['logged_in_name'])) {
+			$query="select team from users where name='". $_SESSION['logged_in_name'] ."'";
 		try{
 
 	$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
 //$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
 	$t = $db->query($query);
 	$team=$t->fetchColumn();
+
 }
 catch (pdoexception $e){
 die("connection failed: " . $e->GETmessage());
 }
 	//json to get images
 $images = glob("./assets/main_page_images/".$team."/*.jpg");
-	} else $images = glob("./assets/main_page_images/none/*.jpg");
+	} else {$images = glob("./assets/main_page_images/none/*.jpg");}
 header("Content-type: application/json");?>
 { "imag": [
 <?php
@@ -543,6 +544,7 @@ header("Content-type: application/json");?>
 
  <?php }}
 
+
 #next: contact us mail sending
  if(isSet($_POST['msg_name'])&&isSet($_POST['msg_body'])&&isSet($_POST['msg_subject'])&&isSet($_POST['msg_email'])&&$_POST['msg_email']!==""):
  $subject = "GOT_WEB:".$_POST['msg_subject'];
@@ -559,6 +561,34 @@ header("Content-type: application/json");?>
  endif;
  
  
- ?>
 
+
+
+
+  /*******************************************/
+  /*admin login*/
+   if(isset($_POST["AdminName"])&&isset($_POST["AdminPasswd"])){
+			$name=$_POST["AdminName"];
+			$pass=$_POST["AdminPasswd"];
+$query="select name, password from admin where name='$name'";
+try{
+	//in my laptop mysql at port 3307 you may need to change this
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+$user_result = $db->query($query);	
+$user_result = $user_result->fetch(); 
+if($user_result[0]==$name && $user_result[1]==$pass){
+$db=null;#closed
+$_SESSION["AdminName"] = $name;
+header("location: ./Admin/adminpage.php");
+#exit();
+} 
+else {header("location: ./Admin/index.php?status=fail");}
+}
+catch (pdoexception $e){
+die("connection failed: " . $e->GETmessage());
+}
+   }
+/*****************************************************/
+	?>
 

@@ -1,36 +1,14 @@
+<?php
+session_start();
+if (isset ($_SESSION["AdminName"])){
+	$admin=$_SESSION["AdminName"]?>
+
 <!Doctype html>
 <html>
 <head>
-<script>
-function validate()
-{
-	var nam, house, story, pic;
-	nam=document.getElementById("nm").value;
-	house= document.getElementById("house").value;
-	story=document.getElementById("story").value;
-	pic= document.getElementById("cphoto");
-	if(nam.length!=0 && house.length!=0 && story.length!=0 && pic.value!= null)
-	{return true;}
-	else return false;
-	
-}
-function validateadmin()
-{
-	var nam;
-	nam= document.getElementById("anm").value;
-	if(nam.length!=0)return true;
-	else return false;
-	
-}
-function validatetime()
-{
-	var t;
-	t= document.getElementById("ntime").value;
-	if(t.match(/^[0-9]{4}\/[0-9]{1}\/[0-9]{2}$/) )return true;
-	else {alert("invalid formate of time"); return false; }
-	
-}
-</script>
+<link href="adminpage.css" rel="stylesheet" type="text/css"/>
+<script src="../jquery.js"  type="text/javascript"></script>
+<script src="adminpage.js"  type="text/javascript"></script>
 <?php
 /*
 function is_photo_uploaded_and_moved($user) {
@@ -52,6 +30,58 @@ endif;
 </head>
 
 <body>
+<ul id= "top-menu">
+  <li class="active">
+   <a href="#">Add Admin</a>
+  </li>
+  <li>
+    <a href="#char">Add Character</a>
+  </li>
+  <li>
+    <a href="#vid">Add Video</a>
+  </li>
+  <li>
+    <a href="#pc">Add Picture</a>
+  </li>
+   <li>
+    <a href="#t">Change Timer</a>
+  </li>
+    <li id="admin">
+   admin name: <?= $admin?> 
+   <a href="index.php?destroy=1">Logout</a>
+  </li>
+</ul>
+<a id="ad">
+<form action="../server.php" method="POST" enctype="multipart/form-data" onsubmit="return validateadmin()">
+	<fieldset>
+		<legend>add Admin:</legend>
+
+		<div>
+			<strong>usename of new admin:</strong>
+			<input id="anm" type="text" name="aname" size="16" />
+		</div>
+		<div>
+			<input type="submit" value="Add admin" />
+		</div>
+	</fieldset>
+</form>
+</a>
+<a id="t">
+<form action="../server.php" method="POST" enctype="multipart/form-data" onsubmit="return validatetime()">
+	<fieldset>
+		<legend>change next episode's timer:</legend>
+
+		<div>
+			<strong>time of new episode ([yyyy/m/dd], where m= 0->11):</strong>
+			<input id="ntime" type="text" name="nexttimer" size="16" />
+		</div>
+		<div>
+			<input type="submit" value="change timer" />
+		</div>
+	</fieldset>
+</form>
+</a>
+<a id="char">
 <form action="../server.php" method="POST" enctype="multipart/form-data" onsubmit="return validate()">
 	<fieldset>
 		<legend>add charcter:</legend>
@@ -86,53 +116,31 @@ endif;
 		</div>
 	</fieldset>
 </form>
-<form action="../server.php" method="POST" enctype="multipart/form-data" onsubmit="return validateadmin()">
-	<fieldset>
-		<legend>add Admin:</legend>
-
-		<div>
-			<strong>usename of new admin:</strong>
-			<input id="anm" type="text" name="aname" size="16" />
-		</div>
-		<div>
-			<input type="submit" value="Add admin" />
-		</div>
-	</fieldset>
-</form>
-<form action="../server.php" method="POST" enctype="multipart/form-data" onsubmit="return validatetime()">
-	<fieldset>
-		<legend>change next episode's timer:</legend>
-
-		<div>
-			<strong>time of new episode ([yyyy/m/dd], where m= 0->11):</strong>
-			<input id="ntime" type="text" name="nexttimer" size="16" />
-		</div>
-		<div>
-			<input type="submit" value="change timer" />
-		</div>
-	</fieldset>
-</form>
-
+</a>
+<a id="vid">
 <form action="../server.php" method="POST" enctype="multipart/form-data" >
 	<fieldset>
 		<legend>change video:</legend>
 
 		<div>
 			<strong>video link:</strong>
-			<input id="video" type="file" name="video" size="16" />
+			<input id= "cvideo" name="cvideo" type="file" accept="video/mp4,video/x-m4v,video/*" />
 		</div>
 		<div>
 			<input type="submit" name="uploadvideo" value="change video" />
 		</div>
 	</fieldset>
 </form>
+</a>
+<a id="pc">
 <form action="../server.php" method="POST" enctype="multipart/form-data">
 	<fieldset>
 		<legend>add pic to main page:</legend>
 
 		<div>
 			<strong>add pic:</strong>
-			<input id="pic" type="file" name="pic" size="16" />
+			<input id="pic" type="file" name="pic" size="16" /></br>
+			<strong>State:</strong>
 			<select name="tm"  >
 			<option value="none">none</option>
 				<option value="dany">Danaerys - Tyrion</option>
@@ -146,16 +154,17 @@ endif;
 		</div>
 	</fieldset>
 </form>
-
+</a>
 <?php
 if(isset($_GET["st"])){
 	if($_GET["st"]=="success"){?>
 <script>alert(" changes done successfuly!");</script>
 <?php }
 if($_GET["st"]=="fail"){?>
-<script>alert(" invalid input");</script>
+<script> alert(" invalid input");</script>
 <?php }
 }
 ?>
 </body>
 </html>
+<?php } else {header("location: ./index.php?status=fail");}?>
