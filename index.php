@@ -236,7 +236,7 @@ function load_pics(){
  
 
 function fadeDivs() {
-	 i = i < images.length ? i : 0;
+	 i = i < images.length-5 ? i : 0;
 
     $('#image1').fadeOut(200, function(){
         $(this).attr('src',images[i++]).fadeIn(200);
