@@ -126,13 +126,36 @@ endif;
 		</div>
 	</fieldset>
 </form>
+<form action="../server.php" method="POST" enctype="multipart/form-data">
+	<fieldset>
+		<legend>add pic to main page:</legend>
 
+		<div>
+			<strong>add pic:</strong>
+			<input id="pic" type="file" name="pic" size="16" />
+			<select name="tm"  >
+			<option value="none">none</option>
+				<option value="dany">Danaerys - Tyrion</option>
+				<option value="snow">Snow - Mormunt</option>
+				<option value="finger">Sansa- Little Finger</option>
+				<option value="cersei">Cersei</option>
+			</select>
+		</div>
+		<div>
+			<input type="submit" name="uploadphoto" value="Add Photo" />
+		</div>
+	</fieldset>
+</form>
 
 <?php
 if(isset($_GET["st"])){
 	if($_GET["st"]=="success"){?>
 <script>alert(" changes done successfuly!");</script>
-<?php }}
+<?php }
+if($_GET["st"]=="fail"){?>
+<script>alert(" invalid input");</script>
+<?php }
+}
 ?>
 </body>
 </html>
