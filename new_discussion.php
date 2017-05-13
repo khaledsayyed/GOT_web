@@ -99,13 +99,16 @@ function play_stop_music(){
 <div id="discussion_categories">
 <ul >
 Categories
-<a href="discussions.php?cat=hot"> <li>Hot</li></a>
+
+<a href="discussions.php?cat=hot"> <li><img src="assets/icons/fire.png" width="20px" height="20px"/>Hot</li></a>
 <a href="discussions.php?cat=uploaded_by_me"><li>Uploaded By Me</li></a>
+<a href="discussions.php"> <li>All Posts</li></a>
 </ul>
 <ul>links
-<a href=""><li>official facebook page</li></a>
-<a href=""><li>official instagram page</li></a>
-<a href=""><li>official website</li></a>
+<a href="https://www.facebook.com/GameOfThrones/" target="_blank"><li>official facebook page</li></a>
+<a href="https://www.instagram.com/gameofthrones/?hl=en" target="_blank"><li>official instagram page</li></a>
+<a href="https://www.youtube.com/user/GameofThrones" target="_blank"><li>official Youtube Page</li></a>
+<a href="http://www.hbo.com/game-of-thrones" target="_blank"><li>official website</li></a>
 </ul>
 </div>
 <?php include("links.php");?>

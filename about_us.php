@@ -94,7 +94,7 @@ function play_stop_music(){
 <form action="server.php" method="POST">
 <fieldset>
 <legend>Contact Us:</legend>
-
+		<img src="assets/Raven.png" alt="raven" width="150px" height="150px" title="raven" style="float:right"/>
 		<div>
 			<strong>Name:</strong>
 			<input type="text" name="msg_name" size="16"  />
@@ -114,7 +114,7 @@ function play_stop_music(){
 			</textarea>
 		</div>
 		<div>
-			<input id="submit" type="submit" value="Send" />
+			<input id="submit_contact" type="submit" value="Send A Raven" />
 		</div>
 </fieldset>
 </form>

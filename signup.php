@@ -70,11 +70,14 @@ body{
 
 width:100%;
 }
+#submit{
+	margin-left:0px;
+}
 
 </style>
 <script type="text/javascript">
 window.onload=function(){
-	
+	$("#pic1").hide();
 	$( "#main-sidebar" ).simplerSidebar( {
 	  selectors: {
 	    trigger: ".toggle-sidebar",
@@ -145,7 +148,9 @@ function check_password_confirm(){
 	return true;
 }
 function view_pic(){
+		$("#pic1").hide();
 	document.getElementById("pic1").src= "images/"+document.getElementById("team_select1").value+".jpg";
+	$("#pic1").show(500);
 }
 </script>
 </head>
@@ -169,7 +174,7 @@ function view_pic(){
 		</div>
 		<div>
 			<strong>Password:</strong>
-			<input class="data" id="passwd1" type="password" name="passwd" placeholder="atleast 1 num 1 char ..." size="16" onblur="check_password()"  />
+			<input class="data" id="passwd1" type="password" name="passwd" placeholder="at least 1 num 1 letter ..." size="16" onblur="check_password()"  />
 		</div>
 		<div>
 			<strong  >Confirm Password:</strong>

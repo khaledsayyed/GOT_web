@@ -141,10 +141,13 @@ if(($("#category")!==null)&&($("#category").text()==='My Posts')){		div2.append(
 
 	div.append(div2);
 	div.append($("<h4>",{text:title}));
+	var find = ["&lt;","&gt;", "&quot;", "&apos;","&amp;" ];
+var replace = ["<",">", "\"",  "'",  "&"];
+content = content.replaceArray(find, replace);
 	div.append($("<p>",{text:content}));
-	//if(){
+	
 	var img_src=data[i].getElementsByTagName("img")[0].firstChild.nodeValue;
-	var img = $('<img>', { 
+	if(img_src!==""){var img = $('<img>', { 
 		id: 'p'+i,
 		title: img_src,
 		src: "./discussion_files/"+img_src,
@@ -157,7 +160,7 @@ if(($("#category")!==null)&&($("#category").text()==='My Posts')){		div2.append(
 	div.append($("<span>",{class:"gray_text",click:show_all_comments,text:data[i].getElementsByTagName("comments")[0].getAttribute("count")+"comments"}))
 	
 	div.append('<br/><br/><hr style="width:83%;color:#cccccc;"/>');
-	//}
+	}
 	
 	
 	
@@ -445,7 +448,15 @@ function play_stop_music(){
 	}
 	
 }
-	
+	String.prototype.replaceArray = function(find, replace) {
+  var replaceString = this;
+  var regex; 
+  for (var i = 0; i < find.length; i++) {
+    regex = new RegExp(find[i], "g");
+    replaceString = replaceString.replace(regex, replace[i]);
+  }
+  return replaceString;
+};
 	</script>
 </head>
 
@@ -455,14 +466,16 @@ function play_stop_music(){
 <div id="discussion_categories">
 <ul >
 Categories
-<a href="discussions.php"> <li>All Posts</li></a>
-<a href="discussions.php?cat=hot"> <li>Hot</li></a>
+
+<a href="discussions.php?cat=hot"> <li><img src="assets/icons/fire.png" width="20px" height="20px"/>Hot</li></a>
 <a href="discussions.php?cat=uploaded_by_me"><li>Uploaded By Me</li></a>
+<a href="discussions.php"> <li>All Posts</li></a>
 </ul>
 <ul>links
-<a href=""><li>official facebook page</li></a>
-<a href=""><li>official instagram page</li></a>
-<a href=""><li>official website</li></a>
+<a href="https://www.facebook.com/GameOfThrones/" target="_blank"><li>official facebook page</li></a>
+<a href="https://www.instagram.com/gameofthrones/?hl=en" target="_blank"><li>official instagram page</li></a>
+<a href="https://www.youtube.com/user/GameofThrones" target="_blank"><li>official Youtube Page</li></a>
+<a href="http://www.hbo.com/game-of-thrones" target="_blank"><li>official website</li></a>
 </ul>
 </div>
 <?php include("links.php");?>

@@ -71,7 +71,7 @@ $( "#main-sidebar" ).simplerSidebar( {
       hide: {
         effect: "puff",
         duration: 500
-      }
+      },minWidth:500
     });
 	
 	 $(".clickFade ul").hide();
@@ -96,19 +96,21 @@ function load_pics(){
 		title: name,
 		src: 'characters/'+name+'.jpg',
 		alt: name,
-		width:150,
+		width:155,
 		height: 150
  
 		});
 	set_actions_to_image(img);
-	
-	$("#charac_div").append(img);
+	var dv = $("<div>",{width:155,
+		height: 150,overflow:'hidden'});
+		dv.append(img);
+	$("#charac_div").append(dv);
 	
 	//
 	}
 }
 function set_actions_to_image(img){
-	img.hover(function(){img.animate({"width": "180px","height": "180px","marginTop":"-20px","marginLeft":"-20px"}, "medium");},function(){img.animate({"width": "150px","height": "150px","marginTop":"0px","marginLeft":"0px"}, "medium")});
+	img.hover(function(){img.animate({"height": "180px","marginTop":"-20px"}, "medium");},function(){img.animate({"height": "150px","marginTop":"0px"}, "medium")});
 
 	img.click(show_char_info);
 
@@ -156,7 +158,7 @@ function play_stop_music(){
 </script>
 
 </head>
-<body>
+<body style="background-color:#000000;">
 <?php include("toolbar.php");?>
 
 <div id="dialog"></div>

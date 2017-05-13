@@ -100,8 +100,9 @@ text-decoration:none;
 #charac_div{
 
    display: -webkit-flex; /* Safari */ 
-
-
+width:100%;
+background-color:black;
+margin:0px;
      display: flex; 
 
 	 flex-wrap:wrap;
@@ -111,7 +112,7 @@ text-decoration:none;
 }
 
 #charac_div img{
-	z-index:5;	
+	z-index:5;
 }
 
 
@@ -510,8 +511,9 @@ border-radius:5px;
 }
 .close{
 	float:right;
-background-color:red;
-width:20px;
+	background-color:red;
+font-size:21px;
+
 	}
 #jon1{
 		z-index:3;
@@ -693,3 +695,24 @@ margin-left:120px;
 
 	}
 
+#log_in_form input{
+	margin-bottom:20px;
+	
+}
+#submit_login{
+	font-family: "Cursive", sans-serif;
+  text-transform: uppercase;
+  background: #aaaaaa;
+  width: 100%;
+  padding: 15px;
+  color: #000000;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  margin-left:0px;
+	
+}
+#submit_login:hover{
+	 background: #aaffaa;
+}

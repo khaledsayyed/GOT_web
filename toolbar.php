@@ -5,7 +5,7 @@
 <script type="text/javascript">
 function validatelogin(){
 	if(checkname() && checkpassword()){ return true;}
-	else alert("invalid data"); return false;
+	else { document.getElementById("not_valid").style.display="block"; return false;}
 }
 function checkname(){
 var name = document.getElementById("user");
@@ -56,7 +56,7 @@ $user= $_SESSION["logged_in_name"];?>
 <a href="javascript:void(0)" id="user_holder"><span class="round_small_image"><img id="user" src="users_photos/<?=$user?>" onerror="this.error=null;this.src='./users_photos/user.png';" alt="<?=$user?>" title="<?=$user?>" width="25" height="25"/></span><span id="user_name"><?=$user?></span><span>&#x25BC;</span></a><!-- this will be styled and placed at thee corner bla bla-->
 
             <ul>
-                <li><a href="#">&nbsp;&nbsp;Edit Your Account</a></li>
+                
                 <li><a href="server.php?log_me_out_please=true">Log Out</a></li>
             </ul>
 <?php }
@@ -84,12 +84,14 @@ $user=	"";?>
 
 	  <div class="main-sidebar-wrapper" id="main-sidebar-wrapper">
 
-	  <form action="server.php" method="post" Onsubmit= "return validatelogin();">
+	  <form id="log_in_form" action="server.php" method="post" Onsubmit= "return validatelogin();">
 		
 						<div>
 							<strong>UserName:</strong><input id="user" name="login_name" type="text" size="20" onblur="checkname();"  /> <br />
 							<strong>Password: </strong><input id="pass" name="login_password" type="text" size="20" onblur="checkpassword();" /> <br />
-							<input id="submit" type="submit" value="Log In" />
+							<p id="not_valid" style="font-size:20px;display:none;">The Data Is Not Valid</p>
+							<input id="submit_login" type="submit" value="Log In" />
+							
 						</div>
 	
 		</form>
@@ -101,11 +103,7 @@ $user=	"";?>
 <a href="signup.php"><li class="close-sb">
          
 Sign Up
-	        </li></a>
-	<a href="#editprofile">        <li class="close-sb">
-        
-Edit Profile 
-	        </li></a>
+
 
 	     <a href="about_us.php">     <li class="close-sb">
  About us 
@@ -114,7 +112,7 @@ Edit Profile
 
 	      </ul>
 
-	    </nav>
+	    </nav><br/><br/>
 		This Website is developed by:<br />
 		Khaled El Sayed<br />
 		Huda Hammoud
