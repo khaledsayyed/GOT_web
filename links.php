@@ -10,14 +10,14 @@ foreach($links as $link):?>
 <li><a href="<?=$link[3]?>">
 <div class="link" onclick="">
 <h5><?=$link[0]?></h5>
-<img src="links_pics/<?=$link[2]?>" title="<?=$link[0]?>" width="10" height="150" alt="<?=$link[0]?>"/>
+<img src="links_pics/<?=$link[2]?>" title="<?=$link[0]?>" width="10" height="150" alt="<?=$link[0]?>" target="_blank"/> 
 <p><?=$link[1]?></p>
 </div></a>
 </li>
 <?php
 endforeach;
 }catch (pdoexception $e){
-die("connection failed: " . $e->GETmessage());
+die("connection failed: " . $e->getmessage());
 }
 
 ?>

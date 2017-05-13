@@ -83,10 +83,27 @@ audio.oncanplay=function() {
         duration: 150
       }
     });
-		
+	var url="";
+	
+		if($("#category").text()!==""){
+			if($("#category").text()==="Hot Posts"){
+				url="server.php?discussions=hot"
+			}else{
+				var logged_username=document.getElementById("user_name").innerHTML;
+				if(logged_username===""){
+				$("#login_message").show(500);
+				return;
+				}else{
+				url="server.php?discussions=uploaded_by_me";
+				}
+			}
+			
+		}else{
+		url ="server.php?discussions=all";
+		}
 ajax = new XMLHttpRequest();
 ajax.onload = load_posts ;
-ajax.open("GET", "server.php?discussions=all", true);
+ajax.open("GET",url , true);
 ajax.send();
 	});
 	function load_posts(){
@@ -103,7 +120,8 @@ ajax.send();
 	var date_time =data[i].getAttribute("datetime");
 	var posted_by =data[i].getAttribute("postedBy")+".jpg";
 	var content=data[i].getElementsByTagName("text")[0].firstChild.nodeValue;
-		
+if(($("#category")!==null)&&($("#category").text()==='My Posts')){		div2.append($('<img>',{class:'delete',src:'assets/icons/delete.png',click:delete_post,width:30,height:35}));}
+
 	var img_user=$('<img>', { 
 		id:"img"+i,
 		src: "./users_photos/"+posted_by,
@@ -120,6 +138,7 @@ ajax.send();
 		div2.append($('<p>', { 
 		text:date_time
 		}));
+
 	div.append(div2);
 	div.append($("<h4>",{text:title}));
 	div.append($("<p>",{text:content}));
@@ -282,6 +301,24 @@ ajax2.send()
 	$( "#dialog" ).append($("<p>",{text:'localhost:81/GOT_website/discussions.php?id='+dis_id}));
 	$( "#dialog" ).dialog( "open" );
 	}
+	function delete_post(){
+		
+	var dis_id =$(this).closest('.post').attr("id");
+	var ajax = new XMLHttpRequest();
+	ajax.onload=update_my_discussions;
+	ajax.open("GET", "server.php?delete_discussion="+dis_id, true);
+	ajax.send();
+	
+	}
+	function update_my_discussions(){
+		var url="server.php?discussions=uploaded_by_me";
+
+		ajax = new XMLHttpRequest();
+		ajax.onload = load_posts ;
+		ajax.open("GET",url , true);
+		ajax.send();
+		
+	}
 	function comment(){
 		
 		//entry for the user to comment
@@ -326,7 +363,7 @@ ajax2.send()
 
 		var updated_comments_count =data.getElementsByTagName("comments")[0].getAttribute("count");
 		var comments = data.getElementsByTagName("comment");
-	//	alert($("#"+id).children(".reaction_div").children(".upvote").text());
+	
 		$("#"+id).children(".reaction_div").children(".upvotes_count").text(updated_upvotes);
 		$("#"+id).children(".reaction_div").children(".downvotes_count").text(updated_downvotes);
 
@@ -414,9 +451,11 @@ function play_stop_music(){
 
 <body >
 <?php include("toolbar.php");?>
+<div style="background-color:#cccccc;overflow:hidden;">
 <div id="discussion_categories">
 <ul >
 Categories
+<a href="discussions.php"> <li>All Posts</li></a>
 <a href="discussions.php?cat=hot"> <li>Hot</li></a>
 <a href="discussions.php?cat=uploaded_by_me"><li>Uploaded By Me</li></a>
 </ul>
@@ -427,7 +466,15 @@ Categories
 </ul>
 </div>
 <?php include("links.php");?>
-
+<?php
+if(isSet($_GET['cat'])):
+if($_GET['cat']==='hot'):?>
+<h3 class="title" id='category'>Hot Posts</h4><?php
+elseif($_GET['cat']==='uploaded_by_me'):?>
+<h3  class="title" id='category'>My Posts</h4><?php
+endif;
+endif;
+?>
 <div id="discussion_main_content">
 
 
@@ -435,6 +482,7 @@ Categories
 <div id="dialog"></div>
 
 <a href="new_discussion.php"><input type="button" id="add_discussion" value="+" /></a>
+</div>
 </body>
 
 </html>

@@ -274,8 +274,15 @@ margin-right:7px;
 	background-color:#dddddd;
 	border-radius:5px;
 }
+.title{
+	width:44%;
+	border-radius:5px;
+	margin-left:25%;
+	text-align:center;
+	background-color:white;padding:9px;
+}
 .post{
-	
+
 	border:2px solid #bbbbbb;
 	border-radius:5px;
 	margin-left:auto;
@@ -375,7 +382,10 @@ margin-right:5px;
 	margin-right:3px;
 	float:right;
 }
-	
+.delete{
+	margin-right:3px;
+	float:right;
+}	
 .gray_text{
 color:#888888;
 float:right;	
@@ -423,7 +433,7 @@ border-radius:5px;
   display: flex;
   align-items: center;
   border:2px solid #999999;
-  width:150px;
+  width:154px;
 }
 
 .round_small_image{

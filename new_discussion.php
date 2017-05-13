@@ -93,9 +93,9 @@ function play_stop_music(){
 	
 	</head>
 
-<body style="background-color:#cccccc">
+<body >
 <?php include("toolbar.php");?>
-
+<div style="background-color:#cccccc;overflow:hidden;">
 <div id="discussion_categories">
 <ul >
 Categories
@@ -129,7 +129,7 @@ Categories
 	</fieldset>
 </form>
 
-
+</div>
 </div>
 
 </body>

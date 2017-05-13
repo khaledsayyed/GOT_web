@@ -82,22 +82,24 @@ if($order==$count):?>
 endif;
 if(isset($_POST["title"])&&isset($_POST["text"])):
 
-if(!isset($_session["logged_in_name"])):die("u need to log in first");
+if(!isset($_SESSION["logged_in_name"])):die("u need to log in first");
 endif;
 $files="";
 $dir="./temp";
 if (is_dir($dir)) {
     if ($dh = opendir($dir)) {
-		if (($file = readdir($dh)) !== false) {    
-		   if(preg_match("/^(.)*.([jj][pp][gg]|[pp][nn][gg])$/",$file)):
-		 $files=$file;
-		endif;
-		}
-	
-        while (($file = readdir($dh)) !== false) {    
-		   if(preg_match("/^(.)*.([jj][pp][gg]|[pp][nn][gg])$/",$file)):
+	/*	if (($file = readdir($dh)) !== false) {    
+		   if(preg_match("/^(.)*\.([Jj][Pp][Gg]|[Pp][Nn][Gg])$/",$file)):
 		   
-		   $files=$files.'|'.$file;
+		   $files=$file;
+		 rename($dir."/".$file,"discussion_files/".$file);
+		   endif;
+		}
+	*/
+        while (($file = readdir($dh)) !== false) {    
+		   if(preg_match("/^(.)*\.([Jj][Pp][Gg]|[Pp][Nn][Gg])$/",$file)):
+		   
+		   $files=$file;//$files.'|'.$file;
 		 rename($dir."/".$file,"discussion_files/".$file);
 		   endif;
         }
@@ -108,14 +110,14 @@ if (is_dir($dir)) {
 $title=$_POST["title"];
 $text=$_POST["text"];
 $date =date("y-m-d h:i:s");
-$user = $_session["logged_in_name"] ; 
-$query="insert into discussions(title,content,files,user,upvotes,downvotes,time_POSTed) values('$title','$text','$files','$user',0,0,$date)";
+$user = $_SESSION["logged_in_name"] ; 
+$query="insert into discussions(title,content,files,user,upvotes,downvotes,time_posted) values('$title','$text','$files','$user',0,0,'$date')";
 try{
 
 $db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
 //$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
 $db->exec($query);
-
+header("Location: discussions.php");
 
 }catch (pdoexception $e){
 	
@@ -124,27 +126,27 @@ $db->exec($query);
 }
 endif;
 
-if(isset($_GET["save_pic_temporarly"])&&$_GET["save_pic_temporarly"]==true):
+if(isset($_GET["save_pic_temporarly"])&&$_GET["save_pic_temporarly"]=='true'):
 $output_dir = "temp/";
-if(isset($_files["file"]))
+if(isset($_FILES["file"]))
 {
 	$ret = array();
-	$error =$_files["file"]["error"];
+	$error =$_FILES["file"]["error"];
 
-	if(!is_array($_files["file"]["name"])) //single file
+	if(!is_array($_FILES["file"]["name"])) //single file
 	{
- 	 	$filename = $_files["file"]["name"];
- 		move_uploaded_file($_files["file"]["tmp_name"],$output_dir.$filename);
-    	$ret[]= $filename;
+ 	 	$filename = $_FILES["file"]["name"];
+ 		move_uploaded_file($_FILES["file"]["tmp_name"],$output_dir.$filename);
+    	
 	}
 	else  //multiple files, file[]
 	{
-	  $filecount = count($_files["file"]["name"]);
+	  $filecount = count($_FILES["file"]["name"]);
 	  for($i=0; $i < $filecount; $i++)
 	  {
-	  	$filename = $_files["file"]["name"][$i];
-		move_uploaded_file($_files["file"]["tmp_name"][$i],$output_dir.$filename);
-	  	$ret[]= $filename;
+	  	$filename = $_FILES["file"]["name"][$i];
+		move_uploaded_file($_FILES["file"]["tmp_name"][$i],$output_dir.$filename);
+	  
 	  }
 	
 	}
@@ -177,16 +179,33 @@ endif;
 }		
 endif;	
 // sending discussions
- if(isset($_GET["discussions"])&&$_GET["discussions"]=="all"):
-
- #this is a very complicated query that GET the discussion and the first 3 comments (if moore than 3 available)
+ if(isset($_GET["discussions"])):
  $check_for_votes=isSet($_SESSION["logged_in_name"]);
+if($_GET["discussions"]==="all"):
+ #this is a very complicated query that GET the discussion and the first 3 comments (if moore than 3 available)
+ 
  if($check_for_votes):
  $username = $_SESSION["logged_in_name"];
-  $query="select distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total, uv.name,dv.name from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid left outer join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id left outer join upvotes uv ON uv.name= '$username' AND uv.dis_id=d.dis_id left outer join downvotes dv ON dv.name= 'admin' AND dv.dis_id=d.dis_id where ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.time_POSTed desc";
+  $query="select distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total, uv.name,dv.name from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid left outer join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id left outer join upvotes uv ON uv.name= '$username' AND uv.dis_id=d.dis_id left outer join downvotes dv ON dv.name= '$username' AND dv.dis_id=d.dis_id where ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.time_posted desc";
  else:
-   $query="select distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid left outer join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id  where ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.time_POSTed desc";
+   $query="select distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid left outer join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id  where ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.time_posted desc";
 
+ endif;
+ elseif($_GET["discussions"]==="hot"):
+  if($check_for_votes):
+ $username = $_SESSION["logged_in_name"];
+  $query="select distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total, uv.name,dv.name from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid left outer join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id left outer join upvotes uv ON uv.name= '$username' AND uv.dis_id=d.dis_id left outer join downvotes dv ON dv.name= '$username' AND dv.dis_id=d.dis_id where ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.upvotes desc";
+ else:
+   $query="select distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid left outer join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id  where ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.upvotes desc";
+
+ endif;
+ elseif($_GET["discussions"]==="uploaded_by_me"):
+  if($check_for_votes):
+ $username = $_SESSION["logged_in_name"];
+  $query="select distinct d.title, d.time_posted, d.upvotes,d.downvotes,d.content, d.files,c1.user_commented,c1.com_time,c1.comment_text,c2.user_commented,c2.com_time,c2.comment_text,c3.user_commented,c3.com_time,c3.comment_text,d.user,d.dis_id,com.total, uv.name,dv.name from discussions d left outer join discussion_comments c1 on c1.dis_id=d.dis_id left outer join discussion_comments c2 on c2.dis_id=d.dis_id and c2.cid<>c1.cid left outer join discussion_comments c3 on c3.dis_id=d.dis_id and c3.cid<>c2.cid and c3.cid<>c1.cid left outer join (select dis_id as id,count(cid) as total from discussion_comments group by dis_id )as com on com.id=d.dis_id left outer join upvotes uv ON uv.name= '$username' AND uv.dis_id=d.dis_id left outer join downvotes dv ON dv.name= '$username' AND dv.dis_id=d.dis_id where d.user='$username' AND ( c1.cid is null or (c1.cid=(select max(cid) from discussion_comments where dis_id=d.dis_id))) and ( c2.cid is null or(c2.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid))) and ( c3.cid is null or (c3.cid=(select max(cid) from discussion_comments  where dis_id=d.dis_id and cid<>c1.cid and cid<>c2.cid)))order by d.time_posted desc";
+ else:
+die('You Should log in to view your posts');
+ endif;
  endif;
  try{
  $db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
@@ -234,6 +253,24 @@ endif;
     // return false if no files were found
    return false;
 }
+//next is deleting dis_id
+if(isSet($_GET['delete_discussion'])):
+$id=$_GET['delete_discussion'];
+$query = "DELETE FROM discussions WHERE dis_id='$id'";
+
+try{
+
+$db = new pdo("mysql:host=localhost:3307;dbname=got", "root", "");
+//$db->setattribute(pdo::attr_errmode, pdo::errmode_exception);
+$db->exec($query);
+
+}catch (pdoexception $e){
+	
+	die("connection failed: " . $e->GETmessage());
+
+}
+
+endif;
 //next:handeling upvotes and downvotes
 if(isset($_GET['user_voted'])&&isset($_GET['dis_id'])):
 $dis_id=$_GET['dis_id'];
