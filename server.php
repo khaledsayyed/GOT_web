@@ -222,10 +222,10 @@ $rows = $db->query($query);
 }
 function is_photo_uploaded_and_moved($charac) {
 	// bail if there were no upload forms
-   if(empty($_files)):
+   if(empty($_FILES)):
        return false;
 endif;
-   $file = $_files['cphoto']['tmp_name']; // check for uploaded photo
+   $file = $_FILES['cphoto']['tmp_name']; // check for uploaded photo
 	if( !empty($file) && is_uploaded_file( $file )):
             move_uploaded_file($file, "characters/$charac.jpg");//rename and move
             return true;
@@ -371,12 +371,13 @@ endif;
 
 //end of update votes and comments
 //add character 
-if(isset($_POST["cname"])&&isset($_POST["house"])&& isset($_POST["cstory"])&&isset($_POST["state"])){
+
+if(isset($_POST["cname"])&& isset($_POST["house"])&& isset($_POST["cstory"])&& isset($_POST["state"])){
 	$cname=$_POST["cname"];
 	$house=$_POST["house"];
 	$cstory=xml_entities($_POST["cstory"]);
 	$state=$_POST["state"];
-	{if(isset($_files["cphoto"])&& $_files["cphoto"]!=null){is_photo_uploaded_and_moved($cname);
+	if(isset($_FILES["cphoto"])&& $_FILES["cphoto"]!=null){is_photo_uploaded_and_moved($cname);
 	
 		$query="insert into characters(name,house,story,state) values('$cname','$house','$cstory','$state')";
 try{
@@ -397,7 +398,6 @@ header("location: ./admin/adminpage.php?st=success");
 	}
 	}
 
-}
 //add new admin 
 if( isset( $_POST["aname"]))
 {
